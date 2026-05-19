@@ -1,0 +1,2398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IDEAS Asia Pacific Japan Hub | システム変革のためのリーダーシップ・ラボ</title>
+  <meta name="description" content="IDEAS Asia Pacific は MIT Sloan と United in Diversity による、サステナビリティのための変革型リーダーシッププログラム。その日本ハブとして、Theory U・システム思考に根ざしたリーダーシップを日本に広めています。" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="IDEAS Asia Pacific Japan Hub" />
+  <meta property="og:description" content="MIT Sloan × United in Diversity の変革型リーダーシッププログラム IDEAS の日本ハブ。Theory U・システム思考の実践を日本へ。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ideas-ap-japan.org/" />
+  <meta property="og:locale" content="ja_JP" />
+
+  <!-- Fonts: Zen Old Mincho (display), Noto Sans JP (body), Cormorant Garamond (Latin display) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Zen+Old+Mincho:wght@400;500;700;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* =========================================================
+       DESIGN TOKENS — IDEAS Asia Pacific Japan Hub
+       ========================================================= */
+    :root {
+      /* Brand purple — derived from IDEAS brochure */
+      --c-purple-900: #1F1733;   /* deepest — primary text on light */
+      --c-purple-800: #2D2548;   /* dark header / footer base */
+      --c-purple-700: #3D2E5F;   /* dark accent */
+      --c-purple-600: #5A4080;   /* mid */
+      --c-purple-500: #7A5BA8;   /* core brand */
+      --c-purple-400: #9B7BC8;   /* light accent */
+      --c-purple-300: #BFA8DC;   /* lighter accent */
+      --c-purple-100: #EDE5F5;   /* very light tint */
+      --c-purple-50:  #F8F4FC;   /* faintest tint — section bg */
+
+      /* Accent colors from IDEAS logo */
+      --c-red:        #D0272D;
+      --c-red-hover:  #B01F25;
+      --c-green:      #3A9A4A;
+
+      /* Neutrals */
+      --c-white:      #FFFFFF;
+      --c-cream:      #FBF8F3;    /* warm off-white for editorial feel */
+      --c-text:       #2D2548;
+      --c-text-muted: #6B6280;
+      --c-border:     #E5DEEF;
+
+      /* Typography */
+      --font-display:  "Zen Old Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      --font-body:     "Noto Sans JP", system-ui, -apple-system, "Hiragino Kaku Gothic ProN", sans-serif;
+      --font-latin:    "Cormorant Garamond", "Zen Old Mincho", serif;
+
+      /* Spacing */
+      --space-1:   4px;
+      --space-2:   8px;
+      --space-3:   12px;
+      --space-4:   16px;
+      --space-5:   20px;
+      --space-6:   24px;
+      --space-8:   32px;
+      --space-10:  40px;
+      --space-12:  48px;
+      --space-16:  64px;
+      --space-20:  80px;
+      --space-24:  96px;
+      --space-32:  128px;
+
+      /* Layout */
+      --container:    1200px;
+      --container-sm: 920px;
+      --container-xs: 720px;
+      --header-h:     96px;
+      --radius:       2px;
+      --radius-lg:    12px;
+      --ease:         cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* =========================================================
+       BASE
+       ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      font-weight: 400;
+      color: var(--c-text);
+      background-color: var(--c-cream);
+      line-height: 1.85;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; text-decoration: none; transition: color 0.2s var(--ease), opacity 0.2s var(--ease); }
+    img, svg { display: block; max-width: 100%; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--space-6);
+    }
+    .container-sm { max-width: var(--container-sm); margin: 0 auto; padding: 0 var(--space-6); }
+    .container-xs { max-width: var(--container-xs); margin: 0 auto; padding: 0 var(--space-6); }
+
+    .lucide-icon { width: 20px; height: 20px; stroke-width: 1.75; }
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-h);
+      z-index: 100;
+      background-color: transparent;
+      transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease), height 0.3s var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    .site-header.is-scrolled {
+      height: 60px;
+      background-color: rgba(251, 248, 243, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom-color: var(--c-border);
+    }
+    .site-header .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-6);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-4);
+      color: var(--c-white);
+      transition: color 0.3s var(--ease);
+    }
+    .is-scrolled .brand { color: var(--c-purple-900); }
+    .brand-logo-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: transform 0.3s var(--ease);
+    }
+    .brand:hover .brand-logo-chip {
+      transform: translateY(-1px);
+    }
+    .brand img {
+      height: 152px;
+      width: auto;
+      display: block;
+      transition: height 0.3s var(--ease);
+      /* 透明背景PNG内部の上下余白を視覚的にトリミング（img自体の高さは変えずクロップ量を増やす） */
+      margin: -38px 0;
+    }
+    .is-scrolled .brand img { height: 112px; }
+    .brand-text {
+      font-family: var(--font-latin);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      line-height: 1.1;
+      text-transform: uppercase;
+      padding-left: var(--space-4);
+      border-left: 1px solid rgba(255, 255, 255, 0.3);
+      transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+    }
+    .is-scrolled .brand-text {
+      border-left-color: var(--c-border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+    }
+    .nav a {
+      color: var(--c-white);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      opacity: 0.9;
+      transition: opacity 0.2s var(--ease), color 0.3s var(--ease);
+    }
+    .is-scrolled .nav a { color: var(--c-purple-900); }
+    .nav a:hover { opacity: 1; }
+
+    /* Nav dropdown (PC) */
+    .nav-item {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-item > a { display: inline-flex; align-items: center; gap: 6px; }
+    .nav-item .chev {
+      width: 12px;
+      height: 12px;
+      stroke-width: 2;
+      opacity: 0.7;
+      transition: transform 0.2s var(--ease);
+    }
+    .nav-item:hover .chev,
+    .nav-item:focus-within .chev { transform: rotate(180deg); }
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: -16px;
+      min-width: 240px;
+      background-color: var(--c-cream);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+      padding: var(--space-3);
+      box-shadow: 0 18px 40px -16px rgba(45, 37, 72, 0.25);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity 0.2s var(--ease), transform 0.2s var(--ease), visibility 0.2s var(--ease);
+      z-index: 110;
+    }
+    .nav-item:hover .nav-dropdown,
+    .nav-item:focus-within .nav-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .nav-dropdown::before {
+      /* hover-bridge so cursor doesn't lose the dropdown */
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 0;
+      right: 0;
+      height: 12px;
+    }
+    .nav-dropdown a {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: var(--space-3) var(--space-4);
+      color: var(--c-purple-900) !important;
+      opacity: 1;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: var(--radius);
+      letter-spacing: 0.03em;
+      transition: background-color 0.2s var(--ease), color 0.2s var(--ease);
+    }
+    .nav-dropdown a small {
+      font-family: var(--font-latin);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c-text-muted);
+      font-weight: 400;
+    }
+    .nav-dropdown a:hover {
+      background-color: var(--c-purple-50);
+      color: var(--c-purple-900) !important;
+    }
+    .nav-dropdown a:focus-visible {
+      outline: 2px solid var(--c-purple-500);
+      outline-offset: 2px;
+    }
+
+    /* Mobile dropdown collapsing */
+    .mobile-menu .submenu {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding-left: var(--space-5);
+      border-left: 2px solid var(--c-purple-300);
+      margin: var(--space-2) 0 var(--space-3);
+    }
+    .mobile-menu .submenu a {
+      font-size: 14px;
+      padding: var(--space-3) var(--space-2);
+      border-bottom: 1px dashed var(--c-border);
+      color: var(--c-text-muted);
+    }
+    .mobile-menu .submenu a:last-child { border-bottom: none; }
+    .nav a.cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 10px 18px;
+      border: 1px solid currentColor;
+      border-radius: var(--radius);
+      opacity: 1;
+    }
+    .nav a.cta:hover {
+      background-color: var(--c-white);
+      color: var(--c-purple-900);
+      border-color: var(--c-white);
+    }
+    .is-scrolled .nav a.cta:hover {
+      background-color: var(--c-purple-900);
+      color: var(--c-white);
+      border-color: var(--c-purple-900);
+    }
+
+    .menu-toggle {
+      display: none;
+      color: var(--c-white);
+      padding: 8px;
+    }
+    .is-scrolled .menu-toggle { color: var(--c-purple-900); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      right: 0;
+      background-color: var(--c-cream);
+      padding: var(--space-6);
+      z-index: 99;
+      border-bottom: 1px solid var(--c-border);
+    }
+    .mobile-menu.is-open { display: block; }
+    .mobile-menu nav { display: flex; flex-direction: column; gap: var(--space-1); }
+    .mobile-menu a {
+      color: var(--c-purple-900);
+      padding: var(--space-4) var(--space-2);
+      font-size: 16px;
+      font-weight: 500;
+      border-bottom: 1px solid var(--c-border);
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 20% 30%, #6B4B95 0%, transparent 55%),
+                  radial-gradient(ellipse at 80% 70%, #9B7BC8 0%, transparent 50%),
+                  linear-gradient(160deg, #2D2548 0%, #3D2E5F 40%, #5A4080 100%);
+      color: var(--c-white);
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: calc(var(--header-h) + var(--space-16)) 0 var(--space-20);
+    }
+    /* Grain texture overlay */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      opacity: 0.6;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+    /* Decorative thin lines suggesting woven/bamboo pattern from brochure */
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(90deg, transparent 49%, rgba(255,255,255,0.04) 49%, rgba(255,255,255,0.04) 51%, transparent 51%),
+        linear-gradient(0deg,  transparent 49%, rgba(255,255,255,0.025) 49%, rgba(255,255,255,0.025) 51%, transparent 51%);
+      background-size: 80px 100%, 100% 120px;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-4);
+      font-family: var(--font-latin);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c-purple-200);
+      margin-bottom: var(--space-8);
+      animation: fade-up 0.9s var(--ease) 0.1s backwards;
+    }
+    .hero-eyebrow::before {
+      content: "";
+      width: 56px;
+      height: 2px;
+      background-color: var(--c-red);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 6.4vw, 80px);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      margin: 0 0 var(--space-6);
+      max-width: 820px;
+      animation: fade-up 1s var(--ease) 0.2s backwards;
+    }
+    .hero-title em {
+      font-family: var(--font-display);
+      font-style: normal;
+      font-size: 0.56em;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--c-purple-300);
+      display: inline-block;
+      margin-top: var(--space-5);
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.78);
+      max-width: 480px;
+      margin: 0 0 var(--space-10);
+      animation: fade-up 1s var(--ease) 0.35s backwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      animation: fade-up 1s var(--ease) 0.5s backwards;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: 16px 28px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      border-radius: var(--radius);
+      transition: all 0.25s var(--ease);
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background-color: var(--c-red);
+      color: var(--c-white);
+    }
+    .btn-primary:hover {
+      background-color: var(--c-red-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px -10px rgba(208, 39, 45, 0.5);
+    }
+    .btn-outline {
+      background-color: transparent;
+      color: var(--c-white);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+    .btn-outline:hover {
+      background-color: var(--c-white);
+      color: var(--c-purple-900);
+      border-color: var(--c-white);
+    }
+    .btn-ghost {
+      background-color: transparent;
+      color: var(--c-purple-900);
+      border-color: var(--c-purple-900);
+    }
+    .btn-ghost:hover {
+      background-color: var(--c-purple-900);
+      color: var(--c-white);
+    }
+    .btn .lucide-icon { width: 16px; height: 16px; }
+
+    /* Scroll indicator */
+    .scroll-cue {
+      position: absolute;
+      bottom: var(--space-8);
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.6);
+      font-family: var(--font-latin);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+      50%      { opacity: 0.9; transform: translateX(-50%) translateY(6px); }
+    }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =========================================================
+       SECTION COMMON
+       ========================================================= */
+    section { position: relative; }
+    .section-pad { padding: var(--space-24) 0; }
+    .section-pad-sm { padding: var(--space-16) 0; }
+    .bg-cream { background-color: var(--c-cream); }
+    .bg-white { background-color: var(--c-white); }
+    .bg-purple-pale { background-color: var(--c-purple-50); }
+    .bg-purple-dark {
+      background: linear-gradient(160deg, #2D2548 0%, #3D2E5F 100%);
+      color: var(--c-white);
+    }
+
+    .eyebrow {
+      font-family: var(--font-latin);
+      font-size: 13px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--c-purple-500);
+      margin-bottom: var(--space-5);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background-color: var(--c-red);
+    }
+    .bg-purple-dark .eyebrow { color: var(--c-purple-300); }
+
+    .heading {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+      margin: 0 0 var(--space-6);
+      color: var(--c-purple-900);
+    }
+    .bg-purple-dark .heading { color: var(--c-white); }
+    .heading em {
+      font-style: normal;
+      color: var(--c-purple-500);
+    }
+
+    .lead {
+      font-size: 17px;
+      line-height: 2;
+      color: var(--c-text-muted);
+      max-width: 720px;
+      margin: 0;
+    }
+    .bg-purple-dark .lead { color: rgba(255, 255, 255, 0.8); }
+
+    /* =========================================================
+       INTRO / WHY NOW
+       ========================================================= */
+    .intro {
+      padding: var(--space-32) 0 var(--space-24);
+      background-color: var(--c-cream);
+      position: relative;
+    }
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: var(--space-16);
+      align-items: start;
+    }
+    .intro-left .eyebrow { margin-bottom: var(--space-6); }
+    .intro-left .heading {
+      font-size: clamp(28px, 3vw, 40px);
+      line-height: 1.45;
+    }
+    .intro-quote {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 22px;
+      line-height: 1.9;
+      color: var(--c-purple-700);
+      padding-left: var(--space-6);
+      border-left: 2px solid var(--c-red);
+      margin: var(--space-8) 0 var(--space-6);
+    }
+    .intro-quote-author {
+      font-family: var(--font-latin);
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      color: var(--c-text-muted);
+      text-transform: uppercase;
+    }
+    .intro-body p {
+      font-size: 16px;
+      line-height: 2;
+      color: var(--c-text);
+      margin: 0 0 var(--space-5);
+    }
+    .intro-body p:first-child::first-letter {
+      font-family: var(--font-display);
+      font-size: 56px;
+      float: left;
+      line-height: 1;
+      margin: 4px 12px 0 0;
+      color: var(--c-purple-600);
+      font-weight: 500;
+    }
+
+    /* =========================================================
+       ABOUT IDEAS (L.I.F.E.)
+       ========================================================= */
+    .life-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-6);
+      margin-top: var(--space-12);
+    }
+    .life-card {
+      background-color: var(--c-white);
+      padding: var(--space-10) var(--space-6) var(--space-8);
+      border: 1px solid var(--c-border);
+      border-top: 3px solid var(--c-red);
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+      position: relative;
+    }
+    .life-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px -20px rgba(45, 37, 72, 0.18);
+    }
+    .life-letter {
+      font-family: var(--font-latin);
+      font-size: 72px;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--c-purple-500);
+      margin-bottom: var(--space-4);
+    }
+    .life-card h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 500;
+      margin: 0 0 var(--space-3);
+      color: var(--c-purple-900);
+    }
+    .life-card h3 small {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      color: var(--c-text-muted);
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+    .life-card p {
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--c-text-muted);
+      margin: 0;
+    }
+
+    /* Journey timeline */
+    .journey {
+      margin-top: var(--space-24);
+      padding-top: var(--space-16);
+      border-top: 1px solid var(--c-border);
+    }
+    .journey-header { text-align: center; margin-bottom: var(--space-12); }
+    .journey-header .eyebrow { justify-content: center; }
+    .journey-list {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0;
+      counter-reset: jstep;
+    }
+    .journey-step {
+      padding: var(--space-6) var(--space-4);
+      border-left: 1px solid var(--c-border);
+      position: relative;
+      counter-increment: jstep;
+    }
+    .journey-step:first-child { border-left: none; padding-left: 0; }
+    .journey-step::before {
+      content: counter(jstep, decimal-leading-zero);
+      font-family: var(--font-latin);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      color: var(--c-red);
+      display: block;
+      margin-bottom: var(--space-3);
+    }
+    .journey-step h4 {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 500;
+      margin: 0 0 var(--space-2);
+      color: var(--c-purple-900);
+      line-height: 1.5;
+    }
+    .journey-step p {
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--c-text-muted);
+      margin: 0;
+    }
+
+    /* Credentials strip */
+    .credentials {
+      margin-top: var(--space-16);
+      padding: var(--space-8) 0;
+      border-top: 1px solid var(--c-border);
+      border-bottom: 1px solid var(--c-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-8);
+      flex-wrap: wrap;
+    }
+    .credentials-label {
+      font-family: var(--font-latin);
+      font-size: 12px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--c-text-muted);
+    }
+    .credentials-logos {
+      display: flex;
+      align-items: center;
+      gap: var(--space-10);
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--c-purple-900);
+      font-size: 16px;
+      letter-spacing: 0.04em;
+    }
+    .credentials-logos span {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    /* =========================================================
+       FELLOWS
+       ========================================================= */
+    .fellows-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+      align-items: end;
+      margin-bottom: var(--space-12);
+    }
+    .fellows-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-5);
+    }
+    .fellow-card {
+      background-color: var(--c-white);
+      border: 1px solid var(--c-border);
+      padding: var(--space-6);
+      transition: all 0.3s var(--ease);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .fellow-card:hover {
+      border-color: var(--c-purple-500);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -20px rgba(122, 91, 168, 0.3);
+    }
+    .fellow-photo {
+      aspect-ratio: 1 / 1;
+      background-color: var(--c-purple-100);
+      margin-bottom: var(--space-5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--c-purple-400);
+      font-family: var(--font-latin);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+      border-radius: 50%;
+    }
+    .fellow-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.4s var(--ease);
+    }
+    .fellow-card:hover .fellow-photo img {
+      transform: scale(1.04);
+    }
+    .fellow-cohort {
+      font-family: var(--font-latin);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--c-red);
+      text-transform: uppercase;
+      margin-bottom: var(--space-2);
+    }
+    .fellow-name {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--c-purple-900);
+      margin: 0 0 var(--space-1);
+      line-height: 1.4;
+    }
+    .fellow-role {
+      font-size: 12px;
+      color: var(--c-text-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* =========================================================
+       TEAM
+       ========================================================= */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-12);
+      margin-top: var(--space-12);
+    }
+    .team-card {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: var(--space-6);
+      align-items: start;
+    }
+    .team-photo {
+      width: 140px;
+      height: 140px;
+      background-color: var(--c-purple-100);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--c-purple-400);
+      font-family: var(--font-latin);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .team-name {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--c-purple-900);
+      margin: 0 0 var(--space-1);
+    }
+    .team-role {
+      font-family: var(--font-latin);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: var(--c-red);
+      text-transform: uppercase;
+      margin: 0 0 var(--space-3);
+    }
+    .team-bio {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--c-text-muted);
+      margin: 0;
+    }
+
+    /* =========================================================
+       THEORY U / RELATED
+       ========================================================= */
+    .theory-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--space-8);
+      margin-top: var(--space-12);
+    }
+    .theory-card {
+      padding: var(--space-8);
+      background-color: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.3s var(--ease);
+    }
+    .theory-card:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: var(--c-purple-300);
+    }
+    .theory-num {
+      font-family: var(--font-latin);
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: var(--c-purple-300);
+      margin-bottom: var(--space-4);
+    }
+    .theory-card h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--c-white);
+      margin: 0 0 var(--space-3);
+      line-height: 1.5;
+    }
+    .theory-card p {
+      font-size: 14px;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0;
+    }
+
+    /* =========================================================
+       FUND (in development)
+       ========================================================= */
+    .fund-card {
+      background-color: var(--c-white);
+      padding: var(--space-16);
+      border: 1px solid var(--c-border);
+      position: relative;
+      overflow: hidden;
+    }
+    .fund-card::before {
+      content: "";
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(122, 91, 168, 0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .fund-inner {
+      position: relative;
+      max-width: 720px;
+    }
+    .fund-status {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 5px 12px;
+      background-color: var(--c-purple-100);
+      color: var(--c-purple-700);
+      font-family: var(--font-latin);
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 100px;
+      margin-bottom: var(--space-6);
+    }
+    .fund-status::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background-color: var(--c-red);
+      border-radius: 50%;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    /* =========================================================
+       CONTACT
+       ========================================================= */
+    .contact-card {
+      background: linear-gradient(160deg, #3D2E5F 0%, #5A4080 100%);
+      color: var(--c-white);
+      padding: var(--space-20) var(--space-16);
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      opacity: 0.7;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+    .contact-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+      align-items: center;
+    }
+    .contact-card .heading { color: var(--c-white); margin-bottom: var(--space-6); }
+    .contact-card p { color: rgba(255, 255, 255, 0.85); line-height: 2; margin: 0 0 var(--space-8); }
+
+    .contact-options {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .contact-option {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-5) var(--space-6);
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--c-white);
+      transition: all 0.25s var(--ease);
+    }
+    .contact-option:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateX(4px);
+    }
+    .contact-option-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(208, 39, 45, 0.2);
+      color: var(--c-white);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .contact-option-text strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+    .contact-option-text span {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+    .site-footer {
+      background-color: var(--c-purple-900);
+      color: rgba(255, 255, 255, 0.7);
+      padding: var(--space-16) 0 var(--space-6);
+      font-size: 13px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--space-10);
+      padding-bottom: var(--space-12);
+    }
+    .footer-brand img {
+      height: 36px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      margin-bottom: var(--space-5);
+    }
+    .footer-brand p {
+      line-height: 1.9;
+      margin: 0 0 var(--space-5);
+      max-width: 360px;
+    }
+    .footer-col h5 {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--c-white);
+      margin: 0 0 var(--space-5);
+      letter-spacing: 0.04em;
+    }
+    .footer-col ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .footer-col a:hover { color: var(--c-white); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: var(--space-6);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      font-family: var(--font-latin);
+      letter-spacing: 0.08em;
+    }
+
+    /* =========================================================
+       HISTORY OVERLAY  (modal page)
+       ========================================================= */
+    :root {
+      --c-gold:       #C9A24A;
+      --c-gold-light: #F5E29E;
+    }
+
+    body.overlay-open {
+      overflow: hidden;
+    }
+
+    .page-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background-color: var(--c-cream);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(16px);
+      transition: opacity 0.35s var(--ease), transform 0.45s var(--ease), visibility 0.35s var(--ease);
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+    .page-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* Top bar with breadcrumb + close button */
+    .overlay-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: var(--space-5) var(--space-6);
+      background-color: rgba(251, 248, 243, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--c-border);
+    }
+    .overlay-crumb {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-family: var(--font-latin);
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-text-muted);
+    }
+    .overlay-crumb a { color: inherit; }
+    .overlay-crumb a:hover { color: var(--c-purple-900); }
+    .overlay-crumb .sep { opacity: 0.5; }
+    .overlay-crumb .current { color: var(--c-purple-900); font-weight: 600; }
+
+    .overlay-close {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 10px 18px;
+      background-color: var(--c-purple-900);
+      color: var(--c-white);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      border-radius: var(--radius);
+      transition: background-color 0.2s var(--ease), transform 0.2s var(--ease);
+    }
+    .overlay-close:hover {
+      background-color: var(--c-red);
+      transform: translateY(-1px);
+    }
+    .overlay-close .lucide-icon { width: 16px; height: 16px; }
+
+    /* Overlay hero */
+    .overlay-hero {
+      position: relative;
+      padding: var(--space-20) 0;
+      background: radial-gradient(ellipse at 15% 30%, #6B4B95 0%, transparent 55%),
+                  radial-gradient(ellipse at 85% 70%, #9B7BC8 0%, transparent 50%),
+                  linear-gradient(160deg, #2D2548 0%, #3D2E5F 40%, #5A4080 100%);
+      color: var(--c-white);
+      overflow: hidden;
+    }
+    .overlay-hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      opacity: 0.5;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+    .overlay-hero-inner { position: relative; z-index: 1; }
+    .overlay-hero h1 {
+      font-family: var(--font-latin);
+      font-size: clamp(64px, 12vw, 144px);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1;
+      margin: 0 0 var(--space-6);
+      color: var(--c-white);
+    }
+    .overlay-hero h2 {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 500;
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+      margin: 0 0 var(--space-6);
+      max-width: 820px;
+      color: var(--c-white);
+    }
+    .overlay-hero h2 em {
+      font-style: normal;
+      color: var(--c-purple-300);
+      font-size: 0.65em;
+      display: block;
+      margin-top: var(--space-2);
+      letter-spacing: 0.04em;
+    }
+    .overlay-hero .lede {
+      font-size: 16px;
+      line-height: 1.95;
+      color: rgba(255, 255, 255, 0.82);
+      max-width: 620px;
+      margin: 0;
+    }
+
+    /* Timeline */
+    .overlay-timeline-section {
+      padding: var(--space-24) 0;
+      background-color: var(--c-cream);
+    }
+    .overlay-timeline-intro {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto var(--space-20);
+    }
+    .overlay-timeline-intro .eyebrow { justify-content: center; }
+    .overlay-timeline-intro h2 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3vw, 36px);
+      font-weight: 500;
+      margin: 0 0 var(--space-4);
+      color: var(--c-purple-900);
+      line-height: 1.4;
+    }
+    .overlay-timeline-intro p {
+      color: var(--c-text-muted);
+      margin: 0;
+    }
+
+    .timeline {
+      position: relative;
+      list-style: none;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--c-purple-300) 6%,
+        var(--c-purple-300) 94%,
+        transparent 100%
+      );
+      transform: translateX(-50%);
+    }
+    .timeline-item {
+      position: relative;
+      width: 50%;
+      padding: var(--space-6) var(--space-12);
+      box-sizing: border-box;
+    }
+    .timeline-item.left {
+      margin-right: 50%;
+      padding-right: calc(var(--space-12) + var(--space-2));
+    }
+    .timeline-item.right {
+      margin-left: 50%;
+      padding-left: calc(var(--space-12) + var(--space-2));
+    }
+    .timeline-marker {
+      position: absolute;
+      top: calc(var(--space-6) + 18px);
+      width: 14px;
+      height: 14px;
+      background: var(--c-red);
+      border-radius: 50%;
+      border: 3px solid var(--c-cream);
+      box-shadow: 0 0 0 2px var(--c-red), 0 0 0 8px rgba(208, 39, 45, 0.08);
+      z-index: 1;
+    }
+    .timeline-item.left .timeline-marker { right: -7px; }
+    .timeline-item.right .timeline-marker { left: -7px; }
+
+    .timeline-card {
+      background-color: var(--c-white);
+      border: 1px solid var(--c-border);
+      padding: var(--space-8);
+      border-radius: var(--radius);
+      position: relative;
+      transition: border-color 0.3s var(--ease), transform 0.5s var(--ease), opacity 0.6s var(--ease), box-shadow 0.3s var(--ease);
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    .timeline-card.is-visible { opacity: 1; transform: translateY(0); }
+    .timeline-card:hover {
+      border-color: var(--c-purple-300);
+      box-shadow: 0 16px 36px -16px rgba(45, 37, 72, 0.18);
+    }
+    .timeline-year {
+      font-family: var(--font-latin);
+      font-size: clamp(40px, 5vw, 64px);
+      font-style: italic;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--c-purple-300);
+      letter-spacing: 0.01em;
+      margin: 0 0 var(--space-4);
+      display: block;
+    }
+    .timeline-year .yr-label {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--c-red);
+      vertical-align: middle;
+      margin-left: var(--space-3);
+      text-transform: uppercase;
+    }
+    .timeline-card h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--c-purple-900);
+      margin: 0 0 var(--space-4);
+      letter-spacing: 0.02em;
+    }
+    .timeline-card p {
+      font-size: 14.5px;
+      line-height: 1.95;
+      color: var(--c-text);
+      margin: 0;
+    }
+
+    /* NOW badge */
+    .now-badge {
+      position: absolute;
+      top: -16px;
+      right: var(--space-6);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, var(--c-gold) 0%, var(--c-gold-light) 60%, var(--c-gold) 100%);
+      color: var(--c-purple-900);
+      font-family: var(--font-latin);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      border-radius: 24px;
+      box-shadow: 0 6px 16px -6px rgba(201, 162, 74, 0.55), 0 0 0 0 rgba(201, 162, 74, 0.55);
+      animation: pulse-gold 2.4s ease-in-out infinite;
+    }
+    .now-badge::before {
+      content: "";
+      width: 8px; height: 8px;
+      background-color: var(--c-purple-900);
+      border-radius: 50%;
+    }
+    @keyframes pulse-gold {
+      0%, 100% { box-shadow: 0 6px 16px -6px rgba(201, 162, 74, 0.55), 0 0 0 0 rgba(201, 162, 74, 0.5); }
+      50%      { box-shadow: 0 6px 16px -6px rgba(201, 162, 74, 0.55), 0 0 0 16px rgba(201, 162, 74, 0); }
+    }
+    .timeline-card.is-now {
+      border-color: var(--c-gold);
+      background: linear-gradient(180deg, #FFFCF2 0%, var(--c-white) 100%);
+      box-shadow: 0 20px 48px -24px rgba(201, 162, 74, 0.35);
+    }
+    .timeline-card.is-now .timeline-year { color: var(--c-gold); }
+    .timeline-item.is-now .timeline-marker {
+      background: var(--c-gold);
+      box-shadow: 0 0 0 2px var(--c-gold), 0 0 0 10px rgba(201, 162, 74, 0.18);
+    }
+
+    /* Closing */
+    .overlay-closing {
+      padding: var(--space-24) 0;
+      background: linear-gradient(160deg, #2D2548 0%, #3D2E5F 100%);
+      color: var(--c-white);
+      position: relative;
+      overflow: hidden;
+    }
+    .overlay-closing::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image: linear-gradient(90deg, transparent 49%, rgba(255,255,255,0.03) 49%, rgba(255,255,255,0.03) 51%, transparent 51%);
+      background-size: 80px 100%;
+      pointer-events: none;
+    }
+    .overlay-closing-inner {
+      position: relative;
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .closing-quote {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 500;
+      line-height: 1.6;
+      letter-spacing: 0.02em;
+      color: var(--c-white);
+      margin: 0 0 var(--space-10);
+      position: relative;
+    }
+    .closing-quote::before { content: "\201C"; font-family: var(--font-latin); font-size: 1.6em; color: var(--c-purple-300); line-height: 0; vertical-align: -0.3em; margin-right: 0.1em; }
+    .closing-quote::after  { content: "\201D"; font-family: var(--font-latin); font-size: 1.6em; color: var(--c-purple-300); line-height: 0; vertical-align: -0.3em; margin-left: 0.1em; }
+    .closing-body {
+      font-size: 15px;
+      line-height: 2;
+      color: rgba(255, 255, 255, 0.82);
+      margin: 0 0 var(--space-12);
+    }
+    .closing-body strong { color: var(--c-white); font-weight: 600; }
+
+    /* Overlay-internal back-to-top */
+    .overlay-foot {
+      padding: var(--space-12) 0;
+      background-color: var(--c-cream);
+      text-align: center;
+      border-top: 1px solid var(--c-border);
+    }
+    .overlay-foot a {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 14px 28px;
+      border: 1px solid var(--c-purple-900);
+      color: var(--c-purple-900);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      border-radius: var(--radius);
+      transition: all 0.25s var(--ease);
+    }
+    .overlay-foot a:hover {
+      background-color: var(--c-purple-900);
+      color: var(--c-white);
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+    @media (max-width: 1024px) {
+      .life-grid, .theory-grid { grid-template-columns: repeat(2, 1fr); }
+      .fellows-grid { grid-template-columns: repeat(3, 1fr); }
+      .journey-list { grid-template-columns: repeat(3, 1fr); }
+      .journey-step:nth-child(4) { border-left: none; padding-left: 0; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .intro-grid, .fellows-head, .team-grid, .contact-grid { grid-template-columns: 1fr; gap: var(--space-10); }
+    }
+
+    @media (max-width: 768px) {
+      :root { --header-h: 76px; }
+      .nav { display: none; }
+      .menu-toggle { display: inline-flex; }
+      .site-header.is-scrolled { height: 52px; }
+      .brand img { height: 104px; margin: -26px 0; }
+      .is-scrolled .brand img { height: 80px; }
+      .brand-text { display: none; }
+      .section-pad { padding: var(--space-16) 0; }
+      .intro { padding: var(--space-20) 0 var(--space-16); }
+      .hero { min-height: auto; padding: calc(var(--header-h) + var(--space-20)) 0 var(--space-16); }
+      .hero-title { font-size: clamp(32px, 8vw, 48px); }
+      .hero-eyebrow { font-size: 13px; letter-spacing: 0.14em; gap: var(--space-3); }
+      .hero-eyebrow::before { width: 36px; }
+      .life-grid, .fellows-grid, .theory-grid { grid-template-columns: 1fr; }
+      .journey-list { grid-template-columns: 1fr; }
+      .journey-step { border-left: none !important; border-top: 1px solid var(--c-border); padding: var(--space-5) 0; }
+      .journey-step:first-child { border-top: none; padding-top: 0; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .fund-card, .contact-card { padding: var(--space-10) var(--space-6); }
+      .team-card { grid-template-columns: 1fr; text-align: center; }
+      .team-photo { margin: 0 auto; }
+
+      /* History overlay: stack timeline into single column */
+      .overlay-hero { padding: var(--space-16) 0; }
+      .overlay-timeline-section { padding: var(--space-16) 0; }
+      .overlay-timeline-intro { margin-bottom: var(--space-12); }
+      .overlay-closing { padding: var(--space-16) 0; }
+      .timeline { max-width: 100%; padding-left: 8px; }
+      .timeline::before { left: 18px; transform: none; }
+      .timeline-item,
+      .timeline-item.left,
+      .timeline-item.right {
+        width: 100%; margin: 0;
+        padding: var(--space-4) 0 var(--space-4) calc(var(--space-12) + 8px);
+        text-align: left;
+      }
+      .timeline-item .timeline-marker {
+        left: 11px !important; right: auto !important;
+        top: calc(var(--space-4) + 14px);
+      }
+      .timeline-card { padding: var(--space-6); }
+      .timeline-card h3 { font-size: 17px; }
+      .now-badge { top: -14px; right: var(--space-4); font-size: 11px; padding: 5px 10px; }
+      .overlay-topbar { padding: var(--space-4); }
+      .overlay-close { padding: 8px 14px; font-size: 12px; }
+      .overlay-crumb { font-size: 10px; letter-spacing: 0.16em; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .timeline-card { opacity: 1 !important; transform: none !important; transition: none; }
+      .now-badge { animation: none; }
+      .page-overlay { transition: opacity 0.01s linear, visibility 0.01s linear; transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================
+       HEADER
+       ========================================================= -->
+  <header class="site-header" id="siteHeader">
+    <div class="container">
+      <a href="#" class="brand" aria-label="IDEAS Asia Pacific Japan Hub">
+        <span class="brand-logo-chip">
+          <img src="images/logo.png" alt="IDEAS Asia Pacific" />
+        </span>
+        <span class="brand-text">Japan Hub</span>
+      </a>
+
+      <nav class="nav" aria-label="メインナビゲーション">
+        <span class="nav-item" tabindex="0">
+          <a href="#about" aria-haspopup="true" aria-expanded="false">
+            IDEASについて
+            <i data-lucide="chevron-down" class="chev"></i>
+          </a>
+          <div class="nav-dropdown" role="menu" aria-label="IDEASについて">
+            <a href="#about" role="menuitem">
+              概要
+              <small>What is IDEAS</small>
+            </a>
+            <a href="#history" role="menuitem" data-open-history>
+              沿革
+              <small>History</small>
+            </a>
+            <a href="#theory" role="menuitem">
+              関連思想
+              <small>Theory U &amp; Fifth Discipline</small>
+            </a>
+          </div>
+        </span>
+        <a href="#fellows">日本人フェロー</a>
+        <a href="#team">運営チーム</a>
+        <a href="#theory">Theory U</a>
+        <a href="#contact" class="cta">お問い合わせ</a>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="メニューを開く" aria-expanded="false">
+        <i data-lucide="menu" class="lucide-icon"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <nav>
+      <a href="#about">IDEASについて — 概要</a>
+      <div class="submenu" aria-label="IDEASについて - サブメニュー">
+        <a href="#history" data-open-history>沿革 / History</a>
+        <a href="#theory">関連思想 / Theory U</a>
+      </div>
+      <a href="#fellows">日本人フェロー</a>
+      <a href="#team">運営チーム</a>
+      <a href="#fund">若手支援ファンド</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+  </div>
+
+  <!-- =========================================================
+       HERO
+       ========================================================= -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="container">
+        <span class="hero-eyebrow">MIT Sloan × United in Diversity — Japan Hub</span>
+        <h1 class="hero-title">
+          Better Business,<br />
+          Better World.<br />
+          <em>システム変革を、日本から。</em>
+        </h1>
+        <p class="hero-sub">
+          ビジネス・政府・市民社会のリーダーが集う、MIT Sloan × United in Diversity の1年間のトランスフォーメーショナル・プログラム。その日本ハブ。
+        </p>
+        <div class="hero-actions">
+          <a href="#about" class="btn btn-primary">
+            IDEASを知る
+            <i data-lucide="arrow-right" class="lucide-icon"></i>
+          </a>
+          <a href="#fellows" class="btn btn-outline">
+            日本人フェローの声
+            <i data-lucide="arrow-down" class="lucide-icon"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <span class="scroll-cue" aria-hidden="true">Scroll</span>
+  </section>
+
+  <!-- =========================================================
+       INTRO / WHY JAPAN NEEDS THIS NOW
+       ========================================================= -->
+  <section class="intro" id="why">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="intro-left">
+          <span class="eyebrow">Why Now / なぜ今、日本に</span>
+          <h2 class="heading">
+            分断と複雑性の時代に、<br />
+            まだ見ぬ未来を、<br />
+            ともに描く力を。
+          </h2>
+          <blockquote class="intro-quote">
+            「世界の問題は、懐疑的または皮肉的な人々によっては決して解決できない。<br />
+            必要なのは、まだ見ぬ未来を想像できる人々である。」
+          </blockquote>
+          <p class="intro-quote-author">— John F. Kennedy</p>
+        </div>
+
+        <div class="intro-body">
+          <p>
+            気候変動、格差、分断 ── アジア太平洋地域における SDGs 進捗報告書は、
+            現状のペースでは 2030 年までに 118 ターゲットのうち 90% が達成できないと警鐘を鳴らしています。
+            この複雑な課題群は、ひとつの組織、ひとつのセクターだけでは解けない構造をもっています。
+          </p>
+          <p>
+            日本もまた、人口減少、産業構造の変容、地域社会の持続可能性という、
+            相互に絡み合った課題に直面しています。これからの 10 年に求められるのは、
+            正解を急ぐリーダーシップではなく、「まだ見ぬ未来」を集合的に感じ取り、
+            異なる立場の人々とともにシステムを変革していく力です。
+          </p>
+          <p>
+            IDEAS Asia Pacific は、その実践のための共通言語と方法論を、
+            アジア太平洋全域から集まったリーダーたちと共に学び、育てる場です。
+            日本ハブはこの学びを日本社会に翻訳し、対話と協働の輪を広げていきます。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       ABOUT IDEAS — L.I.F.E. + Journey
+       ========================================================= -->
+  <section class="section-pad bg-purple-pale" id="about">
+    <div class="container">
+      <div style="max-width: 720px; margin-bottom: var(--space-12);">
+        <span class="eyebrow">About / IDEASとは</span>
+        <h2 class="heading">
+          サステナビリティへの STEP は、<br />
+          <em>L.I.F.E.</em> の機能である。
+        </h2>
+        <p class="lead">
+          IDEAS Asia Pacific は、Leadership(リーダーシップ)・Innovation(イノベーション)・
+          Foresighting(先見性)・Entrepreneurship(起業家精神)という 4 つの柱を軸に、
+          頭・手・心を統合した学びを 1 年間にわたって展開します。
+        </p>
+      </div>
+
+      <div class="life-grid">
+        <div class="life-card">
+          <div class="life-letter">L</div>
+          <h3>Leadership <small>Tri-Sector Leadership</small></h3>
+          <p>変革を導くトライセクター(公・民・市民)型リーダーシップ。U 理論やシステム思考を統合した、未来を感知する力を育む。</p>
+        </div>
+        <div class="life-card">
+          <div class="life-letter">I</div>
+          <h3>Innovation <small>Eco-systemic Innovation</small></h3>
+          <p>エコシステム重視のイノベーション。人間中心デザインとデザイン思考を通じて、関係性から生まれる解を共創する。</p>
+        </div>
+        <div class="life-card">
+          <div class="life-letter">F</div>
+          <h3>Foresighting <small>Presencing the Future</small></h3>
+          <p>プレゼンシングによる未来洞察。シナリオ思考とサーキュラー・エコノミーの視点から、現れつつある未来を読み解く。</p>
+        </div>
+        <div class="life-card">
+          <div class="life-letter">E</div>
+          <h3>Entrepreneurship <small>Empathic Co-creation</small></h3>
+          <p>共感的・共創型の起業家精神。"Just Money" やブレンデッド・ファイナンスを含む、新たな経済の在り方を実装する。</p>
+        </div>
+      </div>
+
+      <!-- Journey -->
+      <div class="journey">
+        <div class="journey-header">
+          <span class="eyebrow" style="display: inline-flex;">The Journey / 1年間の学びの旅</span>
+          <h3 class="heading" style="font-size: clamp(22px, 2.6vw, 32px);">6つのモジュールで巡る、変革のプロセス</h3>
+        </div>
+
+        <div class="journey-list">
+          <div class="journey-step">
+            <h4>オンボーディング</h4>
+            <p>全体像と参加者の歓迎。オンライン 1 日。</p>
+          </div>
+          <div class="journey-step">
+            <h4>Co-Initiating<br />共創開始</h4>
+            <p>イントロダクションと信頼構築。横浜・対面 4 日間。</p>
+          </div>
+          <div class="journey-step">
+            <h4>Co-Sensing<br />共感</h4>
+            <p>基盤構築。MIT ケンブリッジ・キャンパスでの 5 日間。</p>
+          </div>
+          <div class="journey-step">
+            <h4>Deep Dive<br />重点探究</h4>
+            <p>プレゼンシングの実践。バリ島 UID キャンパスにて 6 日間。</p>
+          </div>
+          <div class="journey-step">
+            <h4>Prototyping<br />試作</h4>
+            <p>プロトタイプ案のブラッシュアップ。小グループで自走。</p>
+          </div>
+          <div class="journey-step">
+            <h4>Completion<br />修了</h4>
+            <p>発表と修了式。ジャカルタにて 3 日間。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Credentials -->
+      <div class="credentials">
+        <span class="credentials-label">Official Partners</span>
+        <div class="credentials-logos">
+          <span>MIT Sloan Global Programs</span>
+          <span>×</span>
+          <span>United in Diversity Foundation</span>
+        </div>
+      </div>
+
+      <p style="margin-top: var(--space-10); font-size: 14px; color: var(--c-text-muted); text-align: center;">
+        修了生は MIT Sloan からの修了認定証、MIT アフィリエイト・ステータス、MIT メールアドレスを取得します。
+        <a href="https://mitsloan.mit.edu/global-programs/ideas-asia-pacific" target="_blank" rel="noopener" style="color: var(--c-purple-600); text-decoration: underline; text-underline-offset: 3px;">
+          MIT Sloan 公式ページ →
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FELLOWS PREVIEW
+       ========================================================= -->
+  <section class="section-pad bg-cream" id="fellows">
+    <div class="container">
+      <div class="fellows-head">
+        <div>
+          <span class="eyebrow">Fellows / 日本人フェロー</span>
+          <h2 class="heading">これまでに、<br />5 名の日本人がこの旅を歩みました。</h2>
+        </div>
+        <p class="lead">
+          Cohort 1.0 と 2.0 から、それぞれの組織・地域でシステム変革に取り組む 5 名の日本人がフェローとして参加。
+          彼らがプログラムから何を持ち帰り、いま何を実践しているのか。その声をお届けします。
+        </p>
+      </div>
+
+      <div class="fellows-grid">
+        <article class="fellow-card">
+          <div class="fellow-photo">
+            <img src="images/picture.jpeg" alt="野田 浩平 / Kohei Noda">
+          </div>
+          <div class="fellow-cohort">Cohort 1.0</div>
+          <h3 class="fellow-name">野田 浩平</h3>
+          <p class="fellow-role">Kohei Noda</p>
+        </article>
+        <article class="fellow-card">
+          <div class="fellow-photo">
+            <img src="images/%E9%B3%A5%E3%81%95%E3%82%93.webp" alt="鳥居 正年 / Masatoshi Torii">
+          </div>
+          <div class="fellow-cohort">Cohort 1.0</div>
+          <h3 class="fellow-name">鳥居 正年</h3>
+          <p class="fellow-role">Masatoshi Torii</p>
+        </article>
+        <article class="fellow-card">
+          <div class="fellow-photo">
+            <img src="images/%E3%83%9E%E3%83%89%E3%82%AB%E3%81%95%E3%82%93.jpg" alt="辰野 まどか / Madoka Tatsuno">
+          </div>
+          <div class="fellow-cohort">Cohort 2.0</div>
+          <h3 class="fellow-name">辰野 まどか</h3>
+          <p class="fellow-role">Madoka Tatsuno</p>
+        </article>
+        <article class="fellow-card">
+          <div class="fellow-photo">
+            <img src="images/ayano-kasajima.jpg" alt="笠島 綾乃 / Ayano Kasajima">
+          </div>
+          <div class="fellow-cohort">Cohort 2.0</div>
+          <h3 class="fellow-name">笠島 綾乃</h3>
+          <p class="fellow-role">Ayano Kasajima</p>
+        </article>
+        <article class="fellow-card">
+          <div class="fellow-photo">
+            <img src="images/20260321_Katsu_sama-11713.jpeg" alt="井岡 雄以 / Yui Ioka">
+          </div>
+          <div class="fellow-cohort">Cohort 2.0</div>
+          <h3 class="fellow-name">井岡 雄以</h3>
+          <p class="fellow-role">Yui Ioka</p>
+        </article>
+      </div>
+
+      <div style="text-align: center; margin-top: var(--space-12);">
+        <a href="/fellows/" class="btn btn-ghost">
+          フェロー全員のストーリーを読む
+          <i data-lucide="arrow-right" class="lucide-icon"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       TEAM
+       ========================================================= -->
+  <section class="section-pad bg-white" id="team">
+    <div class="container">
+      <div style="max-width: 720px; margin-bottom: var(--space-8);">
+        <span class="eyebrow">Team / 運営チーム</span>
+        <h2 class="heading">日本ハブを担う、二人。</h2>
+        <p class="lead">
+          IDEAS Asia Pacific 日本ハブは、修了生でもあり組織人材開発を本業とする
+          二人の有志によって運営されています。本業との往還を通じて、IDEAS の方法論を日本社会に
+          根づかせていくことを目指しています。
+        </p>
+      </div>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-photo">Photo</div>
+          <div>
+            <h3 class="team-name">野田 浩平 博士</h3>
+            <p class="team-role">Regional Faculty / Co-lead</p>
+            <p class="team-bio">
+              GLOBIS 経営大学院 研究ファカルティ(リーダーシップ・志分野)。
+              IDEAS Asia Pacific の地域ファカルティとして、アジア太平洋圏のリーダー育成に携わる。
+            </p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-photo">Photo</div>
+          <div>
+            <h3 class="team-name">井岡 [姓名]</h3>
+            <p class="team-role">Hub Lead / Cohort [X]</p>
+            <p class="team-bio">
+              IDEAS Asia Pacific 修了生。組織人材開発を本業としながら、
+              日本ハブの立ち上げと運営を担う。
+              [プロフィール文 — 経歴・専門領域・このプログラムへの想い]
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       THEORY U / RELATED THINKING (purple dark section)
+       ========================================================= -->
+  <section class="section-pad bg-purple-dark" id="theory">
+    <div class="container">
+      <div style="max-width: 720px; margin-bottom: var(--space-6);">
+        <span class="eyebrow">Theory U / 関連思想</span>
+        <h2 class="heading">
+          「あらゆるシステムが生み出す結果の質は、<br />
+          そのシステムで行動する人々の<em>意識の質</em>に依存している。」
+        </h2>
+        <p class="lead">— C. Otto Scharmer, MIT Sloan Senior Lecturer / Presencing Institute 創設者</p>
+      </div>
+
+      <div class="theory-grid">
+        <div class="theory-card">
+          <div class="theory-num">01 / Theory U</div>
+          <h3>U 理論 / プレゼンシング</h3>
+          <p>
+            MIT の C. オットー・シャーマーが提唱する、深い学習と変革のための社会的テクノロジー。
+            「Open Mind・Open Heart・Open Will」のプロセスを通じて、現れつつある未来から学ぶ。
+          </p>
+        </div>
+        <div class="theory-card">
+          <div class="theory-num">02 / Systems Thinking</div>
+          <h3>システム思考 / 学習する組織</h3>
+          <p>
+            ピーター・センゲの『学習する組織(The Fifth Discipline)』を礎に、
+            複雑な問題の構造をシステムとして捉え、ループとレバレッジを見出す思考法。
+          </p>
+        </div>
+        <div class="theory-card">
+          <div class="theory-num">03 / Just Money</div>
+          <h3>新しい経済の作法</h3>
+          <p>
+            ブレンデッド・ファイナンス、サーキュラー・エコノミー、Just Money ──
+            利益最大化を超えた経済の在り方を、実践と理論の両面から探求する。
+          </p>
+        </div>
+      </div>
+
+      <p style="margin-top: var(--space-10); font-size: 13px; color: rgba(255, 255, 255, 0.6); text-align: center;">
+        これらの思想・実践についての日本語解説と、推薦書籍のリストを、サブページにて準備中です。
+      </p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FUND (in development)
+       ========================================================= -->
+  <section class="section-pad bg-cream" id="fund">
+    <div class="container">
+      <div class="fund-card">
+        <div class="fund-inner">
+          <span class="fund-status">In Development / 構想中</span>
+          <span class="eyebrow">Young Leader Fund / 若手支援ファンド</span>
+          <h2 class="heading">
+            次の 10 年を担う若手リーダーに、<br />
+            この学びの扉を開く。
+          </h2>
+          <p style="font-size: 16px; line-height: 2; color: var(--c-text); margin: 0 0 var(--space-6);">
+            IDEAS Asia Pacific の参加費は、若手のリーダーにとっては大きな経済的ハードルです。
+            日本ハブでは、未来を担う次世代の参加機会を広げるため、
+            個人・企業・財団からの支援を集める奨学ファンドの仕組みづくりを進めています。
+          </p>
+          <p style="font-size: 16px; line-height: 2; color: var(--c-text); margin: 0 0 var(--space-8);">
+            ご関心をお寄せくださる支援者の方々を募集しています。
+            まずは構想と進捗をお伝えするご連絡先のご登録から、お気軽にどうぞ。
+          </p>
+          <a href="#contact" class="btn btn-ghost">
+            ファンド構想について連絡を受け取る
+            <i data-lucide="arrow-right" class="lucide-icon"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CONTACT
+       ========================================================= -->
+  <section class="section-pad bg-cream" id="contact">
+    <div class="container">
+      <div class="contact-card">
+        <div class="contact-grid">
+          <div>
+            <span class="eyebrow">Contact / お問い合わせ</span>
+            <h2 class="heading">対話から、すべては始まります。</h2>
+            <p>
+              プログラムへの個人参加、組織への導入、若手支援への参画、取材・登壇のご依頼まで。
+              関心のテーマをお選びください。お二人体制のため、ご返信に少しお時間をいただく場合があります。
+            </p>
+          </div>
+
+          <div class="contact-options">
+            <a href="/contact/?type=individual" class="contact-option">
+              <span class="contact-option-icon"><i data-lucide="user" class="lucide-icon"></i></span>
+              <div class="contact-option-text">
+                <strong>個人として参加に関心</strong>
+                <span>次期コホート、または将来の参加について</span>
+              </div>
+            </a>
+            <a href="/contact/?type=organization" class="contact-option">
+              <span class="contact-option-icon"><i data-lucide="building-2" class="lucide-icon"></i></span>
+              <div class="contact-option-text">
+                <strong>組織として導入を相談</strong>
+                <span>企業・学校・自治体・NPO からのご相談</span>
+              </div>
+            </a>
+            <a href="/contact/?type=fund" class="contact-option">
+              <span class="contact-option-icon"><i data-lucide="heart" class="lucide-icon"></i></span>
+              <div class="contact-option-text">
+                <strong>若手支援ファンドに関心</strong>
+                <span>構想・進捗の情報を受け取る</span>
+              </div>
+            </a>
+            <a href="/contact/?type=other" class="contact-option">
+              <span class="contact-option-icon"><i data-lucide="mail" class="lucide-icon"></i></span>
+              <div class="contact-option-text">
+                <strong>取材・登壇・その他</strong>
+                <span>メディア・イベント・パートナーシップ</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="images/logo.png" alt="IDEAS Asia Pacific" onerror="this.style.display='none'" />
+          <p>
+            MIT Sloan Global Programs と United in Diversity Foundation による、
+            サステナビリティのための変革型リーダーシッププログラム
+            IDEAS Asia Pacific の、公式日本ハブです。
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>About</h5>
+          <ul>
+            <li><a href="#about">IDEASとは</a></li>
+            <li><a href="#history" data-open-history>沿革 / History</a></li>
+            <li><a href="#fellows">日本人フェロー</a></li>
+            <li><a href="#team">運営チーム</a></li>
+            <li><a href="#theory">Theory U / 関連思想</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="#fund">若手支援ファンド</a></li>
+            <li><a href="#contact">お問い合わせ</a></li>
+            <li><a href="https://mitsloan.mit.edu/global-programs/ideas-asia-pacific" target="_blank" rel="noopener">MIT Sloan 公式ページ ↗</a></li>
+            <li><a href="https://uid.or.id/" target="_blank" rel="noopener">United in Diversity ↗</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="mailto:hello@ideas-ap-japan.org">hello@ideas-ap-japan.org</a></li>
+            <li style="opacity: 0.6;">Tokyo, Japan</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 IDEAS Asia Pacific Japan Hub</span>
+        <span>An Official Hub of MIT Sloan × UID</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       HISTORY OVERLAY (modal page)
+       ========================================================= -->
+  <div class="page-overlay"
+       id="historyOverlay"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="historyOverlayTitle"
+       aria-hidden="true">
+
+    <!-- Top bar with breadcrumb + close -->
+    <div class="overlay-topbar">
+      <div class="overlay-crumb" aria-label="パンくずリスト">
+        <a href="#" data-close-history>Home</a>
+        <span class="sep">/</span>
+        <span>About</span>
+        <span class="sep">/</span>
+        <span class="current" aria-current="page">History</span>
+      </div>
+      <button class="overlay-close"
+              type="button"
+              id="historyClose"
+              data-close-history
+              aria-label="History を閉じてトップページに戻る">
+        <i data-lucide="x" class="lucide-icon"></i>
+        <span>閉じる</span>
+      </button>
+    </div>
+
+    <!-- Hero -->
+    <section class="overlay-hero">
+      <div class="container overlay-hero-inner">
+        <h1 id="historyOverlayTitle">History</h1>
+        <h2>
+          IDEASの歩み — 20年以上にわたる<br />
+          変革型リーダーシップの旅
+          <em>A 20+ year journey of transformational leadership.</em>
+        </h2>
+        <p class="lede">
+          IDEAS Asia Pacificは、突然始まったプログラムではありません。MITとインドネシアのリーダーたちが20年以上にわたり共創してきた、システム変革のための学びの旅の集大成です。
+        </p>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="overlay-timeline-section">
+      <div class="container">
+        <div class="overlay-timeline-intro">
+          <span class="eyebrow">Timeline</span>
+          <h2>2003 → 2026 ／ 20年以上の歩み</h2>
+          <p>トライセクターのリーダーたちが、自己・社会・システムを変革してきた軌跡。</p>
+        </div>
+
+        <ol class="timeline" aria-label="IDEASの沿革タイムライン">
+          <li class="timeline-item left">
+            <span class="timeline-marker" aria-hidden="true"></span>
+            <article class="timeline-card">
+              <span class="timeline-year">2003<span class="yr-label">Origin</span></span>
+              <h3>UID（United in Diversity）創設</h3>
+              <p>インドネシア・バリにて、MITスローン経営大学院、インドネシア大学、GTグループ・シナールハラパンの3者により、教育フォーラム「United in Diversity」が共同設立。設立式には、メガワティ・スカルノプトリ元大統領（2001-2004年）が登壇。ビジネス・政府・市民社会（トライセクター）のリーダーが集い、「共通の未来への信頼を築く」という理念のもと活動を開始しました。</p>
+            </article>
+          </li>
+
+          <li class="timeline-item right">
+            <span class="timeline-marker" aria-hidden="true"></span>
+            <article class="timeline-card">
+              <span class="timeline-year">2011<span class="yr-label">Program Launch</span></span>
+              <h3>IDEAS Indonesia 始動</h3>
+              <p>UIDのフラッグシップ・プログラムとして「IDEAS Indonesia」がMITスローン経営大学院と共催で本格スタート。理論的フレームワークとして、MITスローン上級講師オットー・シャーマー教授の「U理論」とピーター・センゲ教授の「学習する組織」を採用。複雑化する課題に対応するためのマインドフルネスとシステム思考を養うプログラムへと発展しました。</p>
+            </article>
+          </li>
+
+          <li class="timeline-item left">
+            <span class="timeline-marker" aria-hidden="true"></span>
+            <article class="timeline-card">
+              <span class="timeline-year">2014<span class="yr-label">MIT Gathering</span></span>
+              <h3>MIT IDEASにインドネシアのリーダーが集結</h3>
+              <p>MITにおいて、インドネシアからのリーダー・チェンジメーカー達がClimate Interactive社の「World Climate演習」を体験。参加メンバーには、世界第2位の生物多様性を誇るコーラル・トライアングル・イニシアティブ（CTI）の主要プレイヤーも含まれ、海洋管理・持続可能な漁業をテーマに対話を実施しました。</p>
+            </article>
+          </li>
+
+          <li class="timeline-item right">
+            <span class="timeline-marker" aria-hidden="true"></span>
+            <article class="timeline-card">
+              <span class="timeline-year">2015<span class="yr-label">Global Expansion</span></span>
+              <h3>u.lab / MITx 開講、グローバル展開へ</h3>
+              <p>オットー・シャーマー教授がMITx u.labを共同設立し、ジェイミソン教育優秀賞を受賞。IDEASプログラムの知見がオンライン教育を通じて世界へ展開され、初年度に185カ国から75,000人以上が参加。グローバルなプレゼンシング・ネットワークが形成されました。</p>
+            </article>
+          </li>
+
+          <li class="timeline-item left">
+            <span class="timeline-marker" aria-hidden="true"></span>
+            <article class="timeline-card">
+              <span class="timeline-year">2014<span style="font-size: 0.5em; opacity: 0.6;">–</span>2023<span class="yr-label">Network Era</span></span>
+              <h3>IDEAS Indonesia / IDEAS China 各国展開期</h3>
+              <p>シャーマー教授は中国とインドネシアにおける分野横断的イノベーションのためのMIT IDEASプログラムの議長として、各地域でトライセクター型リーダー育成を推進。10年以上にわたり、卒業生ネットワークを蓄積していきました。</p>
+            </article>
+          </li>
+
+          <li class="timeline-item right">
+            <span class="timeline-marker" aria-hidden="true"></span>
+            <article class="timeline-card">
+              <span class="timeline-year">2023<span class="yr-label">20th Anniversary</span></span>
+              <h3>UID創設20周年</h3>
+              <p>バリ・キャンパスでの記念式典に、人民協議会副議長（MPR RI）レスタリ・モエルディヤット氏、SDGs国家事務局メンバーなど、各セクターのリーダーが集結。20年間で築かれたグローバル・ネットワークが、次のフェーズ＝アジア太平洋全域への拡張を後押ししました。</p>
+            </article>
+          </li>
+
+          <li class="timeline-item left">
+            <span class="timeline-marker" aria-hidden="true"></span>
+            <article class="timeline-card">
+              <span class="timeline-year">2024<span class="yr-label">Cohort 1.0</span></span>
+              <h3>IDEAS Asia Pacific 始動（Cohort 1.0）</h3>
+              <p>従来の「IDEAS Indonesia」を発展させ、アジア太平洋15カ国以上を対象とする「IDEAS Asia Pacific」として再構築。トランスフォーメーショナル・リーダーシップ・プログラムとして、サステナビリティのための集合的リーダーシップ・スタイルを変革する新たな知識・スキル・フレームワークを提供。第1期は43名のフェローを輩出しました。</p>
+            </article>
+          </li>
+
+          <li class="timeline-item right">
+            <span class="timeline-marker" aria-hidden="true"></span>
+            <article class="timeline-card">
+              <span class="timeline-year">2025<span class="yr-label">Cohort 2.0</span></span>
+              <h3>Cohort 2.0</h3>
+              <p>横浜・ケンブリッジ（MIT）・バリの3拠点を巡る年間プログラムが定着。日本からの参加者も増加し、アジア太平洋におけるシステム変革のハブとして成長しました。</p>
+            </article>
+          </li>
+
+          <li class="timeline-item left is-now">
+            <span class="timeline-marker" aria-hidden="true"></span>
+            <article class="timeline-card is-now">
+              <span class="now-badge" aria-label="現在進行中">Now</span>
+              <span class="timeline-year">2026<span class="yr-label">Cohort 3.0</span></span>
+              <h3>Cohort 3.0「SDGsリーダーシップ・ラボ」始動</h3>
+              <p>2026年プログラムは、より良いビジネス・より良い世界のためのシステム変革に焦点を当てた「SDGsリーダーシップ・ラボ」として実施。SDGs達成期限まであと4年——「いま、何ができるか」を問い、アジア太平洋から45名の選ばれたフェローが共創を始めます。</p>
+            </article>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Closing -->
+    <section class="overlay-closing">
+      <div class="container overlay-closing-inner">
+        <blockquote class="closing-quote">
+          IDEASは、知識を学ぶ場ではなく、<br />
+          未来を共に生み出す場です。
+        </blockquote>
+        <p class="closing-body">
+          20年以上の歩みは、<strong>トライセクターのリーダーたちが「自己・社会・システム」を変革してきた軌跡</strong>そのもの。<br />
+          日本のリーダーにとって、これは"次の20年"を共に描くための招待状です。
+        </p>
+        <a href="#contact" class="btn btn-primary" data-close-history-then="#contact">
+          IDEAS Asia Pacific 3.0 への関心を表明する
+          <i data-lucide="arrow-right" class="lucide-icon"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- Foot: explicit "back to top" -->
+    <div class="overlay-foot">
+      <a href="#" data-close-history>
+        <i data-lucide="arrow-left" class="lucide-icon"></i>
+        <span>トップページに戻る</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       SCRIPTS
+       ========================================================= -->
+  <script>
+    // Initialize Lucide icons
+    if (window.lucide) lucide.createIcons();
+
+    // Sticky header transition
+    const header = document.getElementById('siteHeader');
+    const onScroll = () => {
+      header.classList.toggle('is-scrolled', window.scrollY > 24);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Mobile menu toggle
+    const toggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    toggle?.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      toggle.innerHTML = isOpen
+        ? '<i data-lucide="x" class="lucide-icon"></i>'
+        : '<i data-lucide="menu" class="lucide-icon"></i>';
+      if (window.lucide) lucide.createIcons();
+    });
+
+    // Close mobile menu on link click
+    mobileMenu?.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => {
+        mobileMenu.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.innerHTML = '<i data-lucide="menu" class="lucide-icon"></i>';
+        if (window.lucide) lucide.createIcons();
+      });
+    });
+
+    /* =========================================================
+       HISTORY OVERLAY (modal page)
+       - 開く: ドロップダウンの「沿革」/フッターの「History」/直接 #history で
+       - 閉じる: ヘッダーの「閉じる」/フッター部「トップページに戻る」/ESCキー/背景クリック(任意)
+       - URLは #history に同期。ブラウザ戻るで自動で閉じる
+       ========================================================= */
+    (function setupHistoryOverlay() {
+      const overlay = document.getElementById('historyOverlay');
+      if (!overlay) return;
+
+      let lastFocused = null;
+      let lastScrollY = 0;
+
+      const openOverlay = (updateHash = true) => {
+        if (overlay.classList.contains('is-open')) return;
+        lastFocused = document.activeElement;
+        lastScrollY = window.scrollY;
+
+        document.body.classList.add('overlay-open');
+        document.body.style.top = `-${lastScrollY}px`;
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+
+        overlay.classList.add('is-open');
+        overlay.setAttribute('aria-hidden', 'false');
+        overlay.scrollTop = 0;
+
+        if (updateHash && location.hash !== '#history') {
+          history.pushState({ overlay: 'history' }, '', '#history');
+        }
+
+        // Move focus into overlay
+        const closeBtn = document.getElementById('historyClose');
+        setTimeout(() => closeBtn?.focus(), 50);
+      };
+
+      const closeOverlay = (updateHash = true) => {
+        if (!overlay.classList.contains('is-open')) return;
+
+        overlay.classList.remove('is-open');
+        overlay.setAttribute('aria-hidden', 'true');
+
+        document.body.classList.remove('overlay-open');
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, lastScrollY);
+
+        if (updateHash && location.hash === '#history') {
+          history.replaceState(null, '', location.pathname + location.search);
+        }
+
+        lastFocused?.focus?.();
+      };
+
+      // Triggers: open
+      document.querySelectorAll('[data-open-history]').forEach((el) => {
+        el.addEventListener('click', (e) => {
+          e.preventDefault();
+          openOverlay(true);
+        });
+      });
+
+      // Triggers: close
+      document.querySelectorAll('[data-close-history]').forEach((el) => {
+        el.addEventListener('click', (e) => {
+          e.preventDefault();
+          closeOverlay(true);
+        });
+      });
+
+      // Special: close → then jump to a section on home (e.g. #contact)
+      document.querySelectorAll('[data-close-history-then]').forEach((el) => {
+        el.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = el.getAttribute('data-close-history-then');
+          closeOverlay(true);
+          if (target) {
+            setTimeout(() => {
+              const node = document.querySelector(target);
+              node?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+          }
+        });
+      });
+
+      // ESC to close
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
+          closeOverlay(true);
+        }
+      });
+
+      // Browser back/forward (popstate) — sync overlay to hash
+      window.addEventListener('popstate', () => {
+        if (location.hash === '#history') {
+          openOverlay(false);
+        } else {
+          closeOverlay(false);
+        }
+      });
+
+      // Deep-link: if page loads with #history, open immediately
+      if (location.hash === '#history') {
+        // Wait one frame so layout is ready
+        requestAnimationFrame(() => openOverlay(false));
+      }
+
+      // Init lucide icons inside overlay (close button etc.)
+      if (window.lucide) lucide.createIcons();
+
+      // IntersectionObserver: reveal timeline cards when scrolled into view inside the overlay
+      const cards = overlay.querySelectorAll('.timeline-card');
+      if ('IntersectionObserver' in window && cards.length) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { root: overlay, threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
+        );
+        cards.forEach((c) => io.observe(c));
+      } else {
+        cards.forEach((c) => c.classList.add('is-visible'));
+      }
+    })();
+  </script>
+</body>
+</html>
