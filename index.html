@@ -668,6 +668,89 @@
       margin: 0;
     }
 
+    /* About — IDEAS intro (text + 3-photo strip) */
+    .about-intro {
+      margin-bottom: var(--space-20);
+      padding-bottom: var(--space-16);
+      border-bottom: 1px solid var(--c-border);
+    }
+    .about-intro-text {
+      max-width: 760px;
+      margin-bottom: var(--space-12);
+    }
+    .about-intro-text .body {
+      font-size: 16px;
+      line-height: 2;
+      color: var(--c-text);
+      margin: 0 0 var(--space-5);
+    }
+    .about-intro-text .body:last-child { margin-bottom: 0; }
+    .about-intro-text .body strong {
+      color: var(--c-purple-900);
+      font-weight: 600;
+    }
+    .about-photo-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-5);
+    }
+    .about-photo {
+      margin: 0;
+      position: relative;
+    }
+    .about-photo .frame {
+      position: relative;
+      overflow: hidden;
+      background-color: var(--c-purple-100);
+      aspect-ratio: 1 / 1;
+      transition: transform 0.55s var(--ease), box-shadow 0.55s var(--ease);
+      will-change: transform;
+    }
+    .about-photo .frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(31, 23, 51, 0) 55%, rgba(31, 23, 51, 0.55) 100%);
+      opacity: 0;
+      transition: opacity 0.4s var(--ease);
+      pointer-events: none;
+    }
+    .about-photo .frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s var(--ease), filter 0.5s var(--ease);
+    }
+    .about-photo .idx {
+      position: absolute;
+      top: var(--space-3);
+      left: var(--space-4);
+      z-index: 2;
+      font-family: var(--font-latin);
+      font-size: 13px;
+      font-style: italic;
+      letter-spacing: 0.22em;
+      color: var(--c-white);
+      mix-blend-mode: difference;
+      pointer-events: none;
+    }
+    /* Group hover: focus active photo, gently dim the others */
+    @media (hover: hover) {
+      .about-photo-strip:hover .about-photo .frame img {
+        filter: saturate(0.55) brightness(0.78);
+      }
+      .about-photo-strip:hover .about-photo:hover .frame img {
+        filter: none;
+        transform: scale(1.06);
+      }
+      .about-photo:hover .frame {
+        transform: translateY(-6px);
+        box-shadow: 0 30px 60px -28px rgba(45, 37, 72, 0.45);
+      }
+      .about-photo:hover .frame::after { opacity: 1; }
+    }
+
     /* Journey timeline */
     .journey {
       margin-top: var(--space-24);
@@ -1498,6 +1581,8 @@
       .hero-eyebrow::before { width: 36px; }
       .life-grid, .fellows-grid, .theory-grid { grid-template-columns: 1fr; }
       .journey-list { grid-template-columns: 1fr; }
+      .about-intro { margin-bottom: var(--space-16); padding-bottom: var(--space-12); }
+      .about-photo-strip { grid-template-columns: 1fr; gap: var(--space-4); }
       .journey-step { border-left: none !important; border-top: 1px solid var(--c-border); padding: var(--space-5) 0; }
       .journey-step:first-child { border-top: none; padding-top: 0; }
       .footer-grid { grid-template-columns: 1fr; }
@@ -1529,6 +1614,234 @@
       .overlay-topbar { padding: var(--space-4); }
       .overlay-close { padding: 8px 14px; font-size: 12px; }
       .overlay-crumb { font-size: 10px; letter-spacing: 0.16em; }
+
+      /* Fellows overlay: stacked controls + 1-col grid */
+      .fellows-overlay-hero { padding: var(--space-12) 0 var(--space-8); }
+      .fellows-controls { padding: var(--space-4); top: 56px; }
+      .fellows-controls-inner { gap: var(--space-2); }
+      .fellows-control-field { flex: 1 1 100%; min-width: 0; }
+      .fellows-reset { width: 100%; }
+      .fellows-count { margin-left: 0; width: 100%; text-align: center; padding-top: var(--space-2); }
+      .fellows-overlay-main { padding: var(--space-10) var(--space-4) var(--space-12); }
+      .fellows-overlay-grid { grid-template-columns: 1fr; }
+    }
+
+    /* =========================================================
+       FELLOWS OVERLAY  (Asia Pacific Directory — modal)
+       ========================================================= */
+    .fellows-overlay-hero {
+      position: relative;
+      padding: var(--space-16) 0 var(--space-12);
+      background: radial-gradient(ellipse at 80% 20%, #7A5BA8 0%, transparent 55%),
+                  linear-gradient(160deg, #2D2548 0%, #3D2E5F 60%, #5A4080 100%);
+      color: var(--c-white);
+      overflow: hidden;
+    }
+    .fellows-overlay-hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      opacity: 0.5;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+    .fellows-overlay-hero-inner { position: relative; z-index: 1; }
+    .fellows-overlay-hero h1 {
+      font-family: var(--font-latin);
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1;
+      margin: 0 0 var(--space-5);
+      color: var(--c-white);
+    }
+    .fellows-overlay-hero h2 {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.6vw, 30px);
+      font-weight: 500;
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+      margin: 0 0 var(--space-4);
+      max-width: 780px;
+      color: var(--c-white);
+    }
+    .fellows-overlay-hero .lede {
+      font-size: 15px;
+      line-height: 1.95;
+      color: rgba(255, 255, 255, 0.82);
+      max-width: 620px;
+      margin: 0;
+    }
+
+    /* Sticky controls bar (sits below the overlay-topbar) */
+    .fellows-controls {
+      position: sticky;
+      top: 64px;
+      z-index: 4;
+      background-color: rgba(251, 248, 243, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--c-border);
+      padding: var(--space-5) var(--space-6);
+    }
+    .fellows-controls-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: center;
+      max-width: var(--container);
+      margin: 0 auto;
+    }
+    .fellows-control-field {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      flex: 1 1 200px;
+      min-width: 180px;
+    }
+    .fellows-control-field .lucide-icon {
+      position: absolute;
+      left: 14px;
+      width: 16px;
+      height: 16px;
+      color: var(--c-text-muted);
+      pointer-events: none;
+    }
+    .fellows-control-field.has-icon .fellows-input { padding-left: 40px; }
+    .fellows-input,
+    .fellows-select {
+      width: 100%;
+      padding: 11px 16px;
+      border: 1px solid var(--c-border);
+      background-color: var(--c-white);
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-family: inherit;
+      color: var(--c-text);
+      transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    }
+    .fellows-select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--c-text-muted) 50%),
+        linear-gradient(135deg, var(--c-text-muted) 50%, transparent 50%);
+      background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+    .fellows-input::placeholder { color: var(--c-text-muted); }
+    .fellows-input:focus,
+    .fellows-select:focus {
+      outline: none;
+      border-color: var(--c-purple-500);
+      box-shadow: 0 0 0 3px rgba(122, 91, 168, 0.15);
+    }
+    .fellows-reset {
+      padding: 11px 22px;
+      background-color: var(--c-purple-900);
+      color: var(--c-white);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 0;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-family: var(--font-latin);
+      transition: background-color 0.2s var(--ease), transform 0.2s var(--ease);
+    }
+    .fellows-reset:hover {
+      background-color: var(--c-red);
+      transform: translateY(-1px);
+    }
+    .fellows-count {
+      margin-left: auto;
+      font-size: 12px;
+      font-family: var(--font-latin);
+      letter-spacing: 0.12em;
+      color: var(--c-text-muted);
+      white-space: nowrap;
+    }
+
+    /* Directory grid */
+    .fellows-overlay-main {
+      padding: var(--space-12) var(--space-6) var(--space-16);
+      max-width: var(--container);
+      margin: 0 auto;
+    }
+    .fellows-overlay-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: var(--space-5);
+    }
+    .fellow-row {
+      background-color: var(--c-white);
+      border: 1px solid var(--c-border);
+      padding: var(--space-5) var(--space-5) var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      border-radius: var(--radius);
+      transition: border-color 0.2s var(--ease), transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    }
+    .fellow-row:hover {
+      border-color: var(--c-purple-300);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px -16px rgba(45, 37, 72, 0.22);
+    }
+    .fellow-row-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.4;
+      color: var(--c-purple-900);
+      letter-spacing: 0.01em;
+    }
+    .fellow-row-org {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--c-text);
+      line-height: 1.6;
+    }
+    .fellow-row-title {
+      font-size: 12px;
+      color: var(--c-text-muted);
+      line-height: 1.6;
+    }
+    .fellow-row-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: var(--space-3);
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--c-border);
+    }
+    .fellow-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius);
+      font-family: var(--font-latin);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .tag-sector-business    { background-color: rgba(122, 91, 168, 0.12); color: var(--c-purple-700); }
+    .tag-sector-civil       { background-color: rgba(58, 154, 74, 0.12);  color: var(--c-green); }
+    .tag-sector-government  { background-color: rgba(208, 39, 45, 0.10);  color: var(--c-red); }
+    .tag-sector-unknown     { background-color: rgba(107, 98, 128, 0.10); color: var(--c-text-muted); }
+    .tag-country            { background-color: var(--c-cream); color: var(--c-text); border: 1px solid var(--c-border); }
+
+    .fellows-no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: var(--space-20) var(--space-6);
+      color: var(--c-text-muted);
+      font-family: var(--font-display);
+      font-size: 18px;
     }
 
     /* Reduced motion */
@@ -1536,6 +1849,7 @@
       .timeline-card { opacity: 1 !important; transform: none !important; transition: none; }
       .now-badge { animation: none; }
       .page-overlay { transition: opacity 0.01s linear, visibility 0.01s linear; transform: none !important; }
+      .fellow-row { transition: none; }
     }
   </style>
 </head>
@@ -1574,8 +1888,22 @@
             </a>
           </div>
         </span>
-        <a href="#fellows">日本人フェロー</a>
-        <a href="#team">運営チーム</a>
+        <span class="nav-item" tabindex="0">
+          <a href="#fellows" aria-haspopup="true" aria-expanded="false">
+            フェロー
+            <i data-lucide="chevron-down" class="chev"></i>
+          </a>
+          <div class="nav-dropdown" role="menu" aria-label="フェロー">
+            <a href="#fellows" role="menuitem">
+              日本人フェロー
+              <small>Japan Fellows</small>
+            </a>
+            <a href="#fellows-all" role="menuitem" data-open-fellows-all>
+              Asia Pacific 全フェロー
+              <small>All Asia Pacific Fellows</small>
+            </a>
+          </div>
+        </span>
         <a href="#theory">Theory U</a>
         <a href="#contact" class="cta">お問い合わせ</a>
       </nav>
@@ -1593,8 +1921,10 @@
         <a href="#history" data-open-history>沿革 / History</a>
         <a href="#theory">関連思想 / Theory U</a>
       </div>
-      <a href="#fellows">日本人フェロー</a>
-      <a href="#team">運営チーム</a>
+      <a href="#fellows">フェロー — 日本人フェロー</a>
+      <div class="submenu" aria-label="フェロー - サブメニュー">
+        <a href="#fellows-all" data-open-fellows-all>Asia Pacific 全フェロー</a>
+      </div>
       <a href="#fund">若手支援ファンド</a>
       <a href="#contact">お問い合わせ</a>
     </nav>
@@ -1621,7 +1951,7 @@
             <i data-lucide="arrow-right" class="lucide-icon"></i>
           </a>
           <a href="#fellows" class="btn btn-outline">
-            日本人フェローの声
+            フェローの声
             <i data-lucide="arrow-down" class="lucide-icon"></i>
           </a>
         </div>
@@ -1677,8 +2007,59 @@
        ========================================================= -->
   <section class="section-pad bg-purple-pale" id="about">
     <div class="container">
+
+      <!-- IDEAS イントロ -->
+      <div class="about-intro">
+        <div class="about-intro-text">
+          <span class="eyebrow">About / IDEASとは</span>
+          <h2 class="heading">
+            境界を超えるリーダーが、<br />
+            1 年間、共に学び・共に動く。
+          </h2>
+          <p class="body">
+            <strong>IDEAS（Innovative Dynamic Education and Action for Sustainability）アジア太平洋プログラム</strong>は、
+            米マサチューセッツ工科大学（MIT）と、インドネシアの United in Diversity（UID）との協力により開発された、
+            変革型リーダーシッププログラムです。
+          </p>
+          <p class="body">
+            アジア太平洋地域から、ビジネス・政府・市民社会という 3 つのセクターの境界を超えたリーダーたちが集い、
+            1 年間にわたる実践的な学びの旅を通じて、持続可能な開発に関わる複雑な課題に共に取り組みます。
+            参加者は社会の構造的問題を共に特定し、緊密な関係を築きながら、
+            そこから生まれた解決策の実装に向けて協働します。
+          </p>
+        </div>
+
+        <div class="about-photo-strip">
+          <figure class="about-photo">
+            <span class="idx" aria-hidden="true">01</span>
+            <div class="frame">
+              <img src="images/PHOTO-2024-06-11-02-45-06.jpg"
+                   alt="MIT Sloan Cambridge キャンパスでの IDEAS Asia Pacific 集合写真"
+                   loading="lazy" />
+            </div>
+          </figure>
+          <figure class="about-photo">
+            <span class="idx" aria-hidden="true">02</span>
+            <div class="frame">
+              <img src="images/IMG_2238.jpeg"
+                   alt="MIT モジュール中のワークショップ Q&amp;A セッション"
+                   loading="lazy" />
+            </div>
+          </figure>
+          <figure class="about-photo">
+            <span class="idx" aria-hidden="true">03</span>
+            <div class="frame">
+              <img src="images/PHOTO-2024-08-08-17-04-51.jpg"
+                   alt="UID Bali キャンパスでの IDEAS フェロー集合写真"
+                   loading="lazy" />
+            </div>
+          </figure>
+        </div>
+      </div>
+
+      <!-- L.I.F.E. -->
       <div style="max-width: 720px; margin-bottom: var(--space-12);">
-        <span class="eyebrow">About / IDEASとは</span>
+        <span class="eyebrow">Framework / L.I.F.E.</span>
         <h2 class="heading">
           サステナビリティへの STEP は、<br />
           <em>L.I.F.E.</em> の機能である。
@@ -1713,41 +2094,6 @@
         </div>
       </div>
 
-      <!-- Journey -->
-      <div class="journey">
-        <div class="journey-header">
-          <span class="eyebrow" style="display: inline-flex;">The Journey / 1年間の学びの旅</span>
-          <h3 class="heading" style="font-size: clamp(22px, 2.6vw, 32px);">6つのモジュールで巡る、変革のプロセス</h3>
-        </div>
-
-        <div class="journey-list">
-          <div class="journey-step">
-            <h4>オンボーディング</h4>
-            <p>全体像と参加者の歓迎。オンライン 1 日。</p>
-          </div>
-          <div class="journey-step">
-            <h4>Co-Initiating<br />共創開始</h4>
-            <p>イントロダクションと信頼構築。横浜・対面 4 日間。</p>
-          </div>
-          <div class="journey-step">
-            <h4>Co-Sensing<br />共感</h4>
-            <p>基盤構築。MIT ケンブリッジ・キャンパスでの 5 日間。</p>
-          </div>
-          <div class="journey-step">
-            <h4>Deep Dive<br />重点探究</h4>
-            <p>プレゼンシングの実践。バリ島 UID キャンパスにて 6 日間。</p>
-          </div>
-          <div class="journey-step">
-            <h4>Prototyping<br />試作</h4>
-            <p>プロトタイプ案のブラッシュアップ。小グループで自走。</p>
-          </div>
-          <div class="journey-step">
-            <h4>Completion<br />修了</h4>
-            <p>発表と修了式。ジャカルタにて 3 日間。</p>
-          </div>
-        </div>
-      </div>
-
       <!-- Credentials -->
       <div class="credentials">
         <span class="credentials-label">Official Partners</span>
@@ -1774,7 +2120,7 @@
     <div class="container">
       <div class="fellows-head">
         <div>
-          <span class="eyebrow">Fellows / 日本人フェロー</span>
+          <span class="eyebrow">Fellows / フェロー</span>
           <h2 class="heading">これまでに、<br />5 名の日本人がこの旅を歩みました。</h2>
         </div>
         <p class="lead">
@@ -1827,54 +2173,10 @@
       </div>
 
       <div style="text-align: center; margin-top: var(--space-12);">
-        <a href="/fellows/" class="btn btn-ghost">
-          フェロー全員のストーリーを読む
+        <a href="#fellows-all" class="btn btn-ghost" data-open-fellows-all>
+          Asia Pacificの全フェロー
           <i data-lucide="arrow-right" class="lucide-icon"></i>
         </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================
-       TEAM
-       ========================================================= -->
-  <section class="section-pad bg-white" id="team">
-    <div class="container">
-      <div style="max-width: 720px; margin-bottom: var(--space-8);">
-        <span class="eyebrow">Team / 運営チーム</span>
-        <h2 class="heading">日本ハブを担う、二人。</h2>
-        <p class="lead">
-          IDEAS Asia Pacific 日本ハブは、修了生でもあり組織人材開発を本業とする
-          二人の有志によって運営されています。本業との往還を通じて、IDEAS の方法論を日本社会に
-          根づかせていくことを目指しています。
-        </p>
-      </div>
-
-      <div class="team-grid">
-        <div class="team-card">
-          <div class="team-photo">Photo</div>
-          <div>
-            <h3 class="team-name">野田 浩平 博士</h3>
-            <p class="team-role">Regional Faculty / Co-lead</p>
-            <p class="team-bio">
-              GLOBIS 経営大学院 研究ファカルティ(リーダーシップ・志分野)。
-              IDEAS Asia Pacific の地域ファカルティとして、アジア太平洋圏のリーダー育成に携わる。
-            </p>
-          </div>
-        </div>
-
-        <div class="team-card">
-          <div class="team-photo">Photo</div>
-          <div>
-            <h3 class="team-name">井岡 [姓名]</h3>
-            <p class="team-role">Hub Lead / Cohort [X]</p>
-            <p class="team-bio">
-              IDEAS Asia Pacific 修了生。組織人材開発を本業としながら、
-              日本ハブの立ち上げと運営を担う。
-              [プロフィール文 — 経歴・専門領域・このプログラムへの想い]
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -2028,8 +2330,7 @@
           <ul>
             <li><a href="#about">IDEASとは</a></li>
             <li><a href="#history" data-open-history>沿革 / History</a></li>
-            <li><a href="#fellows">日本人フェロー</a></li>
-            <li><a href="#team">運営チーム</a></li>
+            <li><a href="#fellows">フェロー</a></li>
             <li><a href="#theory">Theory U / 関連思想</a></li>
           </ul>
         </div>
@@ -2227,6 +2528,105 @@
   </div>
 
   <!-- =========================================================
+       FELLOWS OVERLAY (Asia Pacific Fellows Directory)
+       - 開く: 「Asia Pacificの全フェロー」ボタン / 直接 #fellows-all で
+       - 閉じる: ヘッダー右の「閉じる」/ フッター「トップページに戻る」/ ESC
+       ========================================================= -->
+  <div class="page-overlay"
+       id="fellowsOverlay"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="fellowsOverlayTitle"
+       aria-hidden="true">
+
+    <!-- Top bar with breadcrumb + close -->
+    <div class="overlay-topbar">
+      <div class="overlay-crumb" aria-label="パンくずリスト">
+        <a href="#" data-close-fellows-all>Home</a>
+        <span class="sep">/</span>
+        <span>Fellows</span>
+        <span class="sep">/</span>
+        <span class="current" aria-current="page">Asia Pacific Directory</span>
+      </div>
+      <button class="overlay-close"
+              type="button"
+              id="fellowsClose"
+              data-close-fellows-all
+              aria-label="フェロー一覧を閉じてトップページに戻る">
+        <i data-lucide="x" class="lucide-icon"></i>
+        <span>閉じる</span>
+      </button>
+    </div>
+
+    <!-- Hero -->
+    <section class="fellows-overlay-hero">
+      <div class="container fellows-overlay-hero-inner">
+        <h1 id="fellowsOverlayTitle">Fellows</h1>
+        <h2>
+          Asia Pacificの全フェロー — 11カ国・81名のチェンジメーカー
+        </h2>
+        <p class="lede">
+          IDEAS Asia Pacific のコホート 1.0・2.0 を共に歩んだフェロー全員のディレクトリ。
+          ビジネス・市民社会・政府の三セクターから集った、システム変革に挑むリーダーたちです。
+        </p>
+      </div>
+    </section>
+
+    <!-- Sticky filter / search bar -->
+    <div class="fellows-controls">
+      <div class="fellows-controls-inner">
+        <div class="fellows-control-field has-icon">
+          <i data-lucide="search" class="lucide-icon"></i>
+          <input type="text"
+                 id="fellowsSearchName"
+                 class="fellows-input"
+                 placeholder="名前・組織名で検索"
+                 aria-label="名前または組織名で検索">
+        </div>
+        <div class="fellows-control-field">
+          <select id="fellowsFilterSector" class="fellows-select" aria-label="セクターで絞り込み">
+            <option value="">すべてのセクター</option>
+            <option value="Business">Business</option>
+            <option value="Civil Society">Civil Society</option>
+            <option value="Government">Government</option>
+          </select>
+        </div>
+        <div class="fellows-control-field">
+          <select id="fellowsFilterCountry" class="fellows-select" aria-label="国で絞り込み">
+            <option value="">すべての国</option>
+            <option value="Australia">Australia</option>
+            <option value="Cambodia">Cambodia</option>
+            <option value="China">China</option>
+            <option value="Indonesia">Indonesia</option>
+            <option value="Japan">Japan</option>
+            <option value="Malaysia">Malaysia</option>
+            <option value="New Zealand">New Zealand</option>
+            <option value="Philippines">Philippines</option>
+            <option value="Samoa">Samoa</option>
+            <option value="Singapore">Singapore</option>
+            <option value="Thailand">Thailand</option>
+          </select>
+        </div>
+        <button type="button" class="fellows-reset" id="fellowsReset">Reset</button>
+        <span class="fellows-count" id="fellowsCount" aria-live="polite"></span>
+      </div>
+    </div>
+
+    <!-- Directory grid -->
+    <main class="fellows-overlay-main">
+      <div class="fellows-overlay-grid" id="fellowsGrid"></div>
+    </main>
+
+    <!-- Foot: explicit "back to top" -->
+    <div class="overlay-foot">
+      <a href="#" data-close-fellows-all>
+        <i data-lucide="arrow-left" class="lucide-icon"></i>
+        <span>トップページに戻る</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- =========================================================
        SCRIPTS
        ========================================================= -->
   <script>
@@ -2264,25 +2664,32 @@
     });
 
     /* =========================================================
-       HISTORY OVERLAY (modal page)
-       - 開く: ドロップダウンの「沿革」/フッターの「History」/直接 #history で
-       - 閉じる: ヘッダーの「閉じる」/フッター部「トップページに戻る」/ESCキー/背景クリック(任意)
-       - URLは #history に同期。ブラウザ戻るで自動で閉じる
+       PAGE OVERLAYS (modal pages)
+       - 共通の開閉コントローラ（History / Fellows Directory で使い回し）
+       - 開閉時に body をスクロールロック、URL ハッシュに同期、ESC / popstate 対応
        ========================================================= */
-    (function setupHistoryOverlay() {
-      const overlay = document.getElementById('historyOverlay');
-      if (!overlay) return;
+    const overlayControllers = [];
+
+    function createOverlayController({ overlayId, hashName, focusId, onFirstOpen }) {
+      const overlay = document.getElementById(overlayId);
+      if (!overlay) return null;
+
+      const hashStr = '#' + hashName;
+      const openSel = '[data-open-' + hashName + ']';
+      const closeSel = '[data-close-' + hashName + ']';
+      const closeThenSel = '[data-close-' + hashName + '-then]';
 
       let lastFocused = null;
       let lastScrollY = 0;
+      let firstOpened = false;
 
-      const openOverlay = (updateHash = true) => {
+      const open = (updateHash = true) => {
         if (overlay.classList.contains('is-open')) return;
         lastFocused = document.activeElement;
         lastScrollY = window.scrollY;
 
         document.body.classList.add('overlay-open');
-        document.body.style.top = `-${lastScrollY}px`;
+        document.body.style.top = '-' + lastScrollY + 'px';
         document.body.style.position = 'fixed';
         document.body.style.width = '100%';
 
@@ -2290,16 +2697,21 @@
         overlay.setAttribute('aria-hidden', 'false');
         overlay.scrollTop = 0;
 
-        if (updateHash && location.hash !== '#history') {
-          history.pushState({ overlay: 'history' }, '', '#history');
+        if (updateHash && location.hash !== hashStr) {
+          history.pushState({ overlay: hashName }, '', hashStr);
         }
 
-        // Move focus into overlay
-        const closeBtn = document.getElementById('historyClose');
-        setTimeout(() => closeBtn?.focus(), 50);
+        const focusEl = focusId ? document.getElementById(focusId) : null;
+        if (focusEl) setTimeout(() => focusEl.focus(), 50);
+
+        if (!firstOpened) {
+          firstOpened = true;
+          if (typeof onFirstOpen === 'function') onFirstOpen(overlay);
+        }
+        if (window.lucide) lucide.createIcons();
       };
 
-      const closeOverlay = (updateHash = true) => {
+      const close = (updateHash = true) => {
         if (!overlay.classList.contains('is-open')) return;
 
         overlay.classList.remove('is-open');
@@ -2311,88 +2723,258 @@
         document.body.style.width = '';
         window.scrollTo(0, lastScrollY);
 
-        if (updateHash && location.hash === '#history') {
+        if (updateHash && location.hash === hashStr) {
           history.replaceState(null, '', location.pathname + location.search);
         }
 
-        lastFocused?.focus?.();
+        if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
       };
 
-      // Triggers: open
-      document.querySelectorAll('[data-open-history]').forEach((el) => {
-        el.addEventListener('click', (e) => {
-          e.preventDefault();
-          openOverlay(true);
-        });
+      document.querySelectorAll(openSel).forEach((el) => {
+        el.addEventListener('click', (e) => { e.preventDefault(); open(true); });
       });
-
-      // Triggers: close
-      document.querySelectorAll('[data-close-history]').forEach((el) => {
-        el.addEventListener('click', (e) => {
-          e.preventDefault();
-          closeOverlay(true);
-        });
+      document.querySelectorAll(closeSel).forEach((el) => {
+        el.addEventListener('click', (e) => { e.preventDefault(); close(true); });
       });
-
-      // Special: close → then jump to a section on home (e.g. #contact)
-      document.querySelectorAll('[data-close-history-then]').forEach((el) => {
+      document.querySelectorAll(closeThenSel).forEach((el) => {
         el.addEventListener('click', (e) => {
           e.preventDefault();
-          const target = el.getAttribute('data-close-history-then');
-          closeOverlay(true);
+          const target = el.getAttribute('data-close-' + hashName + '-then');
+          close(true);
           if (target) {
             setTimeout(() => {
               const node = document.querySelector(target);
-              node?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              if (node) node.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 100);
           }
         });
       });
 
-      // ESC to close
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
-          closeOverlay(true);
-        }
-      });
+      const ctrl = { open, close, overlay, hashStr, hashName };
+      overlayControllers.push(ctrl);
+      return ctrl;
+    }
 
-      // Browser back/forward (popstate) — sync overlay to hash
-      window.addEventListener('popstate', () => {
-        if (location.hash === '#history') {
-          openOverlay(false);
+    // History overlay
+    createOverlayController({
+      overlayId: 'historyOverlay',
+      hashName: 'history',
+      focusId: 'historyClose',
+      onFirstOpen: (overlay) => {
+        const cards = overlay.querySelectorAll('.timeline-card');
+        if ('IntersectionObserver' in window && cards.length) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-visible');
+                  io.unobserve(entry.target);
+                }
+              });
+            },
+            { root: overlay, threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
+          );
+          cards.forEach((c) => io.observe(c));
         } else {
-          closeOverlay(false);
+          cards.forEach((c) => c.classList.add('is-visible'));
         }
+      },
+    });
+
+    // ESC closes any open overlay
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      overlayControllers.forEach((c) => c.close(true));
+    });
+
+    // Browser back/forward (popstate) — sync overlays to URL hash
+    window.addEventListener('popstate', () => {
+      const h = location.hash;
+      let matched = false;
+      overlayControllers.forEach((c) => {
+        if (c.hashStr === h) { c.open(false); matched = true; }
+      });
+      if (!matched) overlayControllers.forEach((c) => c.close(false));
+    });
+
+    /* =========================================================
+       FELLOWS DIRECTORY (Asia Pacific — 81 fellows)
+       - データ: Cohort 1.0 / 2.0 のフェロー全員
+       - 検索: 名前 OR 組織名（部分一致, case-insensitive）
+       - フィルタ: セクター × 国
+       ========================================================= */
+    const FELLOWS = [
+      { name: "Abrar Jainuddin Hataman", org: "Metronoia Corporation", title: "President", sector: "Business", country: "Philippines" },
+      { name: "Ahmad Baidhowi", org: "Yayasan Sukma / Sukma Foundation", title: "Executive Director", sector: "Civil Society", country: "Indonesia" },
+      { name: "Alex Ogg", org: "National Energy Resources Australia", title: "Director", sector: "Government", country: "Australia" },
+      { name: "Alexander Arya Harsono", org: "World Resources Institute", title: "Research Analyst II", sector: "Civil Society", country: "Indonesia" },
+      { name: "Andrew Toh", org: "Keppel Infrastructure Holdings Pte Ltd", title: "Head, Business Development, Power & Renewables", sector: "Business", country: "Singapore" },
+      { name: "Ari Lastina", org: "DBS Indonesia", title: "Executive Director, Head of Cards and Loan Business", sector: "Business", country: "Indonesia" },
+      { name: "Ayano Kasajima", org: "Kokoromachi Co., Ltd", title: "CEO", sector: "Business", country: "Japan" },
+      { name: "Carlo Martinez Severino", org: "Transnational Diversified Group", title: "Chief Digital Transformation Officer", sector: "Business", country: "Philippines" },
+      { name: "Caroline Christine Russell", org: "Boh Plantations Sdn Bhd", title: "Executive Chairman", sector: "Business", country: "Malaysia" },
+      { name: "Dewi Ratna Sari", org: "World Resources Institute (WRI) Indonesia", title: "Innovative Forest Financing Project Lead", sector: "Civil Society", country: "Indonesia" },
+      { name: "Dian Safitri", org: "Ministry of State Owned Enterprises", title: "Communications Advisor to the Minister", sector: "Government", country: "Indonesia" },
+      { name: "Elim Sritaba", org: "APP Sinar Mas", title: "Chief Sustainability Officer", sector: "Business", country: "Indonesia" },
+      { name: "Elvin Ivan Yaw Uy", org: "Philippine Business for Social Progress", title: "Executive Director", sector: "Civil Society", country: "Philippines" },
+      { name: "Elysa Shiyun Chen", org: "CampusImpact", title: "Executive Director", sector: "Civil Society", country: "Singapore" },
+      { name: "Evy Amir Syamsudin", org: "PT Gentamulia Infra", title: "Director", sector: "Business", country: "Indonesia" },
+      { name: "Fajar Kurniawan", org: "Social Investment Indonesia", title: "Managing Partner", sector: "Business", country: "Indonesia" },
+      { name: "Farah Sofa", org: "Ford Foundation", title: "Program Officer", sector: "Civil Society", country: "Indonesia" },
+      { name: "Farwiza Farhan", org: "Yayasan HAkA", title: "Chairperson / Executive Director", sector: "Civil Society", country: "Indonesia" },
+      { name: "Felia Salim", org: "ESAS", title: "Founder", sector: "Civil Society", country: "Indonesia" },
+      { name: "Ferry Preska Wathan", org: "PT Karya Akbar Mandiri", title: "Managing Director", sector: "Business", country: "Indonesia" },
+      { name: "Fidella Anandhita", org: "Inspigo", title: "Senior Customer Success", sector: "Civil Society", country: "Indonesia" },
+      { name: "Florida Petresia Andriana", org: "Think Policy", title: "Co-Founder and Chief Growth Officer", sector: "Civil Society", country: "Indonesia" },
+      { name: "Gita Syahrani", org: "Secretariat of LTKL", title: "Head of Secretariat", sector: "Civil Society", country: "Indonesia" },
+      { name: "Grace Ekaputri Purnomo", org: "Melinda Hospital Group", title: "Chief Marketing Officer", sector: "Business", country: "Indonesia" },
+      { name: "Hendra Godjali", org: "PT. Equity Development Investment Tbk.", title: "President Director", sector: "Business", country: "Indonesia" },
+      { name: "Herman Huang", org: "Semesta Energi Services", title: "CEO", sector: "Business", country: "Indonesia" },
+      { name: "Ilham Sumantri", org: "PT. KMI Wire and Cable Tbk.", title: "Commercial Director", sector: "Business", country: "Indonesia" },
+      { name: "Irman Alvian Zahiruddin", org: "PT INDOLAKTO", title: "President Commissioner", sector: "Business", country: "Indonesia" },
+      { name: "Isabella Manosa Tanjutco", org: "TAYO Change Agency / Kids for Kids Philippines", title: "Co-Founder and Brand Manager", sector: "Civil Society", country: "Philippines" },
+      { name: "Iwan Kurniawan", org: "PT Gajah Tunggal Tbk", title: "General Manager", sector: "Business", country: "Indonesia" },
+      { name: "James Alexander Mackintosh", org: "Commonland", title: "Director", sector: "Civil Society", country: "New Zealand" },
+      { name: "Jen Tan", org: "Sembcorp Industries", title: "Head Renewables Singapore & Indonesia", sector: "Business", country: "Singapore" },
+      { name: "Jenniefer Suryawidjaya", org: "Banking", title: "Greater China Desk Team Lead", sector: "Business", country: "Indonesia" },
+      { name: "Jose Emmanuel Pilapil Reverente", org: "The Rizal Academy for Innovation and Leadership", title: "Chief Exponential Officer", sector: "Civil Society", country: "Philippines" },
+      { name: "June Cheryl (Chaye) Revilla Cabal", org: "Metro Pacific Investments Corporation", title: "Chief Finance, Risk and Sustainability Officer", sector: "Business", country: "Philippines" },
+      { name: "June Oscar", org: "Australian Human Rights Commission", title: "Aboriginal and Torres Strait Islander Social Justice Commissioner", sector: "Government", country: "Australia" },
+      { name: "Karla Angelica Prieto Delgado", org: "TDG - Kai Farms", title: "Chief Sustainability Officer - Earth Leader", sector: "Civil Society", country: "Philippines" },
+      { name: "Katherine Espura Estember", org: "Tuburan Institute, Inc.", title: "Teacher", sector: "Business", country: "Philippines" },
+      { name: "Kevin Herjono", org: "Genies Inc.", title: "Lighter / Compositor / Generalist", sector: "Business", country: "Indonesia" },
+      { name: "Kindy Rinaldy Syahrir", org: "Ministry of Finance Indonesia", title: "Deputy Director Fiscal Decentralization Policy", sector: "Government", country: "Indonesia" },
+      { name: "Kohei Noda", org: "Kocoro Laboratory Inc.", title: "Representative Director", sector: "Civil Society", country: "Japan" },
+      { name: "Larasati Moerdijat", org: "PT Bank Aladin Syariah Tbk.", title: "Group Head Marketing", sector: "Business", country: "Indonesia" },
+      { name: "Levya Samantha Santosa", org: "WWF Indonesia", title: "National Communication Specialist", sector: "Civil Society", country: "Indonesia" },
+      { name: "Lucia Karina", org: "Coca-Cola Europacific Partners Indonesia", title: "VP PACS", sector: "Business", country: "Indonesia" },
+      { name: "Luisito Ocampo Gutierrez", org: "UF Sustainability Concepts Organization Inc", title: "Farmer-in-chief", sector: "Business", country: "Philippines" },
+      { name: "Lyta Permatasari", org: "Ministry of Environment and Forestry Republic of Indonesia", title: "Community Empowerment Analyst", sector: "Government", country: "Indonesia" },
+      { name: "Madoka Tatsuno", org: "GiFT (Global Incubation × Fostering Talents)", title: "CEO / Founder", sector: "Business", country: "Japan" },
+      { name: "Maria Socorro Zacarias Niro", org: "Transnational Diversified Group", title: "Group Chief Finance Officer, Treasurer and Director", sector: "Business", country: "Philippines" },
+      { name: "Masatoshi Torii", org: "NIDEK CO., LTD.", title: "Expert", sector: "—", country: "Japan" },
+      { name: "Mercy Chriesty Barends", org: "House of Representatives of Republic of Indonesia", title: "Member of Parliament", sector: "Government", country: "Indonesia" },
+      { name: "Mia Monasari", org: "PT Bukit Asam", title: "Remuneration Head - Talent Mobility for Timah", sector: "Business", country: "Indonesia" },
+      { name: "Michael Cruz Pizarro", org: "Michael Pizarro Interior Design", title: "Principal Interior Designer", sector: "Civil Society", country: "Philippines" },
+      { name: "Monica Ruth Nirmala", org: "Ministry of Health Indonesia", title: "Chief, Strategic Delivery Unit", sector: "Government", country: "Indonesia" },
+      { name: "Natasha Mañosa Tanjutco", org: "TAYO Change Agency", title: "Co-Founder & Creative Director", sector: "Civil Society", country: "Philippines" },
+      { name: "Nathalie Jane Medina Manahan", org: "Ateneo de Manila University", title: "BFA Information Design Student", sector: "Civil Society", country: "Philippines" },
+      { name: "Ni Wayan Jemiwi Jero", org: "Bali Coaching Institute", title: "Coach", sector: "Civil Society", country: "Indonesia" },
+      { name: "Nimas Mega Purnamasari", org: "UID Foundation", title: "Director of UID Bali Campus", sector: "Civil Society", country: "Indonesia" },
+      { name: "Novi Meyanto", org: "PLUS (Platform Usaha Sosial)", title: "Associate Director", sector: "Business", country: "Indonesia" },
+      { name: "Pramita Indrarini", org: "United In Diversity", title: "Learning Facilitator", sector: "Civil Society", country: "Indonesia" },
+      { name: "Rafael Ignacio Sison Dionisio", org: "MAD Travel", title: "Co-Founder", sector: "Business", country: "Philippines" },
+      { name: "Ratna Kusuma Sari", org: "UNDP Indonesia FOLUR Project", title: "National Project Manager", sector: "Business", country: "Indonesia" },
+      { name: "Rinawati Prihatiningsih", org: "PT. Infinitie Berkah Energi / Kadin Indonesia", title: "COO / Deputy Head (APEC)", sector: "Business", country: "Indonesia" },
+      { name: "Robert Joseph Cabal Revilla", org: "SyCip Gorres Velayo & Co", title: "Assurance Associate", sector: "Business", country: "Philippines" },
+      { name: "Samantha Cruz Villavicencio", org: "Aksyon ng Kabataan (AKO)", title: "Founder", sector: "Civil Society", country: "Philippines" },
+      { name: "Samheng Boros", org: "Government of Cambodia (Ministry of Social Affairs)", title: "Secretary of State", sector: "Government", country: "Cambodia" },
+      { name: "Saskia Prisandhini Tjokro", org: "ANGIN", title: "Advisory Director", sector: "Business", country: "Indonesia" },
+      { name: "Schannel Gestro van Dijken", org: "Conservation International", title: "Government and Partnerships Director", sector: "Government", country: "Samoa" },
+      { name: "Setiyo Wibowo", org: "Bank Tabungan Negara", title: "Director Risk Management", sector: "Business", country: "Indonesia" },
+      { name: "Setyo Budiantoro", org: "SDGs National Secretariat, Ministry of National Development Planning", title: "Manager of Economic Development Pillar", sector: "Government", country: "Indonesia" },
+      { name: "SookKuen YY Chan", org: "SoftServe Inc", title: "Client Partner", sector: "Business", country: "Malaysia" },
+      { name: "Strike Bautista Revilla", org: "House of Representatives, District of Cavite", title: "Deputy Speaker / Congressman", sector: "Government", country: "Philippines" },
+      { name: "Surachet Chaipatamanont", org: "Prime Road Power", title: "Vice Chairman & Executive Director", sector: "Business", country: "Thailand" },
+      { name: "Wiwiek Rabiatul Adawiyah", org: "Universitas Jenderal Soedirman", title: "Professor / Dean, Faculty of Economics and Business", sector: "Civil Society", country: "Indonesia" },
+      { name: "Yessie Dianty Yosetya", org: "PT XL AXIATA", title: "Director / Chief Strategic Transformation & IT Officer", sector: "Business", country: "Indonesia" },
+      { name: "Yoga Arnindita", org: "PT Bank Rakyat Indonesia (Persero) Tbk", title: "VP, Learning and Development Division", sector: "Business", country: "Indonesia" },
+      { name: "Yosua Nugraha Pratama", org: "Immanuel Hospital", title: "Head of Outpatient Department", sector: "Civil Society", country: "Indonesia" },
+      { name: "Yudhistira Nugraha", org: "Jakarta Smart City", title: "Director of Jakarta Smart City", sector: "Government", country: "Indonesia" },
+      { name: "Yui Ioka", org: "eunoia partners", title: "Co-Founder & CEO", sector: "Business", country: "Japan" },
+      { name: "Yuli Sri Wilanti", org: "Coordinating Ministry of Economic Affairs", title: "Assistant of Deputy Minister for Agribusiness and Horticulture Development", sector: "Government", country: "Indonesia" },
+      { name: "Zakki Hakim", org: "PT. Bali Turtle Island Development", title: "Head of Communications", sector: "Business", country: "Indonesia" },
+      { name: "Zhongming Chen", org: "Giti Tire China R&D Center", title: "Director", sector: "Business", country: "China" },
+    ];
+
+    function setupFellowsDirectory(overlay) {
+      const grid = overlay.querySelector('#fellowsGrid');
+      const nameInput = overlay.querySelector('#fellowsSearchName');
+      const sectorSel = overlay.querySelector('#fellowsFilterSector');
+      const countrySel = overlay.querySelector('#fellowsFilterCountry');
+      const resetBtn = overlay.querySelector('#fellowsReset');
+      const countEl = overlay.querySelector('#fellowsCount');
+      if (!grid) return;
+
+      const sectorClass = (s) => {
+        if (s === 'Business') return 'tag-sector-business';
+        if (s === 'Civil Society') return 'tag-sector-civil';
+        if (s === 'Government') return 'tag-sector-government';
+        return 'tag-sector-unknown';
+      };
+      const esc = (s) => String(s).replace(/[&<>"']/g, (c) =>
+        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])
+      );
+
+      function render(list) {
+        grid.innerHTML = '';
+        if (list.length === 0) {
+          grid.innerHTML = '<p class="fellows-no-results">該当するフェローが見つかりませんでした。</p>';
+          return;
+        }
+        const frag = document.createDocumentFragment();
+        list.forEach((f) => {
+          const card = document.createElement('article');
+          card.className = 'fellow-row';
+          card.innerHTML =
+            '<div class="fellow-row-name">' + esc(f.name) + '</div>' +
+            '<div class="fellow-row-org">' + esc(f.org) + '</div>' +
+            '<div class="fellow-row-title">' + esc(f.title) + '</div>' +
+            '<div class="fellow-row-tags">' +
+              '<span class="fellow-tag ' + sectorClass(f.sector) + '">' + esc(f.sector) + '</span>' +
+              '<span class="fellow-tag tag-country">' + esc(f.country) + '</span>' +
+            '</div>';
+          frag.appendChild(card);
+        });
+        grid.appendChild(frag);
+      }
+
+      function applyFilter() {
+        const q = nameInput.value.trim().toLowerCase();
+        const sec = sectorSel.value;
+        const ctr = countrySel.value;
+        const filtered = FELLOWS.filter((f) => {
+          const matchQ = !q || f.name.toLowerCase().includes(q) || f.org.toLowerCase().includes(q);
+          const matchS = !sec || f.sector === sec;
+          const matchC = !ctr || f.country === ctr;
+          return matchQ && matchS && matchC;
+        });
+        render(filtered);
+        countEl.textContent = filtered.length + ' / ' + FELLOWS.length;
+      }
+
+      nameInput.addEventListener('input', applyFilter);
+      sectorSel.addEventListener('change', applyFilter);
+      countrySel.addEventListener('change', applyFilter);
+      resetBtn.addEventListener('click', () => {
+        nameInput.value = '';
+        sectorSel.value = '';
+        countrySel.value = '';
+        applyFilter();
       });
 
-      // Deep-link: if page loads with #history, open immediately
-      if (location.hash === '#history') {
-        // Wait one frame so layout is ready
-        requestAnimationFrame(() => openOverlay(false));
-      }
+      applyFilter();
+    }
 
-      // Init lucide icons inside overlay (close button etc.)
-      if (window.lucide) lucide.createIcons();
+    // Fellows overlay
+    createOverlayController({
+      overlayId: 'fellowsOverlay',
+      hashName: 'fellows-all',
+      focusId: 'fellowsClose',
+      onFirstOpen: (overlay) => {
+        setupFellowsDirectory(overlay);
+      },
+    });
 
-      // IntersectionObserver: reveal timeline cards when scrolled into view inside the overlay
-      const cards = overlay.querySelectorAll('.timeline-card');
-      if ('IntersectionObserver' in window && cards.length) {
-        const io = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                io.unobserve(entry.target);
-              }
-            });
-          },
-          { root: overlay, threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
-        );
-        cards.forEach((c) => io.observe(c));
-      } else {
-        cards.forEach((c) => c.classList.add('is-visible'));
+    // Deep-link: open the overlay matching current hash on load
+    overlayControllers.forEach((c) => {
+      if (location.hash === c.hashStr) {
+        requestAnimationFrame(() => c.open(false));
       }
-    })();
+    });
+
+    // Re-init lucide icons (overlay close buttons, search icon, etc.)
+    if (window.lucide) lucide.createIcons();
   </script>
 </body>
 </html>
