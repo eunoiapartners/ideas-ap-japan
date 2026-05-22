@@ -1735,53 +1735,6 @@
 
 
 
-    /* Why Now (merged) --------------------------------------------------- */
-    .why-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-16);
-      align-items: start;
-    }
-    .why-message .heading {
-      font-size: clamp(26px, 3vw, 40px);
-      line-height: 1.45;
-      margin: 0 0 var(--space-8);
-    }
-    .why-quote {
-      margin: 0;
-      padding-left: var(--space-6);
-      border-left: 2px solid var(--c-red);
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 17px;
-      line-height: 1.9;
-      color: var(--c-purple-700);
-    }
-    .why-quote cite {
-      display: block;
-      margin-top: var(--space-3);
-      font-family: var(--font-latin);
-      font-style: normal;
-      font-size: 13px;
-      letter-spacing: 0.14em;
-      color: var(--c-text-muted);
-    }
-    .why-body { padding-top: var(--space-2); }
-    .why-body p {
-      font-size: 16px;
-      line-height: 2;
-      color: var(--c-text);
-      margin: 0 0 var(--space-5);
-    }
-    .why-body p:last-child { margin-bottom: 0; }
-    .why-emphasis {
-      font-weight: 700;
-      color: var(--c-purple-900) !important;
-    }
-
-    @media (max-width: 768px) {
-      .why-grid { grid-template-columns: 1fr; gap: var(--space-8); }
-    }
     /* ③ Theory quote (within purple-dark) -------------------------------- */
     .theory-quote {
       margin: var(--space-16) auto 0;
@@ -2206,27 +2159,26 @@
   </section>
 
   <!-- =========================================================
-       WHY NOW / WHY THIS SHIFT MATTERS
+       INTRO / WHY JAPAN NEEDS THIS NOW
        ========================================================= -->
-  <section class="section-pad bg-cream" id="why">
+  <section class="intro" id="why">
     <div class="container">
-      <div class="why-grid">
-        <!-- 左: 問いと転換のメッセージ -->
-        <div class="why-message">
-          <span class="eyebrow">Why Now / なぜ今</span>
+      <div class="intro-grid">
+        <div class="intro-left">
+          <span class="eyebrow">Why Now / なぜ今、日本に</span>
           <h2 class="heading">
             分断と複雑性の時代に、<br />
-            <em>まだ見ぬ未来を、ともに描く力を。</em>
+            まだ見ぬ未来を、<br />
+            ともに描く力を。
           </h2>
-          <blockquote class="why-quote">
-            「世界の問題は、懐疑的または皮肉的な人々によっては決して解決できない。
+          <blockquote class="intro-quote">
+            「世界の問題は、懐疑的または皮肉的な人々によっては決して解決できない。<br />
             必要なのは、まだ見ぬ未来を想像できる人々である。」
-            <cite>— John F. Kennedy</cite>
           </blockquote>
+          <p class="intro-quote-author">— John F. Kennedy</p>
         </div>
 
-        <!-- 右: 圧縮した本文 -->
-        <div class="why-body">
+        <div class="intro-body">
           <p>
             気候変動、格差、分断 ── アジア太平洋地域における SDGs 進捗報告書は、
             現状のペースでは 2030 年までに 118 ターゲットのうち 90% が達成できないと警鐘を鳴らしています。
