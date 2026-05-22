@@ -1733,6 +1733,95 @@
       margin-top: 2px;
     }
 
+
+    /* ② Shift section ---------------------------------------------------- */
+    .shift-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: var(--space-16);
+      align-items: start;
+    }
+    .shift-lead .heading {
+      font-size: clamp(26px, 3vw, 38px);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .shift-body { padding-top: var(--space-3); }
+    .shift-body p {
+      font-size: 16px;
+      line-height: 2;
+      color: var(--c-text);
+      margin: 0 0 var(--space-5);
+    }
+    .shift-body p:last-child { margin-bottom: 0; }
+
+    /* ③ Theory quote (within purple-dark) -------------------------------- */
+    .theory-quote {
+      margin: var(--space-16) auto 0;
+      max-width: 820px;
+      padding: var(--space-8) 0 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.4vw, 28px);
+      font-weight: 500;
+      line-height: 1.7;
+      color: var(--c-white);
+      text-align: center;
+    }
+    .theory-quote em {
+      font-style: normal;
+      color: var(--c-purple-300);
+    }
+    .theory-quote cite {
+      display: block;
+      margin-top: var(--space-5);
+      font-family: var(--font-latin);
+      font-style: normal;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .theory-card strong { color: var(--c-white); font-weight: 700; }
+
+    /* ④ Praxis section --------------------------------------------------- */
+    .praxis-text {
+      font-size: 17px;
+      line-height: 2.1;
+      color: var(--c-text);
+      margin: 0 auto var(--space-6);
+      max-width: 640px;
+    }
+    .praxis-arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      margin: var(--space-12) 0;
+      color: var(--c-purple-400);
+    }
+    .praxis-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, transparent, var(--c-purple-300));
+    }
+    .praxis-arrow .lucide-icon { width: 22px; height: 22px; }
+    .praxis-handoff {
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--c-text-muted);
+      margin: 0;
+    }
+    .praxis-handoff strong {
+      font-family: var(--font-latin);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--c-purple-700);
+    }
+
+    @media (max-width: 768px) {
+      .shift-grid { grid-template-columns: 1fr; gap: var(--space-8); }
+    }
+
     /* =========================================================
        RESPONSIVE
        ========================================================= */
@@ -2067,8 +2156,8 @@
               <small>History</small>
             </a>
             <a href="#theory" role="menuitem">
-              関連思想
-              <small>Theory U &amp; Fifth Discipline</small>
+              IDEASの思想
+              <small>Three Foundations</small>
             </a>
           </div>
         </span>
@@ -2088,7 +2177,7 @@
             </a>
           </div>
         </span>
-        <a href="#theory">Theory U</a>
+        <a href="#theory">IDEASの思想</a>
         <a href="#contact" class="cta">お問い合わせ</a>
       </nav>
 
@@ -2103,7 +2192,7 @@
       <a href="#about">IDEASについて — 概要</a>
       <div class="submenu" aria-label="IDEASについて - サブメニュー">
         <a href="#history" data-open-history>沿革 / History</a>
-        <a href="#theory">関連思想 / Theory U</a>
+        <a href="#theory">IDEASの思想</a>
       </div>
       <a href="#fellows">フェロー — 日本人フェロー</a>
       <div class="submenu" aria-label="フェロー - サブメニュー">
@@ -2177,6 +2266,37 @@
   </section>
 
   <!-- =========================================================
+       THE SHIFT / LEADERSHIP TRANSITION
+       ========================================================= -->
+  <section class="section-pad bg-white" id="shift">
+    <div class="container">
+      <div class="shift-grid">
+        <div class="shift-lead">
+          <span class="eyebrow">The Shift / リーダーシップの転換</span>
+          <h2 class="heading">
+            「正解を実行する」リーダーシップから、<br />
+            <em>「まだ見ぬ未来を、ともに感じ取る」</em><br />
+            リーダーシップへ。
+          </h2>
+        </div>
+        <div class="shift-body">
+          <p>
+            私たちが直面している課題の多くは、答えがあらかじめ用意されていません。
+            状況は刻々と変わり、何が正しい応答なのかは、誰にもわからない。
+            こうした「立ち現れてくる複雑性」に、過去の成功事例を当てはめるやり方では届きません。
+          </p>
+          <p>
+            必要なのは、立場の異なる人々が境界を越えて集まり、
+            まだ形になっていない未来を共に感じ取り、小さく試しながら学んでいく ──
+            そんな新しいリーダーシップの能力です。
+            IDEAS Asia Pacific が育てようとしているのは、まさにこの力にほかなりません。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
        ABOUT IDEAS — L.I.F.E. + Journey
        ========================================================= -->
   <section class="section-pad bg-purple-pale" id="about">
@@ -2229,6 +2349,115 @@
           </figure>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       THE THINKING BEHIND / BACKGROUND THINKING
+       ========================================================= -->
+  <section class="section-pad bg-purple-dark" id="theory">
+    <div class="container">
+      <div style="max-width: 760px; margin-bottom: var(--space-6);">
+        <span class="eyebrow">The Thinking Behind / 背景にある思想</span>
+        <h2 class="heading">
+          IDEAS は、<br />
+          <em>3 つの知の系譜</em>の上に立っています。
+        </h2>
+        <p class="lead">
+          理論・ものの見方・実践の形。異なる三層が組み合わさることで、
+          IDEAS の学びは「知識」ではなく「変容」になります。
+        </p>
+      </div>
+
+      <div class="theory-grid">
+        <div class="theory-card">
+          <div class="theory-num">01 / Theory U</div>
+          <h3>U 理論</h3>
+          <p>
+            オットー・シャーマーが提唱する、深い変革のプロセス論。
+            過去の延長ではなく「出現しつつある未来」から学ぶ。
+            Open Mind・Open Heart・Open Will と内面を開きながら U の谷を降り、
+            その最深部で<strong>プレゼンシング</strong> ──
+            最も高い未来の可能性に立ち会うこと ── が起こります。
+          </p>
+        </div>
+        <div class="theory-card">
+          <div class="theory-num">02 / Systems Thinking</div>
+          <h3>システム思考 / 学習する組織</h3>
+          <p>
+            ピーター・センゲの『学習する組織(The Fifth Discipline)』を礎に、
+            問題を個人の能力や責任のせいにするのではなく、
+            その背後にある「システムの構造」として捉える。
+            構造が見えれば、本当に効くレバレッジ・ポイントが見えてきます。
+          </p>
+        </div>
+        <div class="theory-card">
+          <div class="theory-num">03 / Tri-Sector Leadership</div>
+          <h3>トライセクター・リーダーシップ</h3>
+          <p>
+            ビジネス・政府・市民社会。複雑な課題は、
+            ひとつのセクターの中だけでは解けません。
+            境界を越えて集い、共に未来を描く力こそが、
+            システム変革の核心にあります。
+          </p>
+        </div>
+      </div>
+
+      <blockquote class="theory-quote">
+        「あらゆるシステムが生み出す結果の質は、<br />
+        そのシステムの中で行動する人々の<em>“意識の質”</em>に依存している。」
+        <cite>— C. Otto Scharmer</cite>
+      </blockquote>
+
+      <p style="margin-top: var(--space-8); font-size: 13px; color: rgba(255, 255, 255, 0.6);">
+        これらの思想・実践についての日本語解説と、推薦書籍のリストを、サブページにて準備中です。
+      </p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       IN PRACTICE / PRACTICE-BASED LEARNING
+       ========================================================= -->
+  <section class="section-pad bg-cream" id="praxis">
+    <div class="container-sm" style="text-align: center;">
+      <span class="eyebrow" style="justify-content: center;">In Practice / 実践に根ざす学び</span>
+      <h2 class="heading" style="margin-bottom: var(--space-8);">
+        だから IDEAS の学びは、<br />
+        「知ること」ではなく、<em>「やること」</em>に根ざしている。
+      </h2>
+
+      <p class="praxis-text">
+        歩き方は、歩くことで身につく。自転車の乗り方は、自転車に乗ることで身につく。
+        本当に意味のある学びは、学ぼうとしていることを、実際にやってみることの中にしかありません。
+      </p>
+      <p class="praxis-text">
+        IDEAS Asia Pacific の核心には、いつも、
+        セクターを越えた人々が共に取り組む「実際のプロジェクト」があります。
+        1 年間の旅を通じて、参加者は共通の言語とツールを手にし、
+        共に働きながら、共に働くことそのものを学んでいきます。
+      </p>
+
+      <div class="praxis-arrow" aria-hidden="true">
+        <span class="praxis-line"></span>
+        <i data-lucide="chevron-down" class="lucide-icon"></i>
+      </div>
+
+      <p class="praxis-handoff">
+        その 1 年間の旅は、<strong>L.I.F.E.</strong> の 4 つの柱と、
+        4 拠点を巡る 6 つのモジュールで構成されています。
+      </p>
+      <a href="/about/" class="btn btn-ghost" style="margin-top: var(--space-6);">
+        プログラムの全体像を見る
+        <i data-lucide="arrow-right" class="lucide-icon"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       VOICES FROM THE FACULTY
+       ========================================================= -->
+  <section class="section-pad bg-purple-pale" id="voices">
+    <div class="container">
 
       <!-- Voices from the Faculty -->
       <div style="max-width: 720px; margin-bottom: var(--space-12);">
@@ -2421,53 +2650,6 @@
   </section>
 
   <!-- =========================================================
-       THEORY U / RELATED THINKING (purple dark section)
-       ========================================================= -->
-  <section class="section-pad bg-purple-dark" id="theory">
-    <div class="container">
-      <div style="max-width: 720px; margin-bottom: var(--space-6);">
-        <span class="eyebrow">Theory U / 関連思想</span>
-        <h2 class="heading">
-          「あらゆるシステムが生み出す結果の質は、<br />
-          そのシステムで行動する人々の<em>意識の質</em>に依存している。」
-        </h2>
-        <p class="lead">— C. Otto Scharmer, MIT Sloan Senior Lecturer / Presencing Institute 創設者</p>
-      </div>
-
-      <div class="theory-grid">
-        <div class="theory-card">
-          <div class="theory-num">01 / Theory U</div>
-          <h3>U 理論 / プレゼンシング</h3>
-          <p>
-            MIT の C. オットー・シャーマーが提唱する、深い学習と変革のための社会的テクノロジー。
-            「Open Mind・Open Heart・Open Will」のプロセスを通じて、現れつつある未来から学ぶ。
-          </p>
-        </div>
-        <div class="theory-card">
-          <div class="theory-num">02 / Systems Thinking</div>
-          <h3>システム思考 / 学習する組織</h3>
-          <p>
-            ピーター・センゲの『学習する組織(The Fifth Discipline)』を礎に、
-            複雑な問題の構造をシステムとして捉え、ループとレバレッジを見出す思考法。
-          </p>
-        </div>
-        <div class="theory-card">
-          <div class="theory-num">03 / Just Money</div>
-          <h3>新しい経済の作法</h3>
-          <p>
-            ブレンデッド・ファイナンス、サーキュラー・エコノミー、Just Money ──
-            利益最大化を超えた経済の在り方を、実践と理論の両面から探求する。
-          </p>
-        </div>
-      </div>
-
-      <p style="margin-top: var(--space-10); font-size: 13px; color: rgba(255, 255, 255, 0.6); text-align: center;">
-        これらの思想・実践についての日本語解説と、推薦書籍のリストを、サブページにて準備中です。
-      </p>
-    </div>
-  </section>
-
-  <!-- =========================================================
        FUND (in development)
        ========================================================= -->
   <section class="section-pad bg-cream" id="fund">
@@ -2570,7 +2752,7 @@
             <li><a href="#about">IDEASとは</a></li>
             <li><a href="#history" data-open-history>沿革 / History</a></li>
             <li><a href="#fellows">フェロー</a></li>
-            <li><a href="#theory">Theory U / 関連思想</a></li>
+            <li><a href="#theory">IDEASの思想</a></li>
           </ul>
         </div>
 
