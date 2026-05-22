@@ -835,10 +835,6 @@
        FELLOWS
        ========================================================= */
     .fellows-head {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-16);
-      align-items: end;
       margin-bottom: var(--space-12);
     }
     .fellows-grid {
@@ -908,6 +904,14 @@
       color: var(--c-text-muted);
       line-height: 1.6;
       margin: 0;
+    }
+    .fellow-org {
+      margin: var(--space-3) 0 0;
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--c-border);
+      font-size: 12px;
+      line-height: 1.65;
+      color: var(--c-text);
     }
 
     /* =========================================================
@@ -1554,6 +1558,182 @@
     }
 
     /* =========================================================
+       VOICES — Faculty video block (lazy YouTube facade)
+       ========================================================= */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-12);
+    }
+    .video-card { display: flex; flex-direction: column; }
+
+    .video-frame {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background-color: var(--c-purple-800);
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid var(--c-border);
+      outline-offset: 3px;
+    }
+    .video-frame:focus-visible { outline: 2px solid var(--c-purple-500); }
+    .video-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s var(--ease), filter 0.5s var(--ease);
+      filter: saturate(0.9) brightness(0.88);
+    }
+    .video-frame:hover .video-thumb {
+      transform: scale(1.05);
+      filter: saturate(1) brightness(1);
+    }
+    /* Purple gradient veil to harmonize the YouTube thumb with the site palette */
+    .video-frame::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(45, 37, 72, 0.40) 0%, rgba(61, 46, 95, 0.18) 50%, rgba(122, 91, 168, 0.28) 100%);
+      pointer-events: none;
+      transition: opacity 0.4s var(--ease);
+    }
+    .video-frame:hover::after { opacity: 0.55; }
+
+    .video-play {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 78px; height: 78px;
+      border-radius: 50%;
+      background-color: rgba(208, 39, 45, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: transform 0.3s var(--ease), background-color 0.3s var(--ease);
+      box-shadow: 0 12px 36px -8px rgba(208, 39, 45, 0.55);
+    }
+    .video-frame:hover .video-play {
+      transform: translate(-50%, -50%) scale(1.1);
+      background-color: var(--c-red);
+    }
+    .video-play .lucide-icon {
+      width: 28px; height: 28px;
+      color: #fff; fill: #fff;
+      margin-left: 3px;
+    }
+
+    .video-duration {
+      position: absolute;
+      bottom: var(--space-3);
+      right: var(--space-3);
+      z-index: 2;
+      font-family: var(--font-latin);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fff;
+      background-color: rgba(31, 23, 51, 0.7);
+      padding: 4px 10px;
+      backdrop-filter: blur(4px);
+    }
+
+    .video-frame.is-playing { cursor: default; }
+    .video-frame.is-playing .video-play,
+    .video-frame.is-playing .video-duration,
+    .video-frame.is-playing::after { display: none; }
+    .video-frame iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+
+    .video-meta { padding-top: var(--space-6); }
+    .video-tag {
+      font-family: var(--font-latin);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c-red);
+      display: block;
+      margin-bottom: var(--space-2);
+    }
+    .video-meta h3 {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--c-purple-900);
+      margin: 0 0 var(--space-2);
+    }
+    .video-role {
+      font-size: 13px;
+      color: var(--c-text-muted);
+      line-height: 1.7;
+      margin: 0 0 var(--space-4);
+    }
+    .video-summary {
+      font-size: 15px;
+      line-height: 1.95;
+      color: var(--c-text);
+      margin: 0 0 var(--space-5);
+    }
+
+    .video-jp-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--c-purple-600);
+      padding: 8px 0;
+      border: 0;
+      background: transparent;
+      border-bottom: 1px solid var(--c-purple-300);
+      cursor: pointer;
+      font-family: inherit;
+      transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+    }
+    .video-jp-toggle:hover {
+      color: var(--c-purple-900);
+      border-color: var(--c-purple-900);
+    }
+    .video-jp-toggle .lucide-icon { width: 16px; height: 16px; }
+
+    .video-jp {
+      margin-top: var(--space-5);
+      padding: var(--space-6);
+      background-color: var(--c-purple-50);
+      border-left: 2px solid var(--c-purple-400);
+    }
+    .video-jp p {
+      font-size: 14px;
+      line-height: 1.95;
+      color: var(--c-text);
+      margin: 0 0 var(--space-4);
+    }
+    .video-jp p:last-child { margin-bottom: 0; }
+
+    .video-cc-note {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      margin-top: var(--space-12);
+      padding: var(--space-5) var(--space-6);
+      background-color: var(--c-purple-50);
+      font-size: 13px;
+      line-height: 1.85;
+      color: var(--c-text-muted);
+      max-width: 760px;
+    }
+    .video-cc-note .lucide-icon {
+      width: 18px; height: 18px;
+      color: var(--c-purple-500);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* =========================================================
        RESPONSIVE
        ========================================================= */
     @media (max-width: 1024px) {
@@ -1562,7 +1742,7 @@
       .journey-list { grid-template-columns: repeat(3, 1fr); }
       .journey-step:nth-child(4) { border-left: none; padding-left: 0; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .intro-grid, .fellows-head, .team-grid, .contact-grid { grid-template-columns: 1fr; gap: var(--space-10); }
+      .intro-grid, .team-grid, .contact-grid { grid-template-columns: 1fr; gap: var(--space-10); }
     }
 
     @media (max-width: 768px) {
@@ -1580,6 +1760,10 @@
       .hero-eyebrow { font-size: 13px; letter-spacing: 0.14em; gap: var(--space-3); }
       .hero-eyebrow::before { width: 36px; }
       .life-grid, .fellows-grid, .theory-grid { grid-template-columns: 1fr; }
+      .video-grid { grid-template-columns: 1fr; gap: var(--space-10); }
+      .video-play { width: 60px; height: 60px; }
+      .video-play .lucide-icon { width: 22px; height: 22px; }
+      .video-meta h3 { font-size: 20px; }
       .journey-list { grid-template-columns: 1fr; }
       .about-intro { margin-bottom: var(--space-16); padding-bottom: var(--space-12); }
       .about-photo-strip { grid-template-columns: 1fr; gap: var(--space-4); }
@@ -2056,42 +2240,107 @@
         </div>
       </div>
 
-      <!-- L.I.F.E. -->
+      <!-- Voices from the Faculty -->
       <div style="max-width: 720px; margin-bottom: var(--space-12);">
-        <span class="eyebrow">Framework / L.I.F.E.</span>
+        <span class="eyebrow">Voices / 創設者たちの言葉</span>
         <h2 class="heading">
-          サステナビリティへの STEP は、<br />
-          <em>L.I.F.E.</em> の機能である。
+          この学びは、リーダーを<em>どう変えるのか。</em>
         </h2>
         <p class="lead">
-          IDEAS Asia Pacific は、Leadership(リーダーシップ)・Innovation(イノベーション)・
-          Foresighting(先見性)・Entrepreneurship(起業家精神)という 4 つの柱を軸に、
-          頭・手・心を統合した学びを 1 年間にわたって展開します。
+          システム思考の第一人者 Peter Senge と、Theory U の提唱者 Otto Scharmer。
+          IDEAS Asia Pacific を率いる二人が、このプログラムの意味と、なぜ今それが重要なのかを語ります。
         </p>
       </div>
 
-      <div class="life-grid">
-        <div class="life-card">
-          <div class="life-letter">L</div>
-          <h3>Leadership <small>Tri-Sector Leadership</small></h3>
-          <p>変革を導くトライセクター(公・民・市民)型リーダーシップ。U 理論やシステム思考を統合した、未来を感知する力を育む。</p>
-        </div>
-        <div class="life-card">
-          <div class="life-letter">I</div>
-          <h3>Innovation <small>Eco-systemic Innovation</small></h3>
-          <p>エコシステム重視のイノベーション。人間中心デザインとデザイン思考を通じて、関係性から生まれる解を共創する。</p>
-        </div>
-        <div class="life-card">
-          <div class="life-letter">F</div>
-          <h3>Foresighting <small>Presencing the Future</small></h3>
-          <p>プレゼンシングによる未来洞察。シナリオ思考とサーキュラー・エコノミーの視点から、現れつつある未来を読み解く。</p>
-        </div>
-        <div class="life-card">
-          <div class="life-letter">E</div>
-          <h3>Entrepreneurship <small>Empathic Co-creation</small></h3>
-          <p>共感的・共創型の起業家精神。"Just Money" やブレンデッド・ファイナンスを含む、新たな経済の在り方を実装する。</p>
-        </div>
+      <div class="video-grid">
+        <!-- VIDEO 1: Otto Scharmer -->
+        <article class="video-card">
+          <div class="video-frame"
+               data-video-id="KPQgkDPlIdw"
+               role="button"
+               tabindex="0"
+               aria-label="Otto Scharmer の動画を再生">
+            <img class="video-thumb"
+                 src="https://i.ytimg.com/vi/KPQgkDPlIdw/maxresdefault.jpg"
+                 alt="Prof. Otto Scharmer インタビュー"
+                 loading="lazy"
+                 onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/KPQgkDPlIdw/hqdefault.jpg';" />
+            <span class="video-play" aria-hidden="true">
+              <i data-lucide="play" class="lucide-icon"></i>
+            </span>
+            <span class="video-duration">YouTube</span>
+          </div>
+          <div class="video-meta">
+            <span class="video-tag">Theory U / Presencing</span>
+            <h3>Prof. Otto Scharmer</h3>
+            <p class="video-role">MIT Senior Lecturer / Presencing Institute 創設者 / IDEAS Asia Pacific プログラムディレクター</p>
+            <p class="video-summary">
+              「あらゆるシステムが生む結果の質は、人々の意識の質に依存する」── Theory U の核心から、
+              このプログラムがリーダーの内面をどう変容させるのかを語ります。
+            </p>
+            <button type="button" class="video-jp-toggle" data-target="jp-otto" aria-expanded="false">
+              <i data-lucide="languages" class="lucide-icon"></i>
+              日本語で内容を読む
+            </button>
+            <div class="video-jp" id="jp-otto" hidden>
+              <p>皆さん、こんにちは。オットー・シャーマーです。MIT のシニアレクチャラーであり、MIT IDEAS Asia Pacific プログラムのファカルティ・チェア（主任教員）を務めています。</p>
+              <p>このプログラムが見据えているのは、こういうことです。あらゆる組織、そして社会として、さらにはグローバルなコミュニティとして、私たちはいま新しい時代に入りつつあります。それは、これまでとは異なる種類の危機や混乱を伴う時代です。私たちは「複合危機（ポリクライシス）」をよく知っています。環境の崩壊、分断、戦争、そして技術がもたらす混乱。さらに、とりわけ若い世代に広がる絶望感、メンタルヘルスの「パンデミック」── そうした問題の数々です。</p>
+              <p>これらは新しい課題群であり、どこかですべてが相互につながっています。AI がもたらす課題も含めてです。そして、こうした課題を、イノベーションと根本的なシステム変革の「機会」として捉え直すためには、新しいリーダーシップの能力が必要になります。MIT IDEAS プログラムが扱っているのは、まさにそこです。</p>
+              <p>しかも、ここで言うリーダーシップの能力とは、単に頭の中だけのもの ── ひとつのフレームワークを別のフレームワークに置き換える、といったことではありません。もちろん新しいフレームワークも扱いますし、それは重要な要素です。でも、それ以上のものです。本当に問われているのは、新しいタイプの「立ち現れてくる複雑性（emerging complexity）」に向き合うときに必要となる、リーダーシップの能力なのです。</p>
+              <p>「立ち現れてくる複雑性」とは、こういうことです。課題は新しく、しかも変化し続けていて、私たちが返すべき答えがあらかじめ明確ではない。だから私たちは、それに「学び」を通してしか近づけません。やってみることで学ぶ（learning by doing）、革新的なやり方を通じて学ぶ、そして境界を越えて協働する力を高めていくことを通じて学ぶ。どの境界を越えるのか? ── システムとセクターの境界です。ビジネス、政府、市民社会という、それぞれのセクターの境界を越えて。</p>
+              <p>だからこそ、このプログラムは、アジア太平洋地域から集まる参加者で構成されています。ビジネス界のリーダー、政府や国際機関のリーダー、そして市民社会のリーダー。私たちに必要なイノベーションは、これらすべての境界を越えて協働することを求めている ── そう信じているからです。</p>
+              <p>これこそが、このプログラムの本質です。深いシステム変革（deep systems change）のためのリーダーシップ能力を高めること。前例のない混乱の領域 ── 私たちがますます足を踏み入れつつある領域 ── に向き合うときに求められる、深い変革のための力です。</p>
+              <p>だからこそ、この旅を共に歩むこと、MIT に集い、東アジア・東南アジア・アジア太平洋地域で複数のモジュールを経験すること、それは素晴らしい機会になります。自国の人々とだけではなく、地域全体から、そしてあらゆるセクターから集まった人々と共に。</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- VIDEO 2: Peter Senge -->
+        <article class="video-card">
+          <div class="video-frame"
+               data-video-id="y0axNgmEf_c"
+               role="button"
+               tabindex="0"
+               aria-label="Peter Senge の動画を再生">
+            <img class="video-thumb"
+                 src="https://i.ytimg.com/vi/y0axNgmEf_c/maxresdefault.jpg"
+                 alt="Dr. Peter Senge インタビュー"
+                 loading="lazy"
+                 onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/y0axNgmEf_c/hqdefault.jpg';" />
+            <span class="video-play" aria-hidden="true">
+              <i data-lucide="play" class="lucide-icon"></i>
+            </span>
+            <span class="video-duration">YouTube</span>
+          </div>
+          <div class="video-meta">
+            <span class="video-tag">Systems Thinking / 学習する組織</span>
+            <h3>Dr. Peter Senge</h3>
+            <p class="video-role">MIT Senior Lecturer / 『学習する組織』著者 / IDEAS Asia Pacific シニアファカルティ</p>
+            <p class="video-summary">
+              『The Fifth Discipline（学習する組織）』の著者が、システム思考の視点から、
+              IDEAS Asia Pacific が個人と組織にもたらす学びの本質を解説します。
+            </p>
+            <button type="button" class="video-jp-toggle" data-target="jp-senge" aria-expanded="false">
+              <i data-lucide="languages" class="lucide-icon"></i>
+              日本語で内容を読む
+            </button>
+            <div class="video-jp" id="jp-senge" hidden>
+              <p>このプログラムには、立ち上げの当初から関わってきました。なぜ生まれたかというと、オットー・シャーマーと私が、ある強い確信を抱いていたからです。それは──世界が抱える大きな問題の多くが、なかなか有効に解決されないのは、政府の中だけ、ビジネスの中だけ、市民社会の中だけでは、それらに立ち向かえないからだ、ということです。それぞれのセクターの組織が、気候変動、移民、根深い貧困といった、現代世界の本当に困難な不均衡に、単独で対処しようとして、結局は強いフラストレーションを抱えてしまう。</p>
+              <p>だからこそ本当に必要だったのは、セクターを越えた協働のネットワークを築くことでした。それが、IDEAS の出発点にあった基本的な考え方です。そしてプログラムを10年以上運営してきた今、これは本当に成熟したものになったと感じています。異なるセクターから集まった人々が、共通のスキル、共通のツール、変化についての共通の考え方を持つ──そんな素晴らしいコミュニティを育んできました。いわば、彼らが共に働くことを可能にする「共通言語」が生まれるのです。</p>
+              <p>このプログラムは、一貫して「実践者」を主な対象としてきました。実際のマネージャー、権限ある立場にいる行政のリーダー、重要なコミュニティ組織を立ち上げ、あるいは率いている人々です。学術的なものではありませんし、研究者のためのものでもありません。大学に所属する方が参加されることもあり、それはまったく問題ありませんが、主眼はあくまで実践者にあります。なぜなら私たちの問いは、常に「どうやってそれを実行するか」だったからです。セクターを越えて協働する必要性を感じている人々が、それを実際にうまくやれるようになるには、どう支援できるか。協働について語るのでも、その必要性を唱えるのでもなく、ただ実際にやってみること。</p>
+              <p>私たちが行うすべてのことと同じく、最終的にそれは常に、ツール、手法、実践的な理解に根ざしています。そして人々を直接つなぎ、共に働きながら、共に働くことを学んでいく。IDEAS の核心には、いつも、人々が実際に共に取り組むプロジェクトがありました。</p>
+              <p>たとえば、歩き方をどう学ぶか? ──歩くことによってです。自転車の乗り方をどう学ぶか? ──自転車に乗ることによってです。本当に意味のある学びは、学ぼうとしていることを実際にやってみることに根ざしていなければなりません。そして「やること」を通じて、力を育てていくのです。</p>
+              <p>IDEAS は、素晴らしい旅であり、発見に満ちたプロセスでした。アジア太平洋を含む世界の多くの地域で、確かなインパクトを生み始めていると感じています。ですから、これがあなたにとって有益なものになりうるかどうか、ぜひ真剣に考えてみてください。</p>
+            </div>
+          </div>
+        </article>
       </div>
+
+      <p class="video-cc-note">
+        <i data-lucide="info" class="lucide-icon"></i>
+        動画は YouTube 上で字幕の自動翻訳（日本語）をご利用いただけます。再生後、プレーヤー右下の
+        字幕アイコン → 設定（歯車）→「字幕」→「自動翻訳」→「日本語」を選択してください。
+      </p>
 
       <!-- Credentials -->
       <div class="credentials">
@@ -2120,12 +2369,8 @@
       <div class="fellows-head">
         <div>
           <span class="eyebrow">Fellows / フェロー</span>
-          <h2 class="heading">これまでに、<br />5 名の日本人がこの旅を歩みました。</h2>
+          <h2 class="heading">これまでに、5 名の日本人がこの旅を歩みました。</h2>
         </div>
-        <p class="lead">
-          Cohort 1.0 と 2.0 から、それぞれの組織・地域でシステム変革に取り組む 5 名の日本人がフェローとして参加。
-          彼らがプログラムから何を持ち帰り、いま何を実践しているのか。その声をお届けします。
-        </p>
       </div>
 
       <div class="fellows-grid">
@@ -2136,6 +2381,7 @@
           <div class="fellow-cohort">Cohort 1.0</div>
           <h3 class="fellow-name">野田 浩平</h3>
           <p class="fellow-role">Kohei Noda</p>
+          <p class="fellow-org">株式会社ココロラボ 代表取締役<br />グロービス経営大学院 講師</p>
         </article>
         <article class="fellow-card">
           <div class="fellow-photo">
@@ -2144,6 +2390,7 @@
           <div class="fellow-cohort">Cohort 1.0</div>
           <h3 class="fellow-name">鳥居 正年</h3>
           <p class="fellow-role">Masatoshi Torii</p>
+          <p class="fellow-org">NPO法人 U Journey 共同代表</p>
         </article>
         <article class="fellow-card">
           <div class="fellow-photo">
@@ -2152,6 +2399,7 @@
           <div class="fellow-cohort">Cohort 2.0</div>
           <h3 class="fellow-name">辰野 まどか</h3>
           <p class="fellow-role">Madoka Tatsuno</p>
+          <p class="fellow-org">グローバル教育推進プロジェクト (GiFT) 代表理事</p>
         </article>
         <article class="fellow-card">
           <div class="fellow-photo">
@@ -2160,6 +2408,7 @@
           <div class="fellow-cohort">Cohort 2.0</div>
           <h3 class="fellow-name">笠島 綾乃</h3>
           <p class="fellow-role">Ayano Kasajima</p>
+          <p class="fellow-org">株式会社ココロマチ 代表</p>
         </article>
         <article class="fellow-card">
           <div class="fellow-photo">
@@ -2168,6 +2417,7 @@
           <div class="fellow-cohort">Cohort 2.0</div>
           <h3 class="fellow-name">井岡 雄以</h3>
           <p class="fellow-role">Yui Ioka</p>
+          <p class="fellow-org">eunoia partners LLC<br />Co-Founder &amp; CEO</p>
         </article>
       </div>
 
@@ -2993,6 +3243,52 @@
 
     // Re-init lucide icons (overlay close buttons, search icon, etc.)
     if (window.lucide) lucide.createIcons();
+
+    /* =========================================================
+       VOICES — Lazy YouTube facade (load iframe only on click)
+       ========================================================= */
+    document.querySelectorAll('.video-frame').forEach((frame) => {
+      const play = () => {
+        if (frame.classList.contains('is-playing')) return;
+        const id = frame.dataset.videoId;
+        const iframe = document.createElement('iframe');
+        // origin を明示することで file:// などでの Error 153 を回避
+        const params = new URLSearchParams({
+          autoplay: '1',
+          rel: '0',
+          modestbranding: '1',
+          playsinline: '1',
+          hl: 'ja',
+          cc_load_policy: '1',
+          cc_lang_pref: 'ja',
+        });
+        if (location.protocol === 'http:' || location.protocol === 'https:') {
+          params.set('origin', location.origin);
+        }
+        iframe.src = 'https://www.youtube.com/embed/' + id + '?' + params.toString();
+        iframe.title = 'YouTube video player';
+        iframe.allow =
+          'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        frame.classList.add('is-playing');
+        frame.appendChild(iframe);
+      };
+      frame.addEventListener('click', play);
+      frame.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); }
+      });
+    });
+
+    // 日本語要約のトグル
+    document.querySelectorAll('.video-jp-toggle').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = document.getElementById(btn.dataset.target);
+        if (!target) return;
+        const isOpen = !target.hidden;
+        target.hidden = isOpen;
+        btn.setAttribute('aria-expanded', String(!isOpen));
+      });
+    });
   </script>
 </body>
 </html>
