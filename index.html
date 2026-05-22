@@ -1734,27 +1734,54 @@
     }
 
 
-    /* ② Shift section ---------------------------------------------------- */
-    .shift-grid {
+
+    /* Why Now (merged) --------------------------------------------------- */
+    .why-grid {
       display: grid;
-      grid-template-columns: 1.1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: var(--space-16);
       align-items: start;
     }
-    .shift-lead .heading {
-      font-size: clamp(26px, 3vw, 38px);
-      line-height: 1.5;
-      margin: 0;
+    .why-message .heading {
+      font-size: clamp(26px, 3vw, 40px);
+      line-height: 1.45;
+      margin: 0 0 var(--space-8);
     }
-    .shift-body { padding-top: var(--space-3); }
-    .shift-body p {
+    .why-quote {
+      margin: 0;
+      padding-left: var(--space-6);
+      border-left: 2px solid var(--c-red);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 17px;
+      line-height: 1.9;
+      color: var(--c-purple-700);
+    }
+    .why-quote cite {
+      display: block;
+      margin-top: var(--space-3);
+      font-family: var(--font-latin);
+      font-style: normal;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      color: var(--c-text-muted);
+    }
+    .why-body { padding-top: var(--space-2); }
+    .why-body p {
       font-size: 16px;
       line-height: 2;
       color: var(--c-text);
       margin: 0 0 var(--space-5);
     }
-    .shift-body p:last-child { margin-bottom: 0; }
+    .why-body p:last-child { margin-bottom: 0; }
+    .why-emphasis {
+      font-weight: 700;
+      color: var(--c-purple-900) !important;
+    }
 
+    @media (max-width: 768px) {
+      .why-grid { grid-template-columns: 1fr; gap: var(--space-8); }
+    }
     /* ③ Theory quote (within purple-dark) -------------------------------- */
     .theory-quote {
       margin: var(--space-16) auto 0;
@@ -1818,9 +1845,6 @@
       color: var(--c-purple-700);
     }
 
-    @media (max-width: 768px) {
-      .shift-grid { grid-template-columns: 1fr; gap: var(--space-8); }
-    }
 
     /* =========================================================
        RESPONSIVE
@@ -2224,72 +2248,40 @@
   </section>
 
   <!-- =========================================================
-       INTRO / WHY JAPAN NEEDS THIS NOW
+       WHY NOW / WHY THIS SHIFT MATTERS
        ========================================================= -->
-  <section class="intro" id="why">
+  <section class="section-pad bg-cream" id="why">
     <div class="container">
-      <div class="intro-grid">
-        <div class="intro-left">
-          <span class="eyebrow">Why Now / なぜ今、日本に</span>
+      <div class="why-grid">
+        <!-- 左: 問いと転換のメッセージ -->
+        <div class="why-message">
+          <span class="eyebrow">Why Now / なぜ今</span>
           <h2 class="heading">
             分断と複雑性の時代に、<br />
-            まだ見ぬ未来を、<br />
-            ともに描く力を。
+            <em>まだ見ぬ未来を、ともに描く力を。</em>
           </h2>
-          <blockquote class="intro-quote">
-            「世界の問題は、懐疑的または皮肉的な人々によっては決して解決できない。<br />
+          <blockquote class="why-quote">
+            「世界の問題は、懐疑的または皮肉的な人々によっては決して解決できない。
             必要なのは、まだ見ぬ未来を想像できる人々である。」
+            <cite>— John F. Kennedy</cite>
           </blockquote>
-          <p class="intro-quote-author">— John F. Kennedy</p>
         </div>
 
-        <div class="intro-body">
+        <!-- 右: 圧縮した本文 -->
+        <div class="why-body">
           <p>
-            気候変動、格差、分断 ── アジア太平洋地域における SDGs 進捗報告書は、
-            現状のペースでは 2030 年までに 118 ターゲットのうち 90% が達成できないと警鐘を鳴らしています。
-            この複雑な課題群は、ひとつの組織、ひとつのセクターだけでは解けない構造をもっています。
+            気候変動、格差、分断。こうした課題は、ひとつの組織、ひとつのセクターだけでは
+            解けない構造をもっています。日本もまた、人口減少や地域社会の持続可能性という、
+            相互に絡み合った課題に直面しています。
           </p>
-          <p>
-            日本もまた、人口減少、産業構造の変容、地域社会の持続可能性という、
-            相互に絡み合った課題に直面しています。これからの 10 年に求められるのは、
-            正解を急ぐリーダーシップではなく、「まだ見ぬ未来」を集合的に感じ取り、
-            異なる立場の人々とともにシステムを変革していく力です。
+          <p class="why-emphasis">
+            これからの 10 年に求められるのは、「正解を急ぐ」リーダーシップではなく、
+            まだ見ぬ未来を集合的に感じ取り、立場の異なる人々とともにシステムを変革していく力です。
           </p>
           <p>
             IDEAS Asia Pacific は、その実践のための共通言語と方法論を、
-            アジア太平洋全域から集まったリーダーたちと共に学び、育てる場です。
-            日本ハブはこの学びを日本社会に翻訳し、対話と協働の輪を広げていきます。
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================
-       THE SHIFT / LEADERSHIP TRANSITION
-       ========================================================= -->
-  <section class="section-pad bg-white" id="shift">
-    <div class="container">
-      <div class="shift-grid">
-        <div class="shift-lead">
-          <span class="eyebrow">The Shift / リーダーシップの転換</span>
-          <h2 class="heading">
-            「正解を実行する」リーダーシップから、<br />
-            <em>「まだ見ぬ未来を、ともに感じ取る」</em><br />
-            リーダーシップへ。
-          </h2>
-        </div>
-        <div class="shift-body">
-          <p>
-            私たちが直面している課題の多くは、答えがあらかじめ用意されていません。
-            状況は刻々と変わり、何が正しい応答なのかは、誰にもわからない。
-            こうした「立ち現れてくる複雑性」に、過去の成功事例を当てはめるやり方では届きません。
-          </p>
-          <p>
-            必要なのは、立場の異なる人々が境界を越えて集まり、
-            まだ形になっていない未来を共に感じ取り、小さく試しながら学んでいく ──
-            そんな新しいリーダーシップの能力です。
-            IDEAS Asia Pacific が育てようとしているのは、まさにこの力にほかなりません。
+            アジア太平洋から集まったリーダーたちと共に育てる場。
+            日本ハブは、この学びを日本社会へと翻訳していきます。
           </p>
         </div>
       </div>
