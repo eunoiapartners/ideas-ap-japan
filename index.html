@@ -1811,40 +1811,21 @@
     .theory-card strong { color: var(--c-white); font-weight: 700; }
 
     /* ④ Praxis section --------------------------------------------------- */
+    .praxis-lead {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 500;
+      line-height: 1.6;
+      color: var(--c-purple-900);
+      margin: var(--space-6) 0 var(--space-6);
+    }
     .praxis-text {
-      font-size: 17px;
-      line-height: 2.1;
-      color: var(--c-text);
-      margin: 0 auto var(--space-6);
-      max-width: 640px;
-    }
-    .praxis-arrow {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--space-2);
-      margin: var(--space-12) 0;
-      color: var(--c-purple-400);
-    }
-    .praxis-line {
-      width: 1px;
-      height: 48px;
-      background: linear-gradient(to bottom, transparent, var(--c-purple-300));
-    }
-    .praxis-arrow .lucide-icon { width: 22px; height: 22px; }
-    .praxis-handoff {
       font-size: 16px;
-      line-height: 1.9;
+      line-height: 2.1;
       color: var(--c-text-muted);
-      margin: 0;
+      margin: 0 auto;
+      max-width: 600px;
     }
-    .praxis-handoff strong {
-      font-family: var(--font-latin);
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      color: var(--c-purple-700);
-    }
-
 
     /* =========================================================
        RESPONSIVE
@@ -2274,13 +2255,12 @@
             解けない構造をもっています。日本もまた、人口減少や地域社会の持続可能性という、
             相互に絡み合った課題に直面しています。
           </p>
-          <p class="why-emphasis">
-            これからの 10 年に求められるのは、「正解を急ぐ」リーダーシップではなく、
-            まだ見ぬ未来を集合的に感じ取り、立場の異なる人々とともにシステムを変革していく力です。
+          <p>
+            答えがあらかじめ用意されていない問いに、私たちはどう向き合えるのか。
           </p>
           <p>
-            IDEAS Asia Pacific は、その実践のための共通言語と方法論を、
-            アジア太平洋から集まったリーダーたちと共に育てる場。
+            IDEAS Asia Pacific は、その問いを携えたリーダーたちが、
+            アジア太平洋から集い、立場を越えて共に学び合う場です。
             日本ハブは、この学びを日本社会へと翻訳していきます。
           </p>
         </div>
@@ -2412,33 +2392,18 @@
        ========================================================= -->
   <section class="section-pad bg-cream" id="praxis">
     <div class="container-sm" style="text-align: center;">
-      <span class="eyebrow" style="justify-content: center;">In Practice / 実践に根ざす学び</span>
-      <h2 class="heading" style="margin-bottom: var(--space-8);">
-        だから IDEAS の学びは、<br />
-        「知ること」ではなく、<em>「やること」</em>に根ざしている。
-      </h2>
+      <span class="eyebrow" style="justify-content: center;">In Practice / 実践のなかで</span>
 
-      <p class="praxis-text">
-        歩き方は、歩くことで身につく。自転車の乗り方は、自転車に乗ることで身につく。
-        本当に意味のある学びは、学ぼうとしていることを、実際にやってみることの中にしかありません。
+      <p class="praxis-lead">
+        観察し、対話し、共に試す。
       </p>
       <p class="praxis-text">
-        IDEAS Asia Pacific の核心には、いつも、
-        セクターを越えた人々が共に取り組む「実際のプロジェクト」があります。
-        1 年間の旅を通じて、参加者は共通の言語とツールを手にし、
-        共に働きながら、共に働くことそのものを学んでいきます。
+        立場を越えた人々が、未来を「考える」のではなく、共に動かしはじめるとき、
+        システムは少しずつ姿を変えていきます。
+        歩き方が歩くことで身につくように、本当の学びは、いつも実践のなかにあります。
       </p>
 
-      <div class="praxis-arrow" aria-hidden="true">
-        <span class="praxis-line"></span>
-        <i data-lucide="chevron-down" class="lucide-icon"></i>
-      </div>
-
-      <p class="praxis-handoff">
-        その 1 年間の旅は、<strong>L.I.F.E.</strong> の 4 つの柱と、
-        4 拠点を巡る 6 つのモジュールで構成されています。
-      </p>
-      <a href="/about/" class="btn btn-ghost" style="margin-top: var(--space-6);">
+      <a href="/about/" class="btn btn-ghost" style="margin-top: var(--space-8);">
         プログラムの全体像を見る
         <i data-lucide="arrow-right" class="lucide-icon"></i>
       </a>
