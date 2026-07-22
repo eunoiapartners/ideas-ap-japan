@@ -1058,6 +1058,335 @@
       50%      { opacity: 0.5; transform: scale(1.3); }
     }
 
+    /* Fund status — accepting variant (受付中は緑系。文言と一緒にクラスを切り替える) */
+    .fund-status--accepting {
+      background-color: rgba(58, 154, 74, 0.14);
+      color: var(--c-green);
+    }
+    .fund-status--accepting::before { background-color: var(--c-green); }
+
+    /* Extended fund card — full-width inner for detailed layout */
+    .fund-card--extended .fund-inner { max-width: none; }
+
+    /* Label row: badge + eyebrow */
+    .fund-label-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-6);
+    }
+    .fund-label-row .fund-status,
+    .fund-label-row .eyebrow { margin-bottom: 0; }
+
+    /* Sub-section wrapper inside the fund card */
+    .fund-section {
+      margin-top: var(--space-16);
+      padding-top: var(--space-12);
+      border-top: 1px solid var(--c-border);
+    }
+    .fund-section-head { margin-bottom: var(--space-6); }
+    .fund-section-head .eyebrow { margin-bottom: var(--space-3); }
+    .fund-section-head h3 {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.4vw, 28px);
+      font-weight: 500;
+      color: var(--c-purple-900);
+      margin: 0;
+      line-height: 1.55;
+    }
+    .fund-section > p {
+      font-size: 15px;
+      line-height: 2;
+      color: var(--c-text);
+      margin: 0 0 var(--space-5);
+    }
+    .fund-section > p:last-child { margin-bottom: 0; }
+
+    /* WHY — 2 column (figure + text) */
+    .fund-why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-12);
+      align-items: start;
+    }
+    .fund-figure {
+      aspect-ratio: 4 / 3;
+      background-color: var(--c-purple-50);
+      border: 1px dashed var(--c-purple-300);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--c-text-muted);
+      font-family: var(--font-latin);
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: var(--space-6);
+      line-height: 1.8;
+    }
+    .fund-figure small {
+      display: block;
+      margin-top: var(--space-2);
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: none;
+      color: var(--c-text-muted);
+      opacity: 0.75;
+    }
+    .fund-why-text p {
+      font-size: 15px;
+      line-height: 2;
+      color: var(--c-text);
+      margin: 0 0 var(--space-5);
+    }
+    .fund-why-text p:last-child { margin-bottom: 0; }
+
+    /* Keyline quote */
+    .fund-quote {
+      margin: var(--space-6) 0;
+      padding: var(--space-2) 0 var(--space-2) var(--space-6);
+      border-left: 3px solid var(--c-red);
+      font-family: var(--font-display);
+      font-size: clamp(17px, 1.6vw, 20px);
+      font-weight: 500;
+      line-height: 1.85;
+      color: var(--c-purple-900);
+    }
+
+    /* Cost breakdown */
+    .fund-cost { margin-top: var(--space-8); }
+    .fund-cost-total {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-4);
+      margin-bottom: var(--space-3);
+      font-family: var(--font-latin);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-text-muted);
+      flex-wrap: wrap;
+    }
+    .fund-cost-total strong {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--c-purple-900);
+      letter-spacing: 0.02em;
+      text-transform: none;
+    }
+    .fund-cost-bar {
+      display: flex;
+      height: 26px;
+      overflow: hidden;
+      border: 1px solid var(--c-border);
+    }
+    .fund-cost-seg {
+      display: flex;
+      align-items: center;
+      padding: 0 var(--space-3);
+      font-family: var(--font-latin);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+      overflow: hidden;
+      min-width: 0;
+    }
+    .fund-cost-seg--primary   { flex: 4 1 0; background-color: var(--c-purple-700); color: var(--c-white); }
+    .fund-cost-seg--secondary { flex: 1 1 0; background-color: var(--c-purple-200, #D8C5EE); color: var(--c-purple-900); }
+    .fund-cost-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3) var(--space-6);
+      margin-top: var(--space-4);
+      font-size: 13px;
+      color: var(--c-text);
+      line-height: 1.75;
+    }
+    .fund-cost-legend > span {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    .fund-cost-legend .dot {
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .fund-cost-legend .dot--primary   { background-color: var(--c-purple-700); }
+    .fund-cost-legend .dot--secondary { background-color: var(--c-purple-200, #D8C5EE); }
+    .fund-cost-note {
+      margin-top: var(--space-5);
+      font-size: 13px;
+      color: var(--c-text-muted);
+      line-height: 1.85;
+    }
+
+    /* Journey — 4 stops */
+    .fund-journey {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-5);
+      margin-top: var(--space-4);
+      list-style: none;
+      padding: 0;
+    }
+    .fund-stop {
+      padding: var(--space-6);
+      background-color: var(--c-purple-50);
+      border-top: 3px solid var(--c-purple-500);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+    .fund-stop:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px -16px rgba(45, 37, 72, 0.18);
+    }
+    .fund-stop-month {
+      font-family: var(--font-latin);
+      font-size: 12px;
+      letter-spacing: 0.28em;
+      color: var(--c-red);
+      text-transform: uppercase;
+      margin-bottom: var(--space-2);
+    }
+    .fund-stop-place {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--c-purple-900);
+      margin: 0 0 var(--space-2);
+      line-height: 1.45;
+    }
+    .fund-stop-tag {
+      font-family: var(--font-latin);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-purple-500);
+      margin-bottom: var(--space-3);
+    }
+    .fund-stop-body {
+      font-size: 13px;
+      line-height: 1.85;
+      color: var(--c-text);
+      margin: 0;
+    }
+
+    /* Support — 2 cards */
+    .fund-support-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+      margin-top: var(--space-6);
+    }
+    .fund-support-card {
+      padding: var(--space-8);
+      background-color: var(--c-white);
+      border: 1px solid var(--c-border);
+    }
+    .fund-support-card h4 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--c-purple-900);
+      margin: 0 0 var(--space-3);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .fund-support-card h4::before {
+      content: "";
+      width: 6px;
+      height: 22px;
+      background-color: var(--c-red);
+      flex-shrink: 0;
+    }
+    .fund-support-card p {
+      font-size: 14px;
+      line-height: 2;
+      color: var(--c-text);
+      margin: 0;
+    }
+
+    /* CTA */
+    .fund-cta {
+      margin-top: var(--space-16);
+      padding-top: var(--space-12);
+      border-top: 1px solid var(--c-border);
+      text-align: center;
+    }
+    .fund-cta-head h3 {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.4vw, 28px);
+      font-weight: 500;
+      color: var(--c-purple-900);
+      margin: 0 0 var(--space-3);
+    }
+    .fund-cta-sub {
+      font-size: 15px;
+      color: var(--c-text);
+      margin: 0 0 var(--space-8);
+    }
+    .fund-cta-actions {
+      display: inline-flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: var(--space-6);
+    }
+    .fund-cta-note {
+      font-size: 12px;
+      line-height: 1.9;
+      color: var(--c-text-muted);
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    .fund-cta-note a {
+      color: var(--c-purple-700);
+      border-bottom: 1px solid var(--c-purple-300);
+      transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+    }
+    .fund-cta-note a:hover {
+      color: var(--c-red);
+      border-color: var(--c-red);
+    }
+    .fund-cta-note strong { color: var(--c-purple-900); }
+
+    /* Trust block */
+    .fund-trust {
+      margin-top: var(--space-12);
+      padding-top: var(--space-10);
+      border-top: 1px solid var(--c-border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-10);
+    }
+    .fund-trust-col-label {
+      font-family: var(--font-latin);
+      font-size: 12px;
+      letter-spacing: 0.24em;
+      color: var(--c-purple-500);
+      text-transform: uppercase;
+      margin-bottom: var(--space-3);
+    }
+    .fund-trust-col p {
+      font-size: 13px;
+      line-height: 1.95;
+      color: var(--c-text);
+      margin: 0 0 var(--space-3);
+    }
+    .fund-trust-col p:last-child { margin-bottom: 0; }
+    .fund-trust-col p strong { color: var(--c-purple-900); }
+
     /* =========================================================
        CONTACT
        ========================================================= */
@@ -1773,6 +2102,7 @@
       .journey-step:nth-child(4) { border-left: none; padding-left: 0; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .intro-grid, .team-grid, .contact-grid { grid-template-columns: 1fr; gap: var(--space-10); }
+      .fund-journey { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 768px) {
@@ -1801,6 +2131,16 @@
       .journey-step:first-child { border-top: none; padding-top: 0; }
       .footer-grid { grid-template-columns: 1fr; }
       .fund-card, .contact-card { padding: var(--space-10) var(--space-6); }
+      .fund-why-grid,
+      .fund-support-grid,
+      .fund-trust { grid-template-columns: 1fr; gap: var(--space-8); }
+      .fund-journey { grid-template-columns: 1fr; }
+      .fund-section { margin-top: var(--space-12); padding-top: var(--space-10); }
+      .fund-cta { margin-top: var(--space-12); padding-top: var(--space-10); }
+      .fund-cost-bar { height: 24px; }
+      .fund-label-row { gap: var(--space-3); }
+      .fund-cta-actions { display: flex; width: 100%; }
+      .fund-cta-actions .btn { flex: 1 1 auto; justify-content: center; }
       .team-card { grid-template-columns: 1fr; text-align: center; }
       .team-photo { margin: 0 auto; }
 
@@ -2503,27 +2843,140 @@
   </section>
 
   <!-- =========================================================
-       FUND (in development)
+       FUND (Young Leader Fund)
        ========================================================= -->
   <section class="section-pad bg-cream" id="fund">
     <div class="container">
-      <div class="fund-card">
+      <div class="fund-card fund-card--extended">
         <div class="fund-inner">
-          <span class="fund-status">In Development / 構想中</span>
-          <span class="eyebrow">Young Leader Fund / 若手支援ファンド</span>
+
+          <!--
+            バッジ 状態切替: 文言と修飾クラス（--accepting）だけ差し替える。
+            受付前:  <span class="fund-status" data-mode="in-development">In Development / 構想中</span>
+            受付中:  <span class="fund-status fund-status--accepting" data-mode="accepting">Now Accepting / 支援受付中</span>
+          -->
+          <div class="fund-label-row">
+            <span class="fund-status fund-status--accepting" data-mode="accepting">Now Accepting / 支援受付中</span>
+            <span class="eyebrow">Young Leader Fund / 若手支援ファンド</span>
+          </div>
+
+          <!-- Hero: 見出し + リード -->
           <h2 class="heading">
             次の 10 年を担う若手リーダーに、<br />
             この学びの扉を開く。
           </h2>
-          <p style="font-size: 16px; line-height: 2; color: var(--c-text); margin: 0 0 var(--space-6);">
-            IDEAS Asia Pacific の参加費は、若手のリーダーにとっては大きな経済的ハードルです。
-            日本ハブでは、未来を担う次世代の参加機会を広げるため、
-            個人・企業・財団からの支援を集める奨学ファンドの仕組みづくりを進めています。
+          <p class="lead">
+            2026年、MITスローン経営大学院の社会変革プログラム「IDEAS Asia Pacific 3.0」が始動します。アジア各国のリーダーがU理論とシステム思考を1年かけて実践するこの学びの場に、日本から「現場で社会を変革するユース」を1名送り出す——円安と物価高がつくる資金の壁を、有志の共同ドネーションで越えるプロジェクトです。
           </p>
-          <p style="font-size: 16px; line-height: 2; color: var(--c-text); margin: 0 0 var(--space-8);">
-            ご関心をお寄せくださる支援者の方々を募集しています。
-            まずは構想と進捗をお伝えするご連絡先のご登録から、お気軽にどうぞ。
-          </p>
+
+          <!-- WHY / なぜ、若手支援なのか -->
+          <div class="fund-section">
+            <div class="fund-section-head">
+              <span class="eyebrow">Why / なぜ、若手支援なのか</span>
+            </div>
+            <div class="fund-why-grid">
+              <!-- TODO: 世代別資産の逆ピラミッド図（SVG）を後日差し替え -->
+              <div class="fund-figure" role="img" aria-label="世代別資産の逆ピラミッド図（準備中）">
+                Figure — Coming Soon
+                <small>Generational Assets Inverted Pyramid</small>
+              </div>
+              <div class="fund-why-text">
+                <p>日本の個人金融資産は2,351兆円。その多くは、60代以上の世代に蓄えられています。いっぽう、奨学金を借りて学んだ若者が背負う負債は、ひとりあたり平均310万円。海外プログラムへの参加費は、志ある若手にとって最も高い壁になっています。</p>
+                <blockquote class="fund-quote">
+                  資産は上の世代に、負債は若い世代に。だからこそ、世代を超えた資金の循環をつくりたい。
+                </blockquote>
+                <p>このファンドは、単なる奨学金ではありません。経験と資産をもつ世代から、次の10年を担う世代へ——学びの機会を手渡していく、小さな資金循環のデザインです。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FUND / 支援金の使いみち -->
+          <div class="fund-section">
+            <div class="fund-section-head">
+              <span class="eyebrow">Fund / 支援金の使いみち</span>
+              <h3>お預かりした支援は、全額を1名の派遣に。</h3>
+            </div>
+            <p>運営は、本プログラムを修了したアルムナイ5名によるプロボノ（無償）です。事務経費は一切いただかず、ご支援は全額、日本代表1名の派遣費用に充てられます。</p>
+
+            <div class="fund-cost" aria-label="支援金の使途内訳">
+              <div class="fund-cost-total">
+                <span>1名派遣の目安</span>
+                <strong>約 400 万円</strong>
+              </div>
+              <div class="fund-cost-bar" role="img"
+                   aria-label="内訳バー: プログラム参加貢献金 320万円と 年間の渡航・滞在費 約80万円">
+                <div class="fund-cost-seg fund-cost-seg--primary">80%</div>
+                <div class="fund-cost-seg fund-cost-seg--secondary">20%</div>
+              </div>
+              <div class="fund-cost-legend">
+                <span><span class="dot dot--primary" aria-hidden="true"></span>プログラム参加貢献金　320万円（$20,000相当）</span>
+                <span><span class="dot dot--secondary" aria-hidden="true"></span>年間の渡航・滞在費（実費）　約80万円</span>
+              </div>
+              <p class="fund-cost-note">
+                ※目標額を超えたご支援は、2人目の派遣補助、または次年度の基金として大切に活用します。
+              </p>
+            </div>
+          </div>
+
+          <!-- SUPPORT / 支援のかたち -->
+          <div class="fund-section">
+            <div class="fund-section-head">
+              <span class="eyebrow">Support / 支援のかたち</span>
+              <h3>1口1万円から。金額は自由です。</h3>
+            </div>
+            <p>1万円・3万円・5万円・10万円といった口数の目安をご用意していますが、上限も下限もありません。任意の金額で、この挑戦にご参加いただけます。</p>
+            <div class="fund-support-grid">
+              <article class="fund-support-card">
+                <h4>ジャーナル共有</h4>
+                <p>横浜、MIT、バリ、ジャカルタ——各セッションでの学びと気づきを、レポートとしてリアルタイムにお届けします。派遣される若手の1年を、いちばん近くで見守ってください。</p>
+              </article>
+              <article class="fund-support-card">
+                <h4>成果報告会</h4>
+                <p>帰国後、「日本社会をどう変えるか」のプロトタイプを、支援者のみなさまにご報告します。1年間の視座の転換が、日本の現場でどう動き出すのかをご覧いただけます。</p>
+              </article>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="fund-cta">
+            <div class="fund-cta-head">
+              <h3>未来への投資に、お力添えください。</h3>
+              <p class="fund-cta-sub">ご寄付はもちろん、まずは構想と進捗を受け取ることからでも。</p>
+            </div>
+            <div class="fund-cta-actions">
+              <!-- 寄付先: 特定非営利活動法人 未来世代のための市民委員会（口座を無償でお借りしています） -->
+              <a href="https://futuregenerations.jp/donation/" class="btn btn-primary"
+                 target="_blank" rel="noopener noreferrer" data-cta="donate">
+                いますぐ寄付する
+                <i data-lucide="arrow-up-right" class="lucide-icon"></i>
+              </a>
+              <!-- TODO: 既存の連絡先登録フォームへ -->
+              <a href="#contact" class="btn btn-ghost" data-cta="subscribe">
+                構想と進捗を受け取る
+                <i data-lucide="mail" class="lucide-icon"></i>
+              </a>
+            </div>
+            <p class="fund-cta-note">
+              ご寄付は「特定非営利活動法人 未来世代のための市民委員会」の口座を無償でお借りして受け付けています。銀行振込・PayPalの詳細は
+              <a href="https://futuregenerations.jp/donation/" target="_blank" rel="noopener noreferrer">寄付ページ</a>
+              でご案内しています。振込・入金の際は、備考欄に必ず「<strong>MIT奨学金</strong>」とご記載ください。
+            </p>
+          </div>
+
+          <!-- Trust: members & account -->
+          <div class="fund-trust">
+            <div class="fund-trust-col">
+              <div class="fund-trust-col-label">Members / 実行メンバー</div>
+              <p>本プログラムを修了した日本人アルムナイ5名が、プロボノ（無償）で運営しています。</p>
+              <p><strong>代表：野田浩平</strong>（IDEAS Asia Pacific リージョナルファカルティ）</p>
+              <p>自分たちが得た「視座の転換」を、次の世代へ。</p>
+            </div>
+            <div class="fund-trust-col">
+              <div class="fund-trust-col-label">Account / お預かり口座について</div>
+              <p>ご寄付は、<strong>特定非営利活動法人 未来世代のための市民委員会</strong>のご厚意により、同法人の口座を無償でお借りして受け付けています。お預かりした支援金は、全額を派遣費用に充当します。</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
