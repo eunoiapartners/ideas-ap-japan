@@ -837,6 +837,13 @@
     .fellows-head {
       margin-bottom: var(--space-12);
     }
+    .fellows-directory-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-4);
+      margin-top: var(--space-12);
+    }
     .fellows-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -2388,6 +2395,11 @@
     .tag-sector-government  { background-color: rgba(208, 39, 45, 0.10);  color: var(--c-red); }
     .tag-sector-unknown     { background-color: rgba(107, 98, 128, 0.10); color: var(--c-text-muted); }
     .tag-country            { background-color: var(--c-cream); color: var(--c-text); border: 1px solid var(--c-border); }
+    .tag-cohort             { background-color: var(--c-cream); color: var(--c-text); border: 1px solid var(--c-border); }
+    a.fellow-row:focus-visible {
+      outline: 2px solid var(--c-purple-500);
+      outline-offset: 3px;
+    }
 
     .fellows-no-results {
       grid-column: 1 / -1;
@@ -2452,6 +2464,10 @@
               Asia Pacific 全フェロー
               <small>All Asia Pacific Fellows</small>
             </a>
+            <a href="#fellows-indonesia" role="menuitem" data-open-fellows-indonesia>
+              IDEAS Indonesia
+              <small>Cohort 1.0–6.0</small>
+            </a>
           </div>
         </span>
       </nav>
@@ -2471,6 +2487,7 @@
       <a href="#fellows">フェロー — 日本人フェロー</a>
       <div class="submenu" aria-label="フェロー - サブメニュー">
         <a href="#fellows-all" data-open-fellows-all>Asia Pacific 全フェロー</a>
+        <a href="#fellows-indonesia" data-open-fellows-indonesia>IDEAS Indonesia フェロー</a>
       </div>
       <a href="#fund">若手支援ファンド</a>
     </nav>
@@ -2833,9 +2850,13 @@
         </article>
       </div>
 
-      <div style="text-align: center; margin-top: var(--space-12);">
+      <div class="fellows-directory-links">
         <a href="#fellows-all" class="btn btn-ghost" data-open-fellows-all>
           Asia Pacificの全フェロー
+          <i data-lucide="arrow-right" class="lucide-icon"></i>
+        </a>
+        <a href="#fellows-indonesia" class="btn btn-ghost" data-open-fellows-indonesia>
+          IDEAS Indonesiaのフェロー
           <i data-lucide="arrow-right" class="lucide-icon"></i>
         </a>
       </div>
@@ -3003,6 +3024,7 @@
             <li><a href="#about">IDEASとは</a></li>
             <li><a href="#history" data-open-history>沿革 / History</a></li>
             <li><a href="#fellows">フェロー</a></li>
+            <li><a href="#fellows-indonesia" data-open-fellows-indonesia>IDEAS Indonesia フェロー</a></li>
             <li><a href="#theory">IDEASの思想</a></li>
           </ul>
         </div>
@@ -3310,6 +3332,95 @@
   </div>
 
   <!-- =========================================================
+       FELLOWS OVERLAY (IDEAS Indonesia Cohort 1.0–6.0)
+       - 開く: ナビ / 「IDEAS Indonesiaのフェロー」 / #fellows-indonesia
+       - 各カードは UID Fellows の公式プロフィールへ
+       ========================================================= -->
+  <div class="page-overlay"
+       id="fellowsIndonesiaOverlay"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="fellowsIndonesiaOverlayTitle"
+       aria-hidden="true">
+
+    <div class="overlay-topbar">
+      <div class="overlay-crumb" aria-label="パンくずリスト">
+        <a href="#" data-close-fellows-indonesia>Home</a>
+        <span class="sep">/</span>
+        <span>Fellows</span>
+        <span class="sep">/</span>
+        <span class="current" aria-current="page">IDEAS Indonesia</span>
+      </div>
+      <button class="overlay-close"
+              type="button"
+              id="fellowsIndonesiaClose"
+              data-close-fellows-indonesia
+              aria-label="フェロー一覧を閉じてトップページに戻る">
+        <i data-lucide="x" class="lucide-icon"></i>
+        <span>閉じる</span>
+      </button>
+    </div>
+
+    <section class="fellows-overlay-hero">
+      <div class="container fellows-overlay-hero-inner">
+        <h1 id="fellowsIndonesiaOverlayTitle">Fellows</h1>
+        <h2>
+          IDEAS Indonesia — Cohort 1.0から6.0、175名
+        </h2>
+        <p class="lede">
+          United in Diversity の IDEAS Indonesia（第1期〜第6期）を歩んだフェローのディレクトリです。
+          カードを選ぶと、UID Fellows の公式プロフィールが開きます。
+        </p>
+      </div>
+    </section>
+
+    <div class="fellows-controls">
+      <div class="fellows-controls-inner">
+        <div class="fellows-control-field has-icon">
+          <i data-lucide="search" class="lucide-icon"></i>
+          <input type="text"
+                 id="fellowsIndonesiaSearchName"
+                 class="fellows-input"
+                 placeholder="名前・組織名で検索"
+                 aria-label="名前または組織名で検索">
+        </div>
+        <div class="fellows-control-field">
+          <select id="fellowsIndonesiaFilterSector" class="fellows-select" aria-label="セクターで絞り込み">
+            <option value="">すべてのセクター</option>
+            <option value="Business">Business</option>
+            <option value="Civil Society">Civil Society</option>
+            <option value="Government">Government</option>
+          </select>
+        </div>
+        <div class="fellows-control-field">
+          <select id="fellowsIndonesiaFilterCohort" class="fellows-select" aria-label="コホートで絞り込み">
+            <option value="">すべてのコホート</option>
+            <option value="1.0">Cohort 1.0</option>
+            <option value="2.0">Cohort 2.0</option>
+            <option value="3.0">Cohort 3.0</option>
+            <option value="4.0">Cohort 4.0</option>
+            <option value="5.0">Cohort 5.0</option>
+            <option value="6.0">Cohort 6.0</option>
+          </select>
+        </div>
+        <button type="button" class="fellows-reset" id="fellowsIndonesiaReset">Reset</button>
+        <span class="fellows-count" id="fellowsIndonesiaCount" aria-live="polite"></span>
+      </div>
+    </div>
+
+    <main class="fellows-overlay-main">
+      <div class="fellows-overlay-grid" id="fellowsIndonesiaGrid"></div>
+    </main>
+
+    <div class="overlay-foot">
+      <a href="#" data-close-fellows-indonesia>
+        <i data-lucide="arrow-left" class="lucide-icon"></i>
+        <span>トップページに戻る</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- =========================================================
        SCRIPTS
        ========================================================= -->
   <script>
@@ -3570,14 +3681,1420 @@
       { name: "Zhongming Chen", org: "Giti Tire China R&D Center", title: "Director", sector: "Business", country: "China" },
     ];
 
-    function setupFellowsDirectory(overlay) {
-      const grid = overlay.querySelector('#fellowsGrid');
-      const nameInput = overlay.querySelector('#fellowsSearchName');
-      const sectorSel = overlay.querySelector('#fellowsFilterSector');
-      const countrySel = overlay.querySelector('#fellowsFilterCountry');
-      const resetBtn = overlay.querySelector('#fellowsReset');
-      const countEl = overlay.querySelector('#fellowsCount');
-      if (!grid) return;
+    /* IDEAS Indonesia Cohort 1.0–6.0 — UID Fellows 公開ディレクトリより */
+    const FELLOWS_INDONESIA = [
+      {
+        "name": "Abetnego Tarigan",
+        "org": "Executive Office of the President of the Republic of Indonesia",
+        "title": "Deputy for Human Development (Deputy II) – KSP RI",
+        "sector": "Government",
+        "cohort": "5.0",
+        "slug": "abetnego-tarigan"
+      },
+      {
+        "name": "Adhitya Wisesa",
+        "org": "SS&C Technologies (APAC)",
+        "title": "Regional Business Development Director APAC",
+        "sector": "Business",
+        "cohort": "2.0",
+        "slug": "adhitya-wisesa"
+      },
+      {
+        "name": "Adi Harsono",
+        "org": "InaCham Indonesia Chamber of Commerce",
+        "title": "Senior Advisor",
+        "sector": "Business",
+        "cohort": "2.0",
+        "slug": "adi-harsono"
+      },
+      {
+        "name": "Agung Prasetyo",
+        "org": "Ministry of Maritime Affairs and Fisheries of the Republic of Indonesia",
+        "title": "Deputy Director for Bilateral Cooperation, Centre for Analysis of International Cooperation & Institutions (KKP)",
+        "sector": "Government",
+        "cohort": "5.0",
+        "slug": "agung-prasetyo"
+      },
+      {
+        "name": "Agus Sumule",
+        "org": "Papua Province Government",
+        "title": "Economic Advisor for Governor",
+        "sector": "Government",
+        "cohort": "3.0",
+        "slug": "agus-sumule"
+      },
+      {
+        "name": "Akhmad Mukhlis Yusuf",
+        "org": "ANTARA National News Agency",
+        "title": "Former CEO",
+        "sector": "Civil Society",
+        "cohort": "3.0",
+        "slug": "akhmad-mukhlis-yusuf"
+      },
+      {
+        "name": "Aldrian Irvan Kolonas",
+        "org": "PT. Vasham Kosa Sejahtera",
+        "title": "CEO",
+        "sector": "Business",
+        "cohort": "4.0",
+        "slug": "aldrian-irvan-kolonas"
+      },
+      {
+        "name": "Alfred Nakatsuma",
+        "org": "USAID",
+        "title": "Director",
+        "sector": "Government",
+        "cohort": "3.0",
+        "slug": "alfred-nakatsuma"
+      },
+      {
+        "name": "Alissa Wahid",
+        "org": "Gusdurian Network",
+        "title": "National Director",
+        "sector": "Civil Society",
+        "cohort": "6.0",
+        "slug": "alissa-wahid"
+      },
+      {
+        "name": "Amelia Gozali",
+        "org": "PT Indonesian Paradise Property Tbk",
+        "title": "Vice President Commissioner",
+        "sector": "Business",
+        "cohort": "1.0",
+        "slug": "amelia-gozali"
+      },
+      {
+        "name": "Ana Widjaja",
+        "org": "Media Televisi Indonesia (Metro TV)",
+        "title": "Finance & Administration Director",
+        "sector": "Business",
+        "cohort": "3.0",
+        "slug": "ana-widjaja"
+      },
+      {
+        "name": "Anak Agung Bagus Sudharsana",
+        "org": "Denpasar City Government",
+        "title": "Former Chairperson of Environment Agency",
+        "sector": "Government",
+        "cohort": "3.0",
+        "slug": "anak-agung-bagus-sudharsana"
+      },
+      {
+        "name": "Anang Noegroho S",
+        "org": "Ministry of Marine Affairs and Fisheries",
+        "title": "Executive Director for Investment Development",
+        "sector": "Government",
+        "cohort": "2.0",
+        "slug": "anang-noegroho-s"
+      },
+      {
+        "name": "Andy F. Noya",
+        "org": "Metro TV",
+        "title": "Founder – Kick Andy Foundation",
+        "sector": "Civil Society",
+        "cohort": "1.0",
+        "slug": "andy-f-noya"
+      },
+      {
+        "name": "Apep Fajar Kurniawan",
+        "org": "Ministry of Home Affairs of the Republic of Indonesia",
+        "title": "Special Staff to the Minister for Political Affairs & Network Establishment",
+        "sector": "Civil Society",
+        "cohort": "4.0",
+        "slug": "apep-fajar-kurniawan"
+      },
+      {
+        "name": "Ari Susanti",
+        "org": "British Council Indonesia",
+        "title": "Head of Programmes – Climate, Culture & Inclusive Growth",
+        "sector": "Civil Society",
+        "cohort": "4.0",
+        "slug": "ari-susanti"
+      },
+      {
+        "name": "Arief Aziz",
+        "org": "Climate Catalyst",
+        "title": "Director of Networks and Partnerships",
+        "sector": "Civil Society",
+        "cohort": "4.0",
+        "slug": "arief-aziz-1"
+      },
+      {
+        "name": "Arief Fadillah",
+        "org": "Ministry of Trade, Republic of Indonesia",
+        "title": "Head of Planning Bureau",
+        "sector": "Government",
+        "cohort": "3.0",
+        "slug": "arief-fadillah"
+      },
+      {
+        "name": "Arief Patramijaya",
+        "org": "Patra M Zen & Partners Law Firm",
+        "title": "Advocate, Curator, and Management Board",
+        "sector": "Civil Society",
+        "cohort": "2.0",
+        "slug": "arief-patramijaya"
+      },
+      {
+        "name": "Arif Danurdara Tachril",
+        "org": "PT Bimantara Citra",
+        "title": "President Director",
+        "sector": "Business",
+        "cohort": "2.0",
+        "slug": "arif-danurdara-tachril"
+      },
+      {
+        "name": "Arimbi Heroepoetri",
+        "org": "Coaction Indonesia (Supervisory Board)",
+        "title": "Head of the Supervisory Board",
+        "sector": "Civil Society",
+        "cohort": "5.0",
+        "slug": "arimbi-heroepoetri"
+      },
+      {
+        "name": "Arlinda",
+        "org": "Ministry of Trade, RI",
+        "title": "Foreign Trade Policy & Economy",
+        "sector": "Government",
+        "cohort": "2.0",
+        "slug": "arlinda"
+      },
+      {
+        "name": "Arwani",
+        "org": "NAVAL Lieutenant Colonel Indonesia National Army",
+        "title": "",
+        "sector": "—",
+        "cohort": "5.0",
+        "slug": "arwani"
+      },
+      {
+        "name": "Atika Nur Rahmania",
+        "org": "Regional Development Planning Agency of DKI Jakarta",
+        "title": "Head of the Regional Development Planning Agency (Bappeda) of DKI Jakarta Province",
+        "sector": "Government",
+        "cohort": "6.0",
+        "slug": "atika-nur-rahmania"
+      },
+      {
+        "name": "Axton Salim",
+        "org": "PT Indofood Sukses Makmur Tbk",
+        "title": "Overseeing the Dairy and Corporate Marketing divisions.",
+        "sector": "Business",
+        "cohort": "6.0",
+        "slug": "axton-salim"
+      },
+      {
+        "name": "Ayu Jumila Agriani",
+        "org": "Coordinating Ministry for Economic Affairs, Republic of Indonesia",
+        "title": "Head of European Economic Cooperation Division",
+        "sector": "Government",
+        "cohort": "3.0",
+        "slug": "ayu-jumila-agriani"
+      },
+      {
+        "name": "Ayu Nyoman Purbasari",
+        "org": "Sustainable Fisheries Partnership",
+        "title": "Director of Monitoring & Evaluation",
+        "sector": "—",
+        "cohort": "5.0",
+        "slug": "ayu-nyoman-purbasari"
+      },
+      {
+        "name": "Bambang Shergi Laksmono",
+        "org": "University of Indonesia (FISIP, Department of Social Welfare Sciences)",
+        "title": "Lecturer",
+        "sector": "Civil Society",
+        "cohort": "2.0",
+        "slug": "bambang-shergi-laksmono"
+      },
+      {
+        "name": "Bambang Supriyanto",
+        "org": "Ministry of Environment and Forestry (KLHK)",
+        "title": "Former Director General of Social Forestry & Environmental Partnership",
+        "sector": "Government",
+        "cohort": "5.0",
+        "slug": "bambang-supriyanto"
+      },
+      {
+        "name": "Basaria Martha Juliana",
+        "org": "PT Bank DKI",
+        "title": "Finance & Strategy Director",
+        "sector": "Business",
+        "cohort": "5.0",
+        "slug": "basaria-martha-juliana"
+      },
+      {
+        "name": "Basuri Tjahaja Purnama",
+        "org": "PT Jababeka Morotai",
+        "title": "President Director",
+        "sector": "Government",
+        "cohort": "4.0",
+        "slug": "basuri-tjahaja-purnama"
+      },
+      {
+        "name": "Bayu Maulada Tachril",
+        "org": "PT Bimantara Citra",
+        "title": "Business Development Director",
+        "sector": "Business",
+        "cohort": "3.0",
+        "slug": "bayu-maulada-tachril"
+      },
+      {
+        "name": "Benyamin Lakitan",
+        "org": "Universitas Sriwijaya",
+        "title": "Professor",
+        "sector": "Government",
+        "cohort": "4.0",
+        "slug": "benyamin-lakitan"
+      },
+      {
+        "name": "Buddy Tanasaleh",
+        "org": "PT Gajah Tunggal Tbk",
+        "title": "Vice President Director",
+        "sector": "Business",
+        "cohort": "3.0",
+        "slug": "buddy-tanasaleh"
+      },
+      {
+        "name": "Catharina Widjaja",
+        "org": "PT Gajah Tunggal Tbk",
+        "title": "Director – Corporate Communication & Investor Relations",
+        "sector": "Business",
+        "cohort": "1.0",
+        "slug": "catharina-widjaja"
+      },
+      {
+        "name": "Chaerany Putri",
+        "org": "VIDA Digital Identity",
+        "title": "Director of Public Affairs",
+        "sector": "Business",
+        "cohort": "4.0",
+        "slug": "chaerany-putri"
+      },
+      {
+        "name": "Christopher Chan",
+        "org": "PT Gajah Tunggal Tbk.",
+        "title": "President Director",
+        "sector": "Business",
+        "cohort": "2.0",
+        "slug": "christopher-chan"
+      },
+      {
+        "name": "Chusnunia Chalim",
+        "org": "Lampung Provincial Government",
+        "title": "Vice Governor",
+        "sector": "Government",
+        "cohort": "6.0",
+        "slug": "chusnunia-chalim"
+      },
+      {
+        "name": "David Nellor",
+        "org": "National University of Singapore (NUS)",
+        "title": "Adjunct Professor, Lee Kuan Yew School of Public Policy (NUS)",
+        "sector": "Civil Society",
+        "cohort": "1.0",
+        "slug": "david-nellor"
+      },
+      {
+        "name": "Della Y.A. Temenggung",
+        "org": "Australia Indonesia Partnership for Economic Governance (AIPEG)",
+        "title": "Lead Adviser",
+        "sector": "Government",
+        "cohort": "4.0",
+        "slug": "della-ya-temenggung"
+      },
+      {
+        "name": "Desi Anwar",
+        "org": "CNN Indonesia",
+        "title": "Senior Anchor and Director",
+        "sector": "Civil Society",
+        "cohort": "3.0",
+        "slug": "desi-anwar"
+      },
+      {
+        "name": "Dewi Tjakrawati",
+        "org": "2 Nyonya Batik",
+        "title": "Owner / Founder",
+        "sector": "Business",
+        "cohort": "1.0",
+        "slug": "dewi-tjakrawati"
+      },
+      {
+        "name": "Dian Anis Purbasari",
+        "org": "Yayasan Bakti Barito",
+        "title": "Vice Chairperson of Board of Manager",
+        "sector": "Civil Society",
+        "cohort": "3.0",
+        "slug": "dian-anis-purbasari"
+      },
+      {
+        "name": "Dicky Kartikoyono",
+        "org": "Bank Indonesia",
+        "title": "Head of Department",
+        "sector": "Government",
+        "cohort": "4.0",
+        "slug": "dicky-kartikoyono"
+      },
+      {
+        "name": "Dodi Reza",
+        "org": "DPR-RI",
+        "title": "Anggota DPR-RI & Bupati Musi Banyuasin",
+        "sector": "Government",
+        "cohort": "2.0",
+        "slug": "dodi-reza"
+      },
+      {
+        "name": "Edison Sinaga",
+        "org": "PT Dwi Lestari Nusantara",
+        "title": "President Director",
+        "sector": "Business",
+        "cohort": "4.0",
+        "slug": "edison-sinaga"
+      },
+      {
+        "name": "Edwin Hidayat Abdullah",
+        "org": "PT Aviasi Pariwisata Indonesia (Persero)",
+        "title": "Director of Business Development",
+        "sector": "Government",
+        "cohort": "1.0",
+        "slug": "edwin-hidayat-abdullah"
+      },
+      {
+        "name": "Emil Bambang Sumirat",
+        "org": "Epicentrum Technologies",
+        "title": "Founder & Chief Technology Officer",
+        "sector": "Business",
+        "cohort": "1.0",
+        "slug": "emil-bambang-sumirat"
+      },
+      {
+        "name": "Emil Elestianto Dardak",
+        "org": "Jawa Timur Province",
+        "title": "Vice Governor",
+        "sector": "Government",
+        "cohort": "6.0",
+        "slug": "emil-elestianto-dardak"
+      },
+      {
+        "name": "Endy Mouzardi Bayuni",
+        "org": "The Jakarta Post Foundation",
+        "title": "Senior Editor & Board Member",
+        "sector": "Civil Society",
+        "cohort": "1.0",
+        "slug": "endy-mouzardi-bayuni"
+      },
+      {
+        "name": "Ernie Widianty Rahardjo",
+        "org": "PT MRT Jakarta",
+        "title": "Head of Div Risk",
+        "sector": "Business",
+        "cohort": "2.0",
+        "slug": "ernie-widianty-rahardjo"
+      },
+      {
+        "name": "Esther Anne Parapak",
+        "org": "Ford Foundation (Indonesia office)",
+        "title": "Senior Grants Manager (Indonesia)",
+        "sector": "Civil Society",
+        "cohort": "6.0",
+        "slug": "esther-anne-parapak"
+      },
+      {
+        "name": "Eva Kusuma Sundari",
+        "org": "The Partnership for Governance Reform",
+        "title": "Executive Board",
+        "sector": "Civil Society",
+        "cohort": "6.0",
+        "slug": "eva-kusuma-sundari"
+      },
+      {
+        "name": "Fajar Riza Ul Haq",
+        "org": "Maarif Institute for Culture and Humanity",
+        "title": "Executive Director",
+        "sector": "Civil Society",
+        "cohort": "3.0",
+        "slug": "fajar-riza-ul-haq"
+      },
+      {
+        "name": "Farida Zaituni",
+        "org": "PT Sarana Multi Infrastruktur",
+        "title": "Lead Environmental & Social Safeguard",
+        "sector": "Business",
+        "cohort": "4.0",
+        "slug": "farida-zaituni"
+      },
+      {
+        "name": "Firmanzah",
+        "org": "Paramadina University",
+        "title": "",
+        "sector": "Civil Society",
+        "cohort": "2.0",
+        "slug": "firmanzah"
+      },
+      {
+        "name": "Francisia Saveria Sika Seda",
+        "org": "Departemen Sosiologi, FISIP Universitas Indonesia",
+        "title": "Professor Studi Pembangunan",
+        "sector": "Civil Society",
+        "cohort": "1.0",
+        "slug": "francisia-saveria-sika-seda"
+      },
+      {
+        "name": "Fransisca Ria Susanti",
+        "org": "Perhimpunan Pengembangan Media Nusantara (PPMN)",
+        "title": "Deputy Program Director",
+        "sector": "Civil Society",
+        "cohort": "3.0",
+        "slug": "fransisca-ria-susanti"
+      },
+      {
+        "name": "Fransiskus Teguh",
+        "org": "Ministry of Tourism & Creative Economy / Baparekraf (RI)",
+        "title": "Expert Staff to the Minister for Sustainable Development and Conservation",
+        "sector": "Government",
+        "cohort": "5.0",
+        "slug": "fransiskus-teguh"
+      },
+      {
+        "name": "Gabriella Santosa",
+        "org": "Japfa Ltd",
+        "title": "Business Development Manager",
+        "sector": "Business",
+        "cohort": "6.0",
+        "slug": "gabriella-santosa"
+      },
+      {
+        "name": "Gouri Mirpuri",
+        "org": "The Learning Farm",
+        "title": "Co-Founder & Board Member",
+        "sector": "Civil Society",
+        "cohort": "5.0",
+        "slug": "gouri-mirpuri"
+      },
+      {
+        "name": "Grace Natalie",
+        "org": "Partai Solidaritas Indonesia (PSI)",
+        "title": "Co-Founder & former Chairperson PSI",
+        "sector": "Government",
+        "cohort": "6.0",
+        "slug": "grace-natalie"
+      },
+      {
+        "name": "Gumilar Rusliwa Somantri",
+        "org": "Universitas Indonesia",
+        "title": "Professor of Sociology",
+        "sector": "Civil Society",
+        "cohort": "1.0",
+        "slug": "gumilar-rusliwa-somantri"
+      },
+      {
+        "name": "Gusti Nur Cahya Aryani",
+        "org": "Universitas Multimedia Nusantara (UMN)",
+        "title": "Lecturer at UMN, Faculty of Communication",
+        "sector": "Civil Society",
+        "cohort": "6.0",
+        "slug": "gusti-nur-cahya-aryani"
+      },
+      {
+        "name": "Handaka Santosa",
+        "org": "PT MAP Aktif Adiperkasa Tbk (MAPA) / PT MAP Boga Adiperkasa Tbk (MAPB)",
+        "title": "Vice President Director (MAPA) & Director (MAPB)",
+        "sector": "Business",
+        "cohort": "5.0",
+        "slug": "handaka-santosa-1"
+      },
+      {
+        "name": "Harry Ponto",
+        "org": "Advocate Offices of Kailimang & Ponto",
+        "title": "Managing Partner",
+        "sector": "Business",
+        "cohort": "3.0",
+        "slug": "harry-ponto"
+      },
+      {
+        "name": "Helmy Yahya",
+        "org": "PT Triwarsana",
+        "title": "Founder & Producer / Entrepreneur in Media & Event Production",
+        "sector": "Business",
+        "cohort": "4.0",
+        "slug": "helmy-yahya"
+      },
+      {
+        "name": "Hendra Setiawan",
+        "org": "PT Softex Indonesia",
+        "title": "CEO",
+        "sector": "Business",
+        "cohort": "4.0",
+        "slug": "hendra-setiawan"
+      },
+      {
+        "name": "Hermawan Wijayanto",
+        "org": "Conservation International Indonesia",
+        "title": "Executive Director",
+        "sector": "Civil Society",
+        "cohort": "1.0",
+        "slug": "hermawan-wijayanto"
+      },
+      {
+        "name": "Hernani Sirikit",
+        "org": "LKM Media Watch",
+        "title": "Director",
+        "sector": "Civil Society",
+        "cohort": "1.0",
+        "slug": "hernani-sirikit"
+      },
+      {
+        "name": "Hilman Zaeni",
+        "org": "Indonesian National Air Force (TNI AU) – Air Force Academy (AAU)",
+        "title": "Commander of the Air Force Cadet Wing",
+        "sector": "Government",
+        "cohort": "5.0",
+        "slug": "hilman-zaeni"
+      },
+      {
+        "name": "Hugua",
+        "org": "Southeast Sulawesi Provincial Government",
+        "title": "Deputy Governor of Southeast Sulawesi",
+        "sector": "Government",
+        "cohort": "4.0",
+        "slug": "hugua"
+      },
+      {
+        "name": "Ida Bagus Gede Sidharta Putra",
+        "org": "The Santrian Group (Sanur, Bali)",
+        "title": "Founder / Managing Director",
+        "sector": "Business",
+        "cohort": "4.0",
+        "slug": "ida-bagus-gede-sidharta-putra"
+      },
+      {
+        "name": "Ignatius Warsito",
+        "org": "Ministry of Industry of the Republic of Indonesia",
+        "title": "Director General of the Chemical, Pharmaceutical and Textile Industry (Acting)",
+        "sector": "Government",
+        "cohort": "5.0",
+        "slug": "ignatius-warsito"
+      },
+      {
+        "name": "Illah Sailah",
+        "org": "Bogor Agricultural University (IPB University)",
+        "title": "Senior Lecturer, Department of Agro-industrial Technology, Founder of Human Resource Development Centre (IPB)",
+        "sector": "Government",
+        "cohort": "6.0",
+        "slug": "illah-sailah"
+      },
+      {
+        "name": "Ima Abdulrahim",
+        "org": "Caravanserai Collective",
+        "title": "Co-Founder & Co-Director",
+        "sector": "Civil Society",
+        "cohort": "2.0",
+        "slug": "ima-abdulrahim"
+      },
+      {
+        "name": "Indrawana Widjaja",
+        "org": "United in Diversity Forum (UID)",
+        "title": "Secretary of UID",
+        "sector": "Business",
+        "cohort": "6.0",
+        "slug": "indrawana-widjaja"
+      },
+      {
+        "name": "Ita Mariza",
+        "org": "PT Gajah Tunggal Tbk / Polytechnic Gajah Tunggal",
+        "title": "Director & General Manager of Training Division",
+        "sector": "Business",
+        "cohort": "3.0",
+        "slug": "ita-mariza"
+      },
+      {
+        "name": "Jalal Rameran",
+        "org": "Indonesian Social Investment Foundation & A+ CSR Indonesia",
+        "title": "Chairman of Advisory Board & Co-Founder",
+        "sector": "Civil Society",
+        "cohort": "5.0",
+        "slug": "jalal-rameran"
+      },
+      {
+        "name": "James Putra Nababan",
+        "org": "Metro TV",
+        "title": "News Director",
+        "sector": "Civil Society",
+        "cohort": "1.0",
+        "slug": "james-putra-nababan"
+      },
+      {
+        "name": "Jatna Supriatna",
+        "org": "Universitas Indonesia",
+        "title": "Professor of Biology",
+        "sector": "Civil Society",
+        "cohort": "3.0",
+        "slug": "jatna-supriatna"
+      },
+      {
+        "name": "John Colombo",
+        "org": "Clime Capital (Indonesia)",
+        "title": "Country Manager, Indonesia – Clime Capital",
+        "sector": "Business",
+        "cohort": "6.0",
+        "slug": "john-colombo"
+      },
+      {
+        "name": "Joshua Matulessy",
+        "org": "Right Now Music",
+        "title": "CEO",
+        "sector": "Business",
+        "cohort": "5.0",
+        "slug": "joshua-matulessy"
+      },
+      {
+        "name": "Judith Navarro Dipodiputro",
+        "org": "PT Hinosan Abadi Indonesia",
+        "title": "President Director",
+        "sector": "Business",
+        "cohort": "3.0",
+        "slug": "judith-navarro-dipodiputro"
+      },
+      {
+        "name": "Kaitlin Shilling",
+        "org": "Platform Usaha Sosial (PLUS)",
+        "title": "Director",
+        "sector": "Business",
+        "cohort": "4.0",
+        "slug": "kaitlin-shilling"
+      },
+      {
+        "name": "Kemal Soeriawidjaja",
+        "org": "Company‑Community Partnerships for Health in Indonesia (CCPHI)",
+        "title": "Executive Director",
+        "sector": "Civil Society",
+        "cohort": "4.0",
+        "slug": "kemal-soeriawidjaja"
+      },
+      {
+        "name": "Ketut Sarjana Putra",
+        "org": "Conservation International Indonesia",
+        "title": "Executive Director",
+        "sector": "Civil Society",
+        "cohort": "1.0",
+        "slug": "ketut-sarjana-putra"
+      },
+      {
+        "name": "Kioen Moe",
+        "org": "PT Media Televisi Indonesia (METRO TV)",
+        "title": "Director of Program & Development (METRO TV)",
+        "sector": "Business",
+        "cohort": "6.0",
+        "slug": "kioen-moe"
+      },
+      {
+        "name": "Kisyuwono Prawiroharjo",
+        "org": "PT Gajah Tunggal Tbk",
+        "title": "Director",
+        "sector": "Business",
+        "cohort": "4.0",
+        "slug": "kisyuwono-prawiroharjo"
+      },
+      {
+        "name": "Kristanto Hartadi",
+        "org": "PT Pertamina Hulu Mahakam",
+        "title": "Head of Communications",
+        "sector": "Business",
+        "cohort": "1.0",
+        "slug": "kristanto-hartadi"
+      },
+      {
+        "name": "Laurensia Sally Lawu",
+        "org": "United in Diversity Foundation",
+        "title": "Board of Supervisor",
+        "sector": "Civil Society",
+        "cohort": "2.0",
+        "slug": "laurensia-sally-lawu"
+      },
+      {
+        "name": "Lukman Niode",
+        "org": "PT Unitri Cipta",
+        "title": "Principal Architect & Urban Planner – PT Unitri Cipta",
+        "sector": "Business",
+        "cohort": "1.0",
+        "slug": "lukman-niode"
+      },
+      {
+        "name": "Luky Alfirman",
+        "org": "Ministry of Finance",
+        "title": "Fiscal Policy Agency",
+        "sector": "Government",
+        "cohort": "5.0",
+        "slug": "luky-alfirman"
+      },
+      {
+        "name": "M. Giri Ramanda N. Kiemas",
+        "org": "South Sumatra Provincial DPRD",
+        "title": "Deputy Chairman of the DPRD of South Sumatra Province",
+        "sector": "Government",
+        "cohort": "2.0",
+        "slug": "m-giri-ramanda-n-kiemas"
+      },
+      {
+        "name": "Maesa Samola",
+        "org": "JTV",
+        "title": "CEO",
+        "sector": "Business",
+        "cohort": "5.0",
+        "slug": "maesa-samola"
+      },
+      {
+        "name": "Makhdum Priyatno",
+        "org": "Lembaga Administrasi Negara (NIPA) – Graduate School of Administration",
+        "title": "Head of Graduate School of Administration",
+        "sector": "Government",
+        "cohort": "5.0",
+        "slug": "makhdum-priyatno"
+      },
+      {
+        "name": "Margareth Edith Horhoruw",
+        "org": "Task Force for Development of New & Renewable Energy",
+        "title": "Member / Policy Advisor",
+        "sector": "Government",
+        "cohort": "4.0",
+        "slug": "margareth-edith-horhoruw"
+      },
+      {
+        "name": "Maria R. Nindita Radyati",
+        "org": "Universitas Trisakti",
+        "title": "Lecturer at the Faculty of Economics, USakti",
+        "sector": "Civil Society",
+        "cohort": "2.0",
+        "slug": "maria-r-nindita-radyati"
+      },
+      {
+        "name": "Meity Ursula Mongdong",
+        "org": "Conservation International Indonesia (Papuan Bird’s Head Seascape program)",
+        "title": "Capacity Building Manager, Bird’s Head Seascape (CI Indonesia)",
+        "sector": "Civil Society",
+        "cohort": "4.0",
+        "slug": "meity-ursula-mongdong"
+      },
+      {
+        "name": "Meizani Irmadhiany",
+        "org": "Conservation International Indonesia",
+        "title": "Senior Vice President",
+        "sector": "Civil Society",
+        "cohort": "3.0",
+        "slug": "meizani-irmadhiany"
+      },
+      {
+        "name": "Michael J.P. Widjaja",
+        "org": "Sinar Mas Land",
+        "title": "Group CEO",
+        "sector": "Business",
+        "cohort": "1.0",
+        "slug": "michael-jp-widjaja"
+      },
+      {
+        "name": "Michael Sianipar",
+        "org": "Indonesian Youth Diplomacy (IYD) & Partai Perindo",
+        "title": "Chairman of IYD (Jakarta Regional Branch), National Director of Legislators Development (Perindo)",
+        "sector": "Government",
+        "cohort": "5.0",
+        "slug": "michael-sianipar"
+      },
+      {
+        "name": "Mila Nuh",
+        "org": "United in Diversity Forum (UID) & Consultant engagements",
+        "title": "Co-Manager of Education Program at UID, Consultant (Communications & Stakeholder Engagement Specialist), World Bank Indonesia",
+        "sector": "Civil Society",
+        "cohort": "5.0",
+        "slug": "mila-nuh"
+      },
+      {
+        "name": "Milawarma",
+        "org": "PT Timah (Persero) Tbk",
+        "title": "Independent Commissioner",
+        "sector": "Business",
+        "cohort": "4.0",
+        "slug": "milawarma"
+      },
+      {
+        "name": "Mubariq Ahmad",
+        "org": "Conservation Strategy Fund – Indonesia (CSF-Indonesia)",
+        "title": "Country Director / Indonesia Director (CSF-Indonesia)",
+        "sector": "Civil Society",
+        "cohort": "6.0",
+        "slug": "mubariq-ahmad"
+      },
+      {
+        "name": "Muhammad Bagir",
+        "org": "PT Bumi Sawindo Permai",
+        "title": "President Director",
+        "sector": "Business",
+        "cohort": "2.0",
+        "slug": "muhammad-bagir"
+      },
+      {
+        "name": "Muhammad Farhan",
+        "org": "Mayor of Bandung City",
+        "title": "Bandung City Government",
+        "sector": "Government",
+        "cohort": "3.0",
+        "slug": "muhammad-farhan"
+      },
+      {
+        "name": "Muhammad Hatta",
+        "org": "PT Bukit Asam",
+        "title": "Senior IT Manager",
+        "sector": "Business",
+        "cohort": "2.0",
+        "slug": "muhammad-hatta"
+      },
+      {
+        "name": "Muhammad Taufiq",
+        "org": "State Administration Institute (LAN) of the Republic of Indonesia",
+        "title": "Chairman of LAN RI",
+        "sector": "Government",
+        "cohort": "6.0",
+        "slug": "muhammad-taufiq"
+      },
+      {
+        "name": "Naresh Makhijani",
+        "org": "PT OTI Transformasi Lintas Internasional",
+        "title": "CEO",
+        "sector": "Business",
+        "cohort": "4.0",
+        "slug": "naresh-makhijani"
+      },
+      {
+        "name": "Nia Niscaya",
+        "org": "Ministry of Tourism and Creative Economy of the Republic of Indonesia",
+        "title": "Director of International Tourism Promotion",
+        "sector": "Government",
+        "cohort": "4.0",
+        "slug": "nia-niscaya"
+      },
+      {
+        "name": "Noviar Andayani",
+        "org": "Wildlife Conservation Society (WCS) Indonesia Program",
+        "title": "Director",
+        "sector": "Civil Society",
+        "cohort": "3.0",
+        "slug": "noviar-andayani"
+      },
+      {
+        "name": "Omar Agoes",
+        "org": "UBS Group AG",
+        "title": "Director",
+        "sector": "Business",
+        "cohort": "3.0",
+        "slug": "omar-agoes"
+      },
+      {
+        "name": "Ongku P. Hasibuan",
+        "org": "PT Kasongan Bumi Kencana",
+        "title": "Director / Senior Executive",
+        "sector": "Business",
+        "cohort": "1.0",
+        "slug": "ongku-p-hasibuan"
+      },
+      {
+        "name": "Paul Lemaistre",
+        "org": "Project in East Kalimantan, Indonesia – multi-species regenerative agro-forestry concession",
+        "title": "Business Development & Resource Mobilization Lead",
+        "sector": "Business",
+        "cohort": "5.0",
+        "slug": "paul-lemaistre-1"
+      },
+      {
+        "name": "Poprianto Bustami",
+        "org": "PT Mifaro Alam Sejahtera",
+        "title": "",
+        "sector": "Government",
+        "cohort": "5.0",
+        "slug": "poprianto-bustami"
+      },
+      {
+        "name": "Poprianto Bustami Abdullah",
+        "org": "Jambi Provincial DPRD",
+        "title": "Member of Regional House of Representatives",
+        "sector": "Government",
+        "cohort": "5.0",
+        "slug": "poprianto-bustami-abdullah"
+      },
+      {
+        "name": "Pradnyawati",
+        "org": "Ministry of Trade, Republic of Indonesia",
+        "title": "Director of Promotion and Image Development",
+        "sector": "Government",
+        "cohort": "3.0",
+        "slug": "pradnyawati"
+      },
+      {
+        "name": "Prananda Surya Paloh",
+        "org": "NasDem Party (Partai Nasional Demokrat)",
+        "title": "Member of the House of Representatives (DPR) for North Sumatra I, Vice Chairman of Youth and Organisation Affairs (NasDem)",
+        "sector": "Government",
+        "cohort": "5.0",
+        "slug": "prananda-surya-paloh"
+      },
+      {
+        "name": "Priscillia Suntoso",
+        "org": "Presidential Advisory Council",
+        "title": "Security and Defense Policy Advisor",
+        "sector": "Government",
+        "cohort": "1.0",
+        "slug": "priscillia-suntoso"
+      },
+      {
+        "name": "Putra Nababan",
+        "org": "DPR RI",
+        "title": "Anggota DPR RI",
+        "sector": "Government",
+        "cohort": "1.0",
+        "slug": "putra-nababan"
+      },
+      {
+        "name": "Putu Agung Prianata",
+        "org": "Ministry of Tourism and Creative Economy of the Republic of Indonesia",
+        "title": "Director of International Tourism Promotion",
+        "sector": "Government",
+        "cohort": "4.0",
+        "slug": "putu-agung-prianata"
+      },
+      {
+        "name": "Putu Juli Ardika",
+        "org": "Ministry of Industry of the Republic of Indonesia (MoI)",
+        "title": "Director General of Agro-Industry",
+        "sector": "Government",
+        "cohort": "6.0",
+        "slug": "putu-juli-ardika"
+      },
+      {
+        "name": "Putu Kresna",
+        "org": "PT Bank Negara Indonesia (Persero) Tbk (BNI)",
+        "title": "Head of Organizational Learning Division",
+        "sector": "Business",
+        "cohort": "5.0",
+        "slug": "putu-kresna"
+      },
+      {
+        "name": "Rachmat Susetyo",
+        "org": "PT Nissan Motor Indonesia",
+        "title": "Senior Operations Executive",
+        "sector": "Business",
+        "cohort": "1.0",
+        "slug": "rachmat-susetyo"
+      },
+      {
+        "name": "Rahakundini Laspetrini",
+        "org": "Indonesia Strategic & Defence Studies (ISDS)",
+        "title": "Executive Director",
+        "sector": "Civil Society",
+        "cohort": "3.0",
+        "slug": "rahakundini-laspetrini"
+      },
+      {
+        "name": "Rahmawati Winarni",
+        "org": "(TuK) Indonesia",
+        "title": "Executive Director",
+        "sector": "Civil Society",
+        "cohort": "5.0",
+        "slug": "rahmawati-winarni"
+      },
+      {
+        "name": "Rahni Lowhur",
+        "org": "Media Group Network",
+        "title": "Corporate Secretary",
+        "sector": "Business",
+        "cohort": "1.0",
+        "slug": "rahni-lowhur"
+      },
+      {
+        "name": "Raphael Udik Yunianto",
+        "org": "The Center of Value",
+        "title": "Founder",
+        "sector": "Civil Society",
+        "cohort": "3.0",
+        "slug": "raphael-udik-yunianto"
+      },
+      {
+        "name": "Ratna Maya Sari Soeharto",
+        "org": "PT Makassar Tene",
+        "title": "Leadership & Organizational Development Consultant",
+        "sector": "Business",
+        "cohort": "1.0",
+        "slug": "ratna-maya-sari-soeharto"
+      },
+      {
+        "name": "Reino Ramaputra Barack",
+        "org": "PT Global Mediacom Tbk / MRA Group / Yokke",
+        "title": "Founder & CEO – Yokke (Payment Technology Startup); Board Member – MRA Media & Global Mediacom Group",
+        "sector": "Business",
+        "cohort": "1.0",
+        "slug": "reino-ramaputra-barack"
+      },
+      {
+        "name": "Renold Sutadi Lim",
+        "org": "Center for Democracy and Transparency (Indonesia)",
+        "title": "Researcher",
+        "sector": "Civil Society",
+        "cohort": "6.0",
+        "slug": "renold-sutadi-lim"
+      },
+      {
+        "name": "Retno Shanti Ruwyastuti",
+        "org": "Metro TV",
+        "title": "Assistant President Director",
+        "sector": "Business",
+        "cohort": "2.0",
+        "slug": "retno-shanti-ruwyastuti"
+      },
+      {
+        "name": "Rikard Bagun",
+        "org": "KG Media / Kompas TV / Harian Kompas",
+        "title": "Vice CEO Media, KG Media",
+        "sector": "Business",
+        "cohort": "2.0",
+        "slug": "rikard-bagun"
+      },
+      {
+        "name": "Robert James Bintaryo",
+        "org": "Ministry of Trade of the Republic of Indonesia",
+        "title": "Director of Domestic Market Development & Distribution",
+        "sector": "Government",
+        "cohort": "2.0",
+        "slug": "robert-james-bintaryo"
+      },
+      {
+        "name": "Rofikoh Rokhim",
+        "org": "YCAB Foundation",
+        "title": "Advisor",
+        "sector": "Civil Society",
+        "cohort": "1.0",
+        "slug": "rofikoh-rokhim"
+      },
+      {
+        "name": "Roni Pramaditia",
+        "org": "Medco Foundation",
+        "title": "Head of Foundation",
+        "sector": "Civil Society",
+        "cohort": "3.0",
+        "slug": "roni-pramaditia"
+      },
+      {
+        "name": "Ruben Indraman Hattari",
+        "org": "Microsoft Indonesia",
+        "title": "Director of Corporate Affairs",
+        "sector": "Business",
+        "cohort": "3.0",
+        "slug": "ruben-indraman-hattari"
+      },
+      {
+        "name": "Sara Dhewanto",
+        "org": "Duithape (Fintech Indonesia)",
+        "title": "Founder & Chief Executive Officer",
+        "sector": "Business",
+        "cohort": "5.0",
+        "slug": "sara-dhewanto"
+      },
+      {
+        "name": "Shobi Lawalata",
+        "org": "United in Diversity Foundation (UID)",
+        "title": "Learning Facilitator and Division Manager",
+        "sector": "Civil Society",
+        "cohort": "4.0",
+        "slug": "shobi-lawalata"
+      },
+      {
+        "name": "Sidhayatra Wijaya Mantra",
+        "org": "PT Subba Villa Bintang",
+        "title": "Managing Director",
+        "sector": "Business",
+        "cohort": "5.0",
+        "slug": "sidhayatra-wijaya-mantra"
+      },
+      {
+        "name": "Silverius Oscar Unggul",
+        "org": "Jaringan Untuk Hutan (JAUH), Yayasan Cinta Alam Indonesia (Yascita)",
+        "title": "Founder (Yascita) and Executive Director (JAUH)",
+        "sector": "Civil Society",
+        "cohort": "4.0",
+        "slug": "silverius-oscar-unggul"
+      },
+      {
+        "name": "Sinta Sirait",
+        "org": "US‑ASEAN Business Council",
+        "title": "Chief Representative",
+        "sector": "Business",
+        "cohort": "4.0",
+        "slug": "sinta-sirait"
+      },
+      {
+        "name": "Sondang Anggraini",
+        "org": "Ministry of Trade, RI",
+        "title": "Senior Expert Staff",
+        "sector": "Government",
+        "cohort": "1.0",
+        "slug": "sondang-anggraini"
+      },
+      {
+        "name": "Sri Widodo",
+        "org": "Operational Staff Indonesian Army Head Quarter",
+        "title": "",
+        "sector": "Government",
+        "cohort": "5.0",
+        "slug": "sri-widodo"
+      },
+      {
+        "name": "Srie Agustina",
+        "org": "Kementerian Perdagangan RI",
+        "title": "Inspector General",
+        "sector": "Government",
+        "cohort": "2.0",
+        "slug": "srie-agustina"
+      },
+      {
+        "name": "Surya Tjandra",
+        "org": "Atma Jaya Catholic University (Faculty of Law)",
+        "title": "Lecturer & Researcher",
+        "sector": "Civil Society",
+        "cohort": "6.0",
+        "slug": "surya-tjandra"
+      },
+      {
+        "name": "Sutriono Edi",
+        "org": "Ministry of Trade",
+        "title": "Head of Center of Trade Policy Harmonization (PUSHAKA)",
+        "sector": "Government",
+        "cohort": "4.0",
+        "slug": "sutriono-edi"
+      },
+      {
+        "name": "Suyoto",
+        "org": "Yayasan Upaya Indonesia Damai",
+        "title": "Vice President",
+        "sector": "Civil Society",
+        "cohort": "1.0",
+        "slug": "suyoto"
+      },
+      {
+        "name": "Svida Alisjahbana",
+        "org": "Femina Group",
+        "title": "President Director & CEO",
+        "sector": "Business",
+        "cohort": "6.0",
+        "slug": "svida-alisjahbana"
+      },
+      {
+        "name": "Tantowi Yahya",
+        "org": "United in Diversity Foundation",
+        "title": "President",
+        "sector": "Civil Society",
+        "cohort": "2.0",
+        "slug": "tantowi-yahya"
+      },
+      {
+        "name": "Tiene Rahma Prihatini Gunawan",
+        "org": "MCA-Indonesia",
+        "title": "Director of Green Prosperity Project",
+        "sector": "Civil Society",
+        "cohort": "2.0",
+        "slug": "tiene-rahma-prihatini-gunawan"
+      },
+      {
+        "name": "Togar Mangihut Simatupang",
+        "org": "Ministry of Higher Education, Science, and Technology",
+        "title": "Secretary General",
+        "sector": "Government",
+        "cohort": "6.0",
+        "slug": "togar-mangihut-simatupang"
+      },
+      {
+        "name": "Togar Simatupang",
+        "org": "Bandung Institute of Technology (SBM ITB) & ​​Ministry of Higher Education, Science and Technology of the Republic of Indonesia (Kemdiktisaintek)",
+        "title": "Professor of Operations & Supply Chain Management (SBM ITB), Acting Secretary General at the Ministry of Education and Science and Technology",
+        "sector": "Government",
+        "cohort": "6.0",
+        "slug": "togar-simatupang"
+      },
+      {
+        "name": "Tri Andarsanti Pursita",
+        "org": "Indonesia for Humanity",
+        "title": "Executive Director",
+        "sector": "Civil Society",
+        "cohort": "4.0",
+        "slug": "tri-andarsanti-pursita"
+      },
+      {
+        "name": "Tri Widodo",
+        "org": "National Institute of Public Administration (NIPA) (Indonesia)",
+        "title": "Deputy Chairman for Policy Studies & Public Sector Innovation",
+        "sector": "Government",
+        "cohort": "6.0",
+        "slug": "tri-widodo"
+      },
+      {
+        "name": "Triarko Nurlambang",
+        "org": "University of Indonesia",
+        "title": "Associate Professor & Head of Center for Sustainable Infrastructure and Regional Development",
+        "sector": "Civil Society",
+        "cohort": "1.0",
+        "slug": "triarko-nurlambang"
+      },
+      {
+        "name": "Tsamara Amany",
+        "org": "Ministry of State-Owned Enterprises of the Republic of Indonesia",
+        "title": "Special Staff to the Minister of State-Owned Enterprises",
+        "sector": "Government",
+        "cohort": "6.0",
+        "slug": "tsamara-amany"
+      },
+      {
+        "name": "Usman Hamid",
+        "org": "Amnesty International Indonesia",
+        "title": "Executive Director",
+        "sector": "Civil Society",
+        "cohort": "6.0",
+        "slug": "usman-hamid"
+      },
+      {
+        "name": "Utomo Putro",
+        "org": "Bandung Institute of Technology (School of Business & Management – ITB)",
+        "title": "Professor of Decision Making & Strategic Negotiation, School of Business & Management, ITB",
+        "sector": "Government",
+        "cohort": "6.0",
+        "slug": "utomo-putro"
+      },
+      {
+        "name": "Vikra Ijas",
+        "org": "Kitabisa.com",
+        "title": "Co-Founder & Chief Product Officer (CPO)",
+        "sector": "Business",
+        "cohort": "6.0",
+        "slug": "vikra-ijas"
+      },
+      {
+        "name": "VP Sharma",
+        "org": "PT Mitra Adiperkasa Tbk.",
+        "title": "Commissioner",
+        "sector": "Business",
+        "cohort": "2.0",
+        "slug": "vp-sharma"
+      },
+      {
+        "name": "Wayan Kastawan",
+        "org": "Udayana University – Faculty of Engineering (Bali)",
+        "title": "Associate Professor",
+        "sector": "Government",
+        "cohort": "5.0",
+        "slug": "wayan-kastawan"
+      },
+      {
+        "name": "Wayan Veda Santiaji",
+        "org": "WWF Indonesia – Oceans & Fisheries Program",
+        "title": "Senior Manager for Coral Triangle Initiative and Marine Conservation",
+        "sector": "Civil Society",
+        "cohort": "5.0",
+        "slug": "wayan-veda-santiaji"
+      },
+      {
+        "name": "Wibisono",
+        "org": "PT Bukit Asam Tbk",
+        "title": "Senior Manager of Asset & Maintenance Planning, Mining Operations Division",
+        "sector": "Business",
+        "cohort": "5.0",
+        "slug": "wibisono"
+      },
+      {
+        "name": "Widya Purnama Dewi",
+        "org": "PT Internux",
+        "title": "Marketing",
+        "sector": "Business",
+        "cohort": "2.0",
+        "slug": "widya-purnama-dewi"
+      },
+      {
+        "name": "William Marthy",
+        "org": "Wildlife Conservation Society (WCS) Indonesia Program",
+        "title": "Sumatra Programme Manager (WCS Indonesia)",
+        "sector": "Civil Society",
+        "cohort": "6.0",
+        "slug": "william-marthy"
+      },
+      {
+        "name": "William Paul Marsden",
+        "org": "Save the Children UK",
+        "title": "Head of Emergency Health Unit Design Team",
+        "sector": "Civil Society",
+        "cohort": "3.0",
+        "slug": "william-paul-marsden"
+      },
+      {
+        "name": "Wiratno",
+        "org": "Indonesian Ministry of Environment",
+        "title": "Director of Social Forestry",
+        "sector": "Government",
+        "cohort": "1.0",
+        "slug": "wiratno"
+      },
+      {
+        "name": "Yanik Cantieni",
+        "org": "Faurecia Automotive Holdings",
+        "title": "CFO",
+        "sector": "Business",
+        "cohort": "2.0",
+        "slug": "yanik-cantieni"
+      },
+      {
+        "name": "Yasmin Wirjawan",
+        "org": "Ancora Foundation",
+        "title": "CEO",
+        "sector": "Civil Society",
+        "cohort": "3.0",
+        "slug": "yasmin-wirjawan"
+      },
+      {
+        "name": "Yennah Mulia",
+        "org": "United in Diversity (UID) Foundation",
+        "title": "Chief Operating Officer (COO) – UID Foundation",
+        "sector": "Business",
+        "cohort": "6.0",
+        "slug": "yennah-mulia"
+      },
+      {
+        "name": "Yohanes Surya",
+        "org": "Surya Institute",
+        "title": "Founder",
+        "sector": "Civil Society",
+        "cohort": "1.0",
+        "slug": "yohanes-surya"
+      },
+      {
+        "name": "Yugi Prayanto",
+        "org": "PT Indonesia Prima Property Tbk",
+        "title": "Independent Commissioner",
+        "sector": "Business",
+        "cohort": "3.0",
+        "slug": "yugi-prayanto"
+      },
+      {
+        "name": "Yuliot",
+        "org": "Director Investment Deregulation Indonesia Investment Coordinating Board (BKPM)",
+        "title": "",
+        "sector": "—",
+        "cohort": "5.0",
+        "slug": "yuliot"
+      }
+    ];
+
+    function setupFellowsDirectory(overlay, config) {
+      const fellows = config.fellows;
+      const grid = overlay.querySelector(config.grid);
+      const nameInput = overlay.querySelector(config.search);
+      const sectorSel = overlay.querySelector(config.sector);
+      const extraSel = config.extra ? overlay.querySelector(config.extra) : null;
+      const extraKey = config.extraKey || '';
+      const resetBtn = overlay.querySelector(config.reset);
+      const countEl = overlay.querySelector(config.count);
+      if (!grid || !nameInput || !sectorSel || !resetBtn || !countEl) return;
 
       const sectorClass = (s) => {
         if (s === 'Business') return 'tag-sector-business';
@@ -3585,7 +5102,7 @@
         if (s === 'Government') return 'tag-sector-government';
         return 'tag-sector-unknown';
       };
-      const esc = (s) => String(s).replace(/[&<>"']/g, (c) =>
+      const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
         ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])
       );
 
@@ -3597,16 +5114,27 @@
         }
         const frag = document.createDocumentFragment();
         list.forEach((f) => {
-          const card = document.createElement('article');
+          const card = document.createElement(f.slug ? 'a' : 'article');
           card.className = 'fellow-row';
+          if (f.slug) {
+            card.href = 'https://fellows.unitedindiversity.org/uid-fellows/' + encodeURIComponent(f.slug);
+            card.target = '_blank';
+            card.rel = 'noopener noreferrer';
+            card.setAttribute('aria-label', f.name + 'の公式プロフィールを開く');
+          }
+          let tags =
+            '<span class="fellow-tag ' + sectorClass(f.sector) + '">' + esc(f.sector) + '</span>';
+          if (f.cohort) {
+            tags += '<span class="fellow-tag tag-cohort">Cohort ' + esc(f.cohort) + '</span>';
+          }
+          if (f.country) {
+            tags += '<span class="fellow-tag tag-country">' + esc(f.country) + '</span>';
+          }
           card.innerHTML =
             '<div class="fellow-row-name">' + esc(f.name) + '</div>' +
             '<div class="fellow-row-org">' + esc(f.org) + '</div>' +
-            '<div class="fellow-row-title">' + esc(f.title) + '</div>' +
-            '<div class="fellow-row-tags">' +
-              '<span class="fellow-tag ' + sectorClass(f.sector) + '">' + esc(f.sector) + '</span>' +
-              '<span class="fellow-tag tag-country">' + esc(f.country) + '</span>' +
-            '</div>';
+            (f.title ? '<div class="fellow-row-title">' + esc(f.title) + '</div>' : '') +
+            '<div class="fellow-row-tags">' + tags + '</div>';
           frag.appendChild(card);
         });
         grid.appendChild(frag);
@@ -3615,37 +5143,67 @@
       function applyFilter() {
         const q = nameInput.value.trim().toLowerCase();
         const sec = sectorSel.value;
-        const ctr = countrySel.value;
-        const filtered = FELLOWS.filter((f) => {
-          const matchQ = !q || f.name.toLowerCase().includes(q) || f.org.toLowerCase().includes(q);
+        const extra = extraSel ? extraSel.value : '';
+        const filtered = fellows.filter((f) => {
+          const name = (f.name || '').toLowerCase();
+          const org = (f.org || '').toLowerCase();
+          const matchQ = !q || name.includes(q) || org.includes(q);
           const matchS = !sec || f.sector === sec;
-          const matchC = !ctr || f.country === ctr;
-          return matchQ && matchS && matchC;
+          const matchE = !extra || f[extraKey] === extra;
+          return matchQ && matchS && matchE;
         });
         render(filtered);
-        countEl.textContent = filtered.length + ' / ' + FELLOWS.length;
+        countEl.textContent = filtered.length + ' / ' + fellows.length;
       }
 
       nameInput.addEventListener('input', applyFilter);
       sectorSel.addEventListener('change', applyFilter);
-      countrySel.addEventListener('change', applyFilter);
+      if (extraSel) extraSel.addEventListener('change', applyFilter);
       resetBtn.addEventListener('click', () => {
         nameInput.value = '';
         sectorSel.value = '';
-        countrySel.value = '';
+        if (extraSel) extraSel.value = '';
         applyFilter();
       });
 
       applyFilter();
     }
 
-    // Fellows overlay
+    // Fellows overlay — Asia Pacific
     createOverlayController({
       overlayId: 'fellowsOverlay',
       hashName: 'fellows-all',
       focusId: 'fellowsClose',
       onFirstOpen: (overlay) => {
-        setupFellowsDirectory(overlay);
+        setupFellowsDirectory(overlay, {
+          fellows: FELLOWS,
+          grid: '#fellowsGrid',
+          search: '#fellowsSearchName',
+          sector: '#fellowsFilterSector',
+          extra: '#fellowsFilterCountry',
+          extraKey: 'country',
+          reset: '#fellowsReset',
+          count: '#fellowsCount',
+        });
+      },
+    });
+
+    // Fellows overlay — IDEAS Indonesia 1.0–6.0
+    createOverlayController({
+      overlayId: 'fellowsIndonesiaOverlay',
+      hashName: 'fellows-indonesia',
+      focusId: 'fellowsIndonesiaClose',
+      onFirstOpen: (overlay) => {
+        setupFellowsDirectory(overlay, {
+          fellows: FELLOWS_INDONESIA,
+          grid: '#fellowsIndonesiaGrid',
+          search: '#fellowsIndonesiaSearchName',
+          sector: '#fellowsIndonesiaFilterSector',
+          extra: '#fellowsIndonesiaFilterCohort',
+          extraKey: 'cohort',
+          reset: '#fellowsIndonesiaReset',
+          count: '#fellowsIndonesiaCount',
+        });
       },
     });
 
