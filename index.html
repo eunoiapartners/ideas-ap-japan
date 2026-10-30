@@ -1193,6 +1193,43 @@
       clip-path: polygon(16% 0, 84% 0, 68% 100%, 32% 100%);
       padding: 14px 10px 16px;
     }
+    .fund-distribution {
+      margin-top: var(--space-6);
+      padding-top: var(--space-5);
+      border-top: 1px solid var(--c-border);
+    }
+    .fund-distribution-title {
+      margin: 0 0 var(--space-4);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--c-text-muted);
+    }
+    .fund-distribution-row { margin-top: 12px; }
+    .fund-distribution-row strong {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 5px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--c-purple-900);
+    }
+    .fund-distribution-bar {
+      display: flex;
+      height: 10px;
+      overflow: hidden;
+      border: 1px solid var(--c-border);
+      background: var(--c-white);
+    }
+    .fund-distribution-bar span:nth-child(1) { background: var(--c-purple-800); }
+    .fund-distribution-bar span:nth-child(2) { background: var(--c-purple-300); }
+    .fund-distribution-bar span:nth-child(3) { background: var(--c-red); }
+    .fund-distribution-note {
+      margin: var(--space-4) 0 0;
+      font-size: 11px;
+      line-height: 1.7;
+      color: var(--c-text-muted);
+    }
     .fund-why-text p {
       font-size: 15px;
       line-height: 2;
@@ -3114,6 +3151,22 @@
                     <span>参加費・渡航費</span>
                   </div>
                 </div>
+                <div class="fund-distribution" aria-label="各世代の中にも余裕層と困窮層があることを示す模式図">
+                  <p class="fund-distribution-title">世代内にも広がる分布（模式図）</p>
+                  <div class="fund-distribution-row">
+                    <strong><span>60代以上</span><span>余裕層／中間層／困窮層</span></strong>
+                    <div class="fund-distribution-bar" aria-hidden="true"><span style="width:48%"></span><span style="width:34%"></span><span style="width:18%"></span></div>
+                  </div>
+                  <div class="fund-distribution-row">
+                    <strong><span>40–50代</span><span>余裕層／中間層／困窮層</span></strong>
+                    <div class="fund-distribution-bar" aria-hidden="true"><span style="width:30%"></span><span style="width:43%"></span><span style="width:27%"></span></div>
+                  </div>
+                  <div class="fund-distribution-row">
+                    <strong><span>20–30代</span><span>余裕層／中間層／困窮層</span></strong>
+                    <div class="fund-distribution-bar" aria-hidden="true"><span style="width:16%"></span><span style="width:39%"></span><span style="width:45%"></span></div>
+                  </div>
+                  <p class="fund-distribution-note">世代全体を一括りにせず、各世代の中にも資産・所得・負担の差があることを示しています。比率は説明用の模式図で、統計値ではありません。</p>
+                </div>
                 <span class="fund-figure-caption">Reverse pyramid / 世代間資産と負担</span>
               </div>
               <div class="fund-why-text">
@@ -3121,7 +3174,7 @@
                 <blockquote class="fund-quote">
                   資産は上の世代に、負債は若い世代に。だからこそ、世代を超えた資金の循環をつくりたい。
                 </blockquote>
-                <p>このファンドは、単なる奨学金ではありません。経験と資産をもつ世代から、次の10年を担う世代へ——学びの機会を手渡していく、小さな資金循環のデザインです。</p>
+                <p>ただし、豊かさと困窮は世代単位で分かれるものではありません。各世代に余裕層と困窮層が存在し、資産を受け継ぐ家庭と、奨学金や生活費の負担を抱える家庭が同時にあります。このファンドは、その世代内・世代間の格差を見つめながら、経験と資産をもつ人から次の10年を担う若手へ、学びの機会を手渡していく小さな資金循環です。</p>
               </div>
             </div>
 
