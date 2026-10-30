@@ -1017,6 +1017,37 @@
     /* =========================================================
        FUND (in development)
        ========================================================= */
+    .fund-progress { margin-top: var(--space-10); padding: var(--space-8); background: var(--c-cream); border: 1px solid var(--c-border); }
+    .fund-progress h3 { font-family: var(--font-display); font-size: clamp(22px, 2.4vw, 28px); font-weight: 500; margin: 0 0 12px; color: var(--c-purple-900); }
+    .fund-progress-badge { display: inline-block; padding: 4px 10px; margin-bottom: 12px; background: var(--c-purple-100); color: var(--c-purple-700); font-size: 12px; letter-spacing: 0.04em; }
+    .fund-progress-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; margin: 24px 0; }
+    .fund-progress-metrics div { min-width: 0; }
+    .fund-progress-metrics dt { font-size: 12px; color: var(--c-text-muted); letter-spacing: 0.04em; }
+    .fund-progress-metrics dd { margin: 8px 0 0; font-family: var(--font-display); font-size: clamp(22px, 2.6vw, 30px); font-weight: 500; color: var(--c-purple-900); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; line-height: 1.3; }
+    .fund-progress-metrics dd small { display: block; margin-top: 4px; font-family: var(--font-body); font-size: 12px; font-weight: 400; color: var(--c-text-muted); }
+    .fund-meter { margin: 8px 0 20px; }
+    .fund-meter-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; font-size: 14px; }
+    .fund-meter-track { display: flex; height: 28px; overflow: hidden; background: #e8e2ef; border: 1px solid var(--c-border); }
+    .fund-meter-seg { height: 100%; min-width: 0; }
+    .fund-meter-seg--confirmed { background: var(--c-purple-700); }
+    .fund-meter-seg--provisional {
+      background: repeating-linear-gradient(135deg, var(--c-purple-400), var(--c-purple-400) 8px, var(--c-purple-300) 8px, var(--c-purple-300) 16px);
+    }
+    .fund-meter-scale { display: flex; justify-content: space-between; margin-top: 8px; font-size: 12px; color: var(--c-text-muted); font-variant-numeric: tabular-nums; }
+    .fund-meter-scale strong { color: var(--c-purple-700); font-weight: 700; }
+    .fund-meter-legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 14px; font-size: 13px; color: var(--c-text); }
+    .fund-meter-legend span { display: inline-flex; align-items: center; gap: 8px; }
+    .fund-meter-swatch { width: 12px; height: 12px; flex-shrink: 0; }
+    .fund-meter-swatch--confirmed { background: var(--c-purple-700); }
+    .fund-meter-swatch--provisional {
+      background: repeating-linear-gradient(135deg, var(--c-purple-400), var(--c-purple-400) 4px, var(--c-purple-300) 4px, var(--c-purple-300) 8px);
+    }
+    .fund-meter-swatch--remain { background: #e8e2ef; border: 1px solid var(--c-border); }
+    .fund-progress-note, .fund-progress-updated { font-size: 13px; line-height: 1.85; color: var(--c-text-muted); }
+    .fund-progress-updated { margin-bottom: 8px; }
+    @media (max-width: 860px) { .fund-progress-metrics { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) { .fund-progress-metrics { grid-template-columns: 1fr; gap: 16px; } .fund-progress { padding: var(--space-6); } }
+
     .fund-card {
       background-color: var(--c-white);
       padding: var(--space-16);
@@ -1110,39 +1141,57 @@
     }
     .fund-section > p:last-child { margin-bottom: 0; }
 
-    /* WHY — 2 column (figure + text) */
     .fund-why-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.05fr 0.95fr;
       gap: var(--space-12);
       align-items: start;
     }
     .fund-figure {
-      aspect-ratio: 4 / 3;
       background-color: var(--c-purple-50);
-      border: 1px dashed var(--c-purple-300);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: var(--c-text-muted);
-      font-family: var(--font-latin);
-      font-size: 12px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
+      border: 1px solid var(--c-border);
       padding: var(--space-6);
-      line-height: 1.8;
     }
-    .fund-figure small {
+    .fund-figure-caption {
       display: block;
-      margin-top: var(--space-2);
-      font-family: var(--font-body);
+      margin-top: var(--space-4);
+      font-family: var(--font-latin);
       font-size: 11px;
-      letter-spacing: 0.06em;
-      text-transform: none;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
       color: var(--c-text-muted);
-      opacity: 0.75;
+      text-align: center;
+    }
+    .fund-pyramid { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .fund-pyramid-layer {
+      width: 100%;
+      text-align: center;
+      padding: 14px 16px 16px;
+      color: var(--c-white);
+    }
+    .fund-pyramid-layer strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+    .fund-pyramid-layer span {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      line-height: 1.65;
+      opacity: 0.92;
+    }
+    .fund-pyramid-layer--top { width: 100%; background: var(--c-purple-800); clip-path: polygon(0 0, 100% 0, 92% 100%, 8% 100%); }
+    .fund-pyramid-layer--mid { width: 84%; background: var(--c-purple-600); clip-path: polygon(4% 0, 96% 0, 86% 100%, 14% 100%); }
+    .fund-pyramid-layer--base { width: 68%; background: var(--c-purple-400); color: var(--c-purple-900); clip-path: polygon(8% 0, 92% 0, 74% 100%, 26% 100%); }
+    .fund-pyramid-tip {
+      width: 46%;
+      background: var(--c-red);
+      color: var(--c-white);
+      clip-path: polygon(16% 0, 84% 0, 68% 100%, 32% 100%);
+      padding: 14px 10px 16px;
     }
     .fund-why-text p {
       font-size: 15px;
@@ -1151,6 +1200,73 @@
       margin: 0 0 var(--space-5);
     }
     .fund-why-text p:last-child { margin-bottom: 0; }
+    .fund-compare-wrap { overflow-x: auto; margin-top: var(--space-5); }
+    .fund-compare {
+      width: 100%;
+      min-width: 420px;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .fund-compare caption {
+      caption-side: top;
+      text-align: left;
+      margin-bottom: 10px;
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--c-purple-900);
+    }
+    .fund-compare th, .fund-compare td {
+      padding: 10px 12px;
+      border-top: 1px solid var(--c-border);
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .fund-compare thead th {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--c-text-muted);
+      font-weight: 500;
+      border-top: none;
+      background: var(--c-purple-50);
+    }
+    .fund-compare tbody th { font-weight: 500; color: var(--c-purple-900); white-space: nowrap; }
+    .fund-cycle {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 10px;
+      align-items: stretch;
+      margin-top: var(--space-6);
+    }
+    .fund-cycle-card {
+      padding: var(--space-5);
+      background: var(--c-white);
+      border: 1px solid var(--c-border);
+    }
+    .fund-cycle-card strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--c-purple-900);
+      margin-bottom: 6px;
+    }
+    .fund-cycle-card p { margin: 0; font-size: 13px; line-height: 1.75; color: var(--c-text); }
+    .fund-cycle-arrow {
+      display: flex;
+      align-items: center;
+      color: var(--c-purple-500);
+      font-size: 20px;
+      line-height: 1;
+    }
+    .fund-generation-compare-note {
+      margin: var(--space-4) 0 0;
+      color: var(--c-text-muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
 
     /* Keyline quote */
     .fund-quote {
@@ -2141,6 +2257,10 @@
       .fund-why-grid,
       .fund-support-grid,
       .fund-trust { grid-template-columns: 1fr; gap: var(--space-8); }
+      .fund-cycle { grid-template-columns: 1fr; }
+      .fund-cycle-arrow { transform: rotate(90deg); justify-content: center; padding: 2px 0; }
+      .fund-pyramid-layer { padding-left: 22px; padding-right: 22px; }
+      .fund-pyramid-layer span { font-size: 11px; }
       .fund-journey { grid-template-columns: 1fr; }
       .fund-section { margin-top: var(--space-12); padding-top: var(--space-10); }
       .fund-cta { margin-top: var(--space-12); padding-top: var(--space-10); }
@@ -2890,24 +3010,177 @@
             2026年、MITスローン経営大学院の社会変革プログラム「IDEAS Asia Pacific 3.0」が始動します。アジア各国のリーダーがU理論とシステム思考を1年かけて実践するこの学びの場に、日本から「現場で社会を変革するユース」を1名送り出す——円安と物価高がつくる資金の壁を、有志の共同ドネーションで越えるプロジェクトです。
           </p>
 
+          <section class="fund-progress" aria-labelledby="fund-progress-title" aria-describedby="fund-progress-note">
+            <span class="fund-progress-badge">暫定値・確認中</span>
+            <h3 id="fund-progress-title">IDEAS APAC参加費クラウドファンディング｜ファンド進捗</h3>
+            <dl class="fund-progress-metrics">
+              <div><dt>第1目標額</dt><dd id="fund-progress-target">4,000,000円</dd></div>
+              <div>
+                <dt>暫定確保額</dt>
+                <dd id="fund-progress-received">1,907,614円<small>190万7,614円 / 確認中を含む</small></dd>
+              </div>
+              <div>
+                <dt>達成率</dt>
+                <dd id="fund-progress-rate-metric">47.7%<small>400万円目標に対する暫定値</small></dd>
+              </div>
+              <div><dt>第1目標までの残額</dt><dd id="fund-progress-remaining">2,092,386円</dd></div>
+            </dl>
+            <div class="fund-meter">
+              <div class="fund-meter-head">
+                <strong>第1目標｜1名の参加費・宿泊交通費</strong>
+                <span id="fund-progress-amount">暫定確保額 1,907,614円 / 目標 4,000,000円</span>
+              </div>
+              <div class="fund-meter-track" role="img" aria-label="第1目標400万円に対し、暫定確保額1,907,614円、達成率47.7パーセント。うち確認済み実入金は1,105,614円">
+                <div id="fund-meter-confirmed" class="fund-meter-seg fund-meter-seg--confirmed" style="width: 27.6%"></div>
+                <div id="fund-meter-provisional" class="fund-meter-seg fund-meter-seg--provisional" style="width: 20.1%"></div>
+              </div>
+              <div class="fund-meter-scale">
+                <span>0円</span>
+                <strong id="fund-progress-rate">達成率 47.7%</strong>
+                <span>400万円</span>
+              </div>
+              <div class="fund-meter-legend">
+                <span><span class="fund-meter-swatch fund-meter-swatch--confirmed" aria-hidden="true"></span><span id="fund-legend-confirmed">確認済み実入金 1,105,614円</span></span>
+                <span><span class="fund-meter-swatch fund-meter-swatch--provisional" aria-hidden="true"></span><span id="fund-legend-pending">確認中を含む暫定分 802,000円</span></span>
+                <span><span class="fund-meter-swatch fund-meter-swatch--remain" aria-hidden="true"></span><span id="fund-legend-remain">残額 2,092,386円</span></span>
+              </div>
+            </div>
+            <p class="fund-progress-updated">最終更新日（入金確認）：<span id="fund-progress-updated">2026/10/30</span></p>
+            <p id="fund-progress-note" class="fund-progress-note">表示は暫定値です。第1目標400万円は1名分の参加費320万円と宿泊交通費約80万円を想定しています。棒グラフは、確認中の項目を含む暫定確保額1,907,614円を反映しています。寄付・参加費支援・渡航費支援を含め、過去の2.0参加者の会社負担・本人負担は今回のファンド残高に含めません。金額と引き出し状況の確認後に更新します。本人の約666,728円は最後のボーナス支援として扱い、事前に控除しません。</p>
+          </section>
+          <script id="fund-progress-data" type="application/json">
+            { "targetYen": 4000000, "provisionalCapturedYen": 1907614, "confirmedReceivedYen": 1105614, "updatedAt": "2026-10-30" }
+          </script>
+          <script>
+            (() => {
+              const data = JSON.parse(document.getElementById('fund-progress-data').textContent);
+              const validAmount = n => Number.isSafeInteger(n) && n >= 0;
+              const target = validAmount(data.targetYen) && data.targetYen > 0 ? data.targetYen : null;
+              const captured = validAmount(data.provisionalCapturedYen) ? data.provisionalCapturedYen : null;
+              const confirmedAmt = validAmount(data.confirmedReceivedYen) ? Math.min(data.confirmedReceivedYen, captured ?? data.confirmedReceivedYen) : null;
+              const date = typeof data.updatedAt === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(data.updatedAt)
+                ? new Date(data.updatedAt + 'T00:00:00Z') : null;
+              const dateKnown = date && !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === data.updatedAt;
+              const yen = n => new Intl.NumberFormat('ja-JP').format(n) + '円';
+              const manYen = n => Math.floor(n / 10000).toLocaleString('ja-JP') + '万' + (n % 10000).toLocaleString('ja-JP') + '円';
+              const set = (id, value) => { document.getElementById('fund-progress-' + id).textContent = value; };
+              if (target) set('target', yen(target));
+              if (captured != null) {
+                const received = document.getElementById('fund-progress-received');
+                received.innerHTML = yen(captured) + '<small>' + manYen(captured) + ' / 確認中を含む</small>';
+              }
+              if (target && captured != null) {
+                const rate = (captured / target * 100).toFixed(1) + '%';
+                const remaining = Math.max(0, target - captured);
+                const confirmedShare = confirmedAmt != null ? Math.min(confirmedAmt, captured) : captured;
+                const pendingShare = Math.max(0, captured - confirmedShare);
+                document.getElementById('fund-progress-rate-metric').innerHTML = rate + '<small>400万円目標に対する暫定値</small>';
+                set('remaining', yen(remaining));
+                document.getElementById('fund-progress-amount').textContent = '暫定確保額 ' + yen(captured) + ' / 目標 ' + yen(target);
+                document.getElementById('fund-progress-rate').textContent = '達成率 ' + rate;
+                document.getElementById('fund-meter-confirmed').style.width = (confirmedShare / target * 100).toFixed(1) + '%';
+                document.getElementById('fund-meter-provisional').style.width = (pendingShare / target * 100).toFixed(1) + '%';
+                document.getElementById('fund-legend-confirmed').textContent = '確認済み実入金 ' + yen(confirmedShare);
+                document.getElementById('fund-legend-pending').textContent = '確認中を含む暫定分 ' + yen(pendingShare);
+                document.getElementById('fund-legend-remain').textContent = '残額 ' + yen(remaining);
+              }
+              set('updated', dateKnown ? data.updatedAt.replaceAll('-', '/') : '確認中');
+            })();
+          </script>
+
           <!-- WHY / なぜ、若手支援なのか -->
           <div class="fund-section">
             <div class="fund-section-head">
               <span class="eyebrow">Why / なぜ、若手支援なのか</span>
+              <h3>資産は上の世代に、負担は若い世代に。</h3>
             </div>
             <div class="fund-why-grid">
-              <!-- TODO: 世代別資産の逆ピラミッド図（SVG）を後日差し替え -->
-              <div class="fund-figure" role="img" aria-label="世代別資産の逆ピラミッド図（準備中）">
-                Figure — Coming Soon
-                <small>Generational Assets Inverted Pyramid</small>
+              <div class="fund-figure" role="img" aria-label="世代別資産の逆ピラミッド。上が60代以上の厚い金融資産、中央が40から50代、下が20から30代の奨学金負担、最下点が学びの機会の壁">
+                <div class="fund-pyramid">
+                  <div class="fund-pyramid-layer fund-pyramid-layer--top">
+                    <strong>60代以上</strong>
+                    <span>家計金融資産が最も厚い層。預金・退職金・持ち家が集中</span>
+                  </div>
+                  <div class="fund-pyramid-layer fund-pyramid-layer--mid">
+                    <strong>40–50代</strong>
+                    <span>所得のピーク。住宅ローンを終え、次世代へつなぐ余力が生まれ始める</span>
+                  </div>
+                  <div class="fund-pyramid-layer fund-pyramid-layer--base">
+                    <strong>20–30代</strong>
+                    <span>奨学金返済・家賃・生活費。海外プログラムの参加費が届きにくい</span>
+                  </div>
+                  <div class="fund-pyramid-layer fund-pyramid-tip">
+                    <strong>学びの壁</strong>
+                    <span>参加費・渡航費</span>
+                  </div>
+                </div>
+                <span class="fund-figure-caption">Reverse pyramid / 世代間資産と負担</span>
               </div>
               <div class="fund-why-text">
-                <p>日本の個人金融資産は2,351兆円。その多くは、60代以上の世代に蓄えられています。いっぽう、奨学金を借りて学んだ若者が背負う負債は、ひとりあたり平均310万円。海外プログラムへの参加費は、志ある若手にとって最も高い壁になっています。</p>
+                <p>日本の個人金融資産は大きな規模に達していますが、その多くは上の世代に偏っています。いっぽう、奨学金を借りて学んだ若者には返済が続き、円安と物価高が重なる海外プログラムの参加費は、志ある若手にとって高い壁になっています。</p>
                 <blockquote class="fund-quote">
                   資産は上の世代に、負債は若い世代に。だからこそ、世代を超えた資金の循環をつくりたい。
                 </blockquote>
                 <p>このファンドは、単なる奨学金ではありません。経験と資産をもつ世代から、次の10年を担う世代へ——学びの機会を手渡していく、小さな資金循環のデザインです。</p>
               </div>
+            </div>
+
+            <div class="fund-compare-wrap">
+              <table class="fund-compare">
+                <caption>過去30年で変わった、世代間の環境</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">観点</th>
+                    <th scope="col">およそ30年前</th>
+                    <th scope="col">いま</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">実質賃金</th>
+                    <td>上昇しやすく、将来の蓄えを作りやすい</td>
+                    <td>長く停滞し、若手の可処分所得が伸びにくい</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">学費・進学</th>
+                    <td>家計の負担は相対的に軽め</td>
+                    <td>進学・留学の自己負担が重く、挑戦の前に計算が先に来る</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">奨学金</th>
+                    <td>借りる人が少なく、期間も短い</td>
+                    <td>貸与型が広がり、卒業後も返済が長く続く</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">海外での学び</th>
+                    <td>円高で、海外プログラムに手が届きやすい</td>
+                    <td>円安と物価高で、参加費・渡航費が壁になる</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">家計金融資産</th>
+                    <td>現役世代にも蓄えが分散していた</td>
+                    <td>高齢世帯に厚く偏り、逆ピラミッドが目立つ</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="fund-generation-compare-note">※過去30年の変化は、賃金・学費・奨学金返済などの公的統計をもとにした見取り図です。数値は確認後に更新します。</p>
+
+            <div class="fund-cycle" aria-label="奨学金負担と若手支援の資金循環">
+              <article class="fund-cycle-card">
+                <strong>奨学金負担</strong>
+                <p>若手は返済と生活費を抱え、参加費320万円＋渡航費約80万円が学びの扉を閉じる。</p>
+              </article>
+              <div class="fund-cycle-arrow" aria-hidden="true">→</div>
+              <article class="fund-cycle-card">
+                <strong>上の世代の余裕</strong>
+                <p>経験と資産をもつ世代の少しの余裕を、ファンドに預ける。</p>
+              </article>
+              <div class="fund-cycle-arrow" aria-hidden="true">→</div>
+              <article class="fund-cycle-card">
+                <strong>若手支援へ循環</strong>
+                <p>事務経費は取らず、全額を1名の参加費・渡航費へ。学びの機会を次の10年へ渡す。</p>
+              </article>
             </div>
           </div>
 
