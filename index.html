@@ -1263,6 +1263,20 @@
       vertical-align: top;
     }
     .fund-generation-history th { color: var(--c-text-muted); font-weight: 600; }
+    .fund-source-chart { margin-top: var(--space-8); padding-top: var(--space-6); border-top: 1px solid var(--c-border); }
+    .fund-source-chart h4 { margin: 0 0 8px; font-size: 13px; color: var(--c-purple-900); }
+    .fund-source-chart p { margin: 0 0 14px; font-size: 11px; line-height: 1.7; color: var(--c-text-muted); }
+    .fund-bars { display: grid; gap: 10px; }
+    .fund-bars-row { display: grid; grid-template-columns: 74px 1fr 46px; gap: 8px; align-items: center; font-size: 11px; }
+    .fund-bars-label { color: var(--c-purple-900); }
+    .fund-bars-track { position: relative; height: 18px; overflow: hidden; background: #ece8f1; border: 1px solid var(--c-border); }
+    .fund-bars-current, .fund-bars-bubble { position: absolute; top: 0; bottom: 0; display: flex; align-items: center; min-width: 0; overflow: hidden; font-size: 9px; white-space: nowrap; }
+    .fund-bars-current { left: 0; z-index: 1; justify-content: flex-start; padding-left: 5px; color: var(--c-white); background: var(--c-purple-700); }
+    .fund-bars-bubble { right: 0; width: 100%; justify-content: flex-end; padding-right: 5px; color: var(--c-purple-900); background: var(--c-purple-300); }
+    .fund-bars-note { text-align: right; color: var(--c-text-muted); font-variant-numeric: tabular-nums; }
+    .fund-bars-legend { display: flex; gap: 14px; margin: 12px 0 0 82px; font-size: 10px; color: var(--c-text-muted); }
+    .fund-bars-legend span::before { content: ''; display: inline-block; width: 9px; height: 9px; margin-right: 4px; vertical-align: -1px; background: var(--c-purple-700); }
+    .fund-bars-legend span:last-child::before { background: var(--c-purple-300); }
     .fund-why-text p {
       font-size: 15px;
       line-height: 2;
@@ -3208,6 +3222,18 @@
                         <tr><th>2026年</th><td>資産継承の有無、非正規化、奨学金・住居費の差が重なり、どの世代でも分布が広がる。</td></tr>
                       </tbody>
                     </table>
+                  </div>
+                  <div class="fund-source-chart">
+                    <h4>元パワポの数値｜バブル期と現在の人口規模</h4>
+                    <p>パワポ記載の「カッコ内90年」と現在値を比較。棒の長さは各年齢層の人口規模、右端は現在値が1990年の何％かを示します。</p>
+                    <div class="fund-bars">
+                      <div class="fund-bars-row"><span class="fund-bars-label">19歳まで</span><div class="fund-bars-track"><span class="fund-bars-current" style="width:56%">1,812万人</span><span class="fund-bars-bubble" style="width:44%">3,200万人</span></div><span class="fund-bars-note">56%</span></div>
+                      <div class="fund-bars-row"><span class="fund-bars-label">20代</span><div class="fund-bars-track"><span class="fund-bars-current" style="width:66%">1,200万人</span><span class="fund-bars-bubble" style="width:34%">1,830万人</span></div><span class="fund-bars-note">66%</span></div>
+                      <div class="fund-bars-row"><span class="fund-bars-label">30–34歳</span><div class="fund-bars-track"><span class="fund-bars-current" style="width:75%">605万人</span><span class="fund-bars-bubble" style="width:25%">820万人</span></div><span class="fund-bars-note">75%</span></div>
+                      <div class="fund-bars-row"><span class="fund-bars-label">35–39歳</span><div class="fund-bars-track"><span class="fund-bars-current" style="width:75%">680万人</span><span class="fund-bars-bubble" style="width:25%">920万人</span></div><span class="fund-bars-note">75%</span></div>
+                    </div>
+                    <div class="fund-bars-legend"><span>現在</span><span>1990年</span></div>
+                    <p class="fund-distribution-note">このパワポには「生活の苦しい層もいる」という記載はありますが、困窮層の人数・割合の時系列データはありません。困窮層の増加を数値で示す場合は、別の公的統計を追加する必要があります。</p>
                   </div>
                 </div>
                 <span class="fund-figure-caption">Reverse pyramid / 世代間資産と負担</span>
