@@ -1221,6 +1221,19 @@
       border: 1px solid var(--c-border);
       background: var(--c-white);
     }
+    .fund-distribution-bar span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      overflow: hidden;
+      color: var(--c-white);
+      font-size: 8px;
+      line-height: 1;
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+    }
+    .fund-distribution-bar span:nth-child(2) { color: var(--c-purple-900); }
     .fund-distribution-bar span:nth-child(1) { background: var(--c-purple-800); }
     .fund-distribution-bar span:nth-child(2) { background: var(--c-purple-300); }
     .fund-distribution-bar span:nth-child(3) { background: var(--c-red); }
@@ -1230,6 +1243,26 @@
       line-height: 1.7;
       color: var(--c-text-muted);
     }
+    .fund-generation-history { margin-top: var(--space-6); }
+    .fund-generation-history h4 {
+      margin: 0 0 10px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--c-purple-900);
+    }
+    .fund-generation-history table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+    .fund-generation-history th,
+    .fund-generation-history td {
+      padding: 7px 6px;
+      border-top: 1px solid var(--c-border);
+      text-align: left;
+      vertical-align: top;
+    }
+    .fund-generation-history th { color: var(--c-text-muted); font-weight: 600; }
     .fund-why-text p {
       font-size: 15px;
       line-height: 2;
@@ -3155,17 +3188,28 @@
                   <p class="fund-distribution-title">世代内にも広がる分布（模式図）</p>
                   <div class="fund-distribution-row">
                     <strong><span>60代以上</span><span>余裕層／中間層／困窮層</span></strong>
-                    <div class="fund-distribution-bar" aria-hidden="true"><span style="width:48%"></span><span style="width:34%"></span><span style="width:18%"></span></div>
+                    <div class="fund-distribution-bar" aria-label="余裕48パーセント、中間34パーセント、困窮18パーセント"><span style="width:48%">余裕</span><span style="width:34%">中間</span><span style="width:18%">困窮</span></div>
                   </div>
                   <div class="fund-distribution-row">
                     <strong><span>40–50代</span><span>余裕層／中間層／困窮層</span></strong>
-                    <div class="fund-distribution-bar" aria-hidden="true"><span style="width:30%"></span><span style="width:43%"></span><span style="width:27%"></span></div>
+                    <div class="fund-distribution-bar" aria-label="余裕30パーセント、中間43パーセント、困窮27パーセント"><span style="width:30%">余裕</span><span style="width:43%">中間</span><span style="width:27%">困窮</span></div>
                   </div>
                   <div class="fund-distribution-row">
                     <strong><span>20–30代</span><span>余裕層／中間層／困窮層</span></strong>
-                    <div class="fund-distribution-bar" aria-hidden="true"><span style="width:16%"></span><span style="width:39%"></span><span style="width:45%"></span></div>
+                    <div class="fund-distribution-bar" aria-label="余裕16パーセント、中間39パーセント、困窮45パーセント"><span style="width:16%">余裕</span><span style="width:39%">中間</span><span style="width:45%">困窮</span></div>
                   </div>
                   <p class="fund-distribution-note">世代全体を一括りにせず、各世代の中にも資産・所得・負担の差があることを示しています。比率は説明用の模式図で、統計値ではありません。</p>
+                  <div class="fund-generation-history">
+                    <h4>世代内格差の変化（見取り図）</h4>
+                    <table>
+                      <thead><tr><th>時点</th><th>変化</th></tr></thead>
+                      <tbody>
+                        <tr><th>1990年</th><td>現役世代にも資産形成の余地があり、世代内の分布は比較的なだらか。</td></tr>
+                        <tr><th>1995年</th><td>バブル後の停滞が始まり、世代内の余裕と困窮の差が見え始める。</td></tr>
+                        <tr><th>2026年</th><td>資産継承の有無、非正規化、奨学金・住居費の差が重なり、どの世代でも分布が広がる。</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
                 <span class="fund-figure-caption">Reverse pyramid / 世代間資産と負担</span>
               </div>
